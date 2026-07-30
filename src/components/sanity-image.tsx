@@ -1,4 +1,5 @@
 import { imgSrcSet, imgUrl, type SanityImageSource } from "@/lib/sanity";
+import { useState } from "react";
 
 type Props = {
   // Raw Sanity image reference (preferred — enables responsive srcSet).
@@ -44,16 +45,18 @@ export function SanityImage({
     : {};
   const srcSet = hasRef ? imgSrcSet(image, widths, cropOpts) : undefined;
   const fallbackWidth = widths[Math.floor(widths.length / 2)] ?? 1024;
-  const resolvedSrc =
-    (hasRef ? imgUrl(image, fallbackWidth) : undefined) ?? src ?? undefined;
+  const sanitySrc = hasRef ? imgUrl(image, fallbackWidth) : undefined;
+  const [failedSanitySrc, setFailedSanitySrc] = useState<string | null>(null);
+  const usingFallback = Boolean(src && sanitySrc && failedSanitySrc === sanitySrc);
+  const resolvedSrc = usingFallback ? src : sanitySrc ?? src ?? undefined;
 
   if (!resolvedSrc) return null;
 
   return (
     <img
       src={resolvedSrc}
-      srcSet={srcSet}
-      sizes={srcSet ? sizes : undefined}
+      srcSet={usingFallback ? undefined : srcSet}
+      sizes={!usingFallback && srcSet ? sizes : undefined}
       alt={alt}
       className={className}
       loading={loading}
@@ -61,7 +64,13 @@ export function SanityImage({
       decoding={decoding}
       referrerPolicy={referrerPolicy}
       onLoad={onLoad}
-      onError={onError}
+      onError={(event) => {
+        if (!usingFallback && src && sanitySrc) {
+          setFailedSanitySrc(sanitySrc);
+          return;
+        }
+        onError?.(event);
+      }}
     />
   );
 }

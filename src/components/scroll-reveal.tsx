@@ -11,7 +11,6 @@ const MOTION_SELECTORS = [
   },
   { selector: "main img, main iframe, main canvas, main [class*='aspect-']", type: "media" },
   { selector: "main ol > li, main ul > li", type: "item" },
-  { selector: "main a[href], main button", type: "action" },
 ] as const;
 
 const MAX_STAGGER = 10;
@@ -19,7 +18,7 @@ const MAX_STAGGER = 10;
 /**
  * Client-only initializer that:
  *  1. Adds typed motion hooks to sections, headings, cards, media, form blocks,
- *     list items, and actions (opt out with data-reveal="off").
+ *     and list items (opt out with data-reveal="off").
  *  2. Observes every element independently and adds `.in-view` on intersection.
  *  3. Maintains lightweight scroll state for direction/progress styling.
  *  4. Applies a light parallax translateY to elements marked `data-parallax`.
@@ -40,7 +39,8 @@ export function ScrollReveal() {
       const y = window.scrollY || root.scrollTop;
       const max = Math.max(1, root.scrollHeight - root.clientHeight);
       root.style.setProperty("--scroll-progress", String(Math.min(1, Math.max(0, y / max))));
-      root.dataset.scrollDir = y > lastY + 2 ? "down" : y < lastY - 2 ? "up" : (root.dataset.scrollDir ?? "up");
+      root.dataset.scrollDir =
+        y > lastY + 2 ? "down" : y < lastY - 2 ? "up" : (root.dataset.scrollDir ?? "up");
       root.dataset.scrolled = y > 24 ? "true" : "false";
       lastY = y;
     };

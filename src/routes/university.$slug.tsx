@@ -31,9 +31,9 @@ import { whatsappLink } from "@/lib/lead";
 export const Route = createFileRoute("/university/$slug")({
   loader: async ({ params }) => {
     // Static fallback always available. Best-effort Sanity fetch enriches
-    // the head() metadata with CMS-defined SEO fields; a CMS outage is
-    // swallowed by fetchUniversityBySlugResult so it never breaks the route.
+    // the page after first render, so a slow CMS cannot block local content.
     const fallback = findStaticUniversityBySlug(params.slug);
+    if (fallback) return { fallback, cms: null };
     const cms = await fetchUniversityBySlugResult(params.slug);
     const cmsData = cms.status === "ok" ? cms.data : null;
     return { fallback, cms: cmsData };
@@ -207,7 +207,9 @@ function UniversityDetailPage() {
     cms: UniversityDetail | null;
   };
 
-  const [uni, setUni] = useState<UniversityDetail | null>(cms ?? fallback);
+  const initialUni = cms ?? fallback;
+  const [remoteUni, setRemoteUni] = useState<{ slug: string; data: UniversityDetail } | null>(null);
+  const uni = remoteUni?.slug === slug ? remoteUni.data : initialUni;
   const [cmsState, setCmsState] = useState<"loading" | "error" | "idle">(cms ? "idle" : "loading");
   const [reloadKey, setReloadKey] = useState(0);
   const [cmsHealth, setCmsHealth] = useState<SanityHealth | null>(null);
@@ -220,7 +222,7 @@ function UniversityDetailPage() {
     fetchUniversityBySlugResult(slug).then(async (res) => {
       if (cancelled) return;
       if (res.status === "ok") {
-        setUni(res.data);
+        setRemoteUni({ slug, data: res.data });
         setCmsHealth({ status: "ok" });
         setCmsError(null);
         setCmsState("idle");
@@ -242,9 +244,23 @@ function UniversityDetailPage() {
   }, [slug, reloadKey]);
 
   // Related universities — Sanity by country/ranking with static fallback.
-  const [related, setRelated] = useState<RelatedUniversity[]>(() =>
-    findStaticRelatedUniversities(slug, fallback?.country?.slug, 3),
-  );
+  const fallbackRelated = findStaticRelatedUniversities(slug, fallback?.country?.slug, 3);
+  const [remoteRelated, setRemoteRelated] = useState<{
+    slug: string;
+    data: RelatedUniversity[];
+  } | null>(null);
+  const related =
+    remoteRelated?.slug === slug
+      ? [
+          ...remoteRelated.data,
+          ...fallbackRelated.filter(
+            (fallbackUniversity) =>
+              !remoteRelated.data.some(
+                (remoteUniversity) => remoteUniversity.slug === fallbackUniversity.slug,
+              ),
+          ),
+        ].slice(0, 3)
+      : fallbackRelated;
 
   useEffect(() => {
     let cancelled = false;
@@ -253,7 +269,9 @@ function UniversityDetailPage() {
     if (!countryId && !ranking) return;
     fetchRelatedUniversitiesResult({ slug, countryId, ranking, limit: 3 }).then((res) => {
       if (cancelled) return;
-      if (res.status === "ok" && res.data.length > 0) setRelated(res.data);
+      if (res.status === "ok" && res.data.length > 0) {
+        setRemoteRelated({ slug, data: res.data });
+      }
     });
     return () => {
       cancelled = true;

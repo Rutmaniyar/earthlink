@@ -54,12 +54,13 @@ function paragraphsToPortableText(paragraphs: string[]) {
   }));
 }
 
+// Public dataset grants match path("*"), so dotted/namespaced IDs are not website-readable.
 async function seedCountries() {
   console.log("→ Seeding countries...");
   const tx = client.transaction();
   UNIVERSITY_PARTNERS.forEach((c, i) => {
     tx.createOrReplace({
-      _id: `country.${c.slug}`,
+      _id: `country-${c.slug}`,
       _type: "country",
       country: c.country,
       slug: { _type: "slug", current: c.slug },
@@ -78,13 +79,13 @@ async function seedUniversities() {
   for (const c of UNIVERSITY_PARTNERS) {
     const tx = client.transaction();
     c.universities.forEach((u, i) => {
-      const id = `university.${slugify(u.name)}`;
+      const id = `university-${slugify(u.name)}`;
       tx.createOrReplace({
         _id: id,
         _type: "university",
         name: u.name,
         slug: { _type: "slug", current: slugify(u.name) },
-        country: { _type: "reference", _ref: `country.${c.slug}` },
+        country: { _type: "reference", _ref: `country-${c.slug}` },
         city: u.city,
         domain: u.domain,
         website: u.website,
@@ -103,7 +104,7 @@ async function seedUniversities() {
 async function seedAuthor() {
   console.log("→ Seeding author...");
   await client.createOrReplace({
-    _id: "author.earthlink-editorial",
+    _id: "author-earthlink-editorial",
     _type: "author",
     name: "Earthlink Editorial",
     role: "Editorial team",
@@ -115,7 +116,7 @@ async function seedAuthor() {
 async function seedBlogs() {
   console.log(`→ Seeding ${BLOGS.length} blog posts (uploading cover images)...`);
   for (const b of BLOGS) {
-    const id = `post.${b.slug}`;
+    const id = `post-${b.slug}`;
     const assetId = b.cover ? await uploadImageFromUrl(b.cover) : null;
     const doc: Record<string, unknown> = {
       _id: id,
@@ -124,7 +125,7 @@ async function seedBlogs() {
       slug: { _type: "slug", current: b.slug },
       excerpt: b.excerpt,
       category: b.category,
-      author: { _type: "reference", _ref: "author.earthlink-editorial" },
+      author: { _type: "reference", _ref: "author-earthlink-editorial" },
       publishedAt: b.date,
       readMinutes: b.readMinutes,
       coverCaption: b.coverCaption,

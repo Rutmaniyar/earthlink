@@ -3,7 +3,7 @@
 // so callers can safely fall back to local static content.
 
 import { sanityClient, sanityConfigured, imgUrl } from "./sanity";
-import type { Blog } from "@/content/blogs";
+import { BLOGS, getBlog, type Blog } from "@/content/blogs";
 import { UNIVERSITY_PARTNERS, type University, type UniversityCountry } from "@/content/universities";
 
 // ---------- Blog ----------
@@ -55,21 +55,27 @@ type SanityBlogListItem = {
 type SanityBlogDetail = SanityBlogListItem & { body: unknown };
 
 function mapBlogList(item: SanityBlogListItem): Blog {
+  const fallback = getBlog(item.slug);
   return {
     slug: item.slug,
-    title: item.title,
-    excerpt: item.excerpt ?? "",
-    category: item.category,
-    author: item.author,
-    date: item.date,
-    readMinutes: item.readMinutes ?? 5,
-    cover: imgUrl(item.coverImage as never, 1200) ?? "",
-    coverCaption: item.coverCaption,
-    tags: item.tags ?? [],
-    body: [], // filled on detail
+    title: item.title ?? fallback?.title ?? item.slug,
+    excerpt: item.excerpt ?? fallback?.excerpt ?? "",
+    category: item.category ?? fallback?.category ?? "Guides",
+    author: item.author ?? fallback?.author ?? "Earthlink Editorial",
+    date: item.date ?? fallback?.date ?? "",
+    readMinutes: item.readMinutes ?? fallback?.readMinutes ?? 5,
+    cover: imgUrl(item.coverImage as never, 1200) ?? fallback?.cover ?? "",
+    coverCaption: item.coverCaption ?? fallback?.coverCaption,
+    tags: item.tags ?? fallback?.tags ?? [],
+    body: fallback?.body ?? [],
     // Non-typed passthrough: raw Sanity image ref for responsive rendering.
     ...(item.coverImage ? { coverRef: item.coverImage } : {}),
   } as Blog;
+}
+
+export function mergeBlogsWithFallback(cmsBlogs: Blog[]): Blog[] {
+  const cmsSlugs = new Set(cmsBlogs.map((blog) => blog.slug));
+  return [...cmsBlogs, ...BLOGS.filter((blog) => !cmsSlugs.has(blog.slug))];
 }
 
 export type SanityResult<T> =
@@ -86,7 +92,7 @@ export async function fetchBlogListResult(): Promise<SanityResult<Blog[]>> {
   if (!sanityConfigured || !sanityClient) return { status: "skipped" };
   try {
     const rows = await sanityClient.fetch<SanityBlogListItem[]>(BLOG_LIST_QUERY);
-    return { status: "ok", data: rows.map(mapBlogList) };
+    return { status: "ok", data: mergeBlogsWithFallback(rows.map(mapBlogList)) };
   } catch (err) {
     console.error("[sanity] fetchBlogList failed", err);
     return { status: "error", error: err instanceof Error ? err.message : "Unknown error" };
@@ -152,6 +158,33 @@ type SanityUniversityCountry = {
   >;
 };
 
+function universityKey(university: University): string {
+  return (university as University & { slug?: string }).slug ?? slugifyUniversityName(university.name);
+}
+
+export function mergeUniversityCountriesWithFallback(
+  cmsCountries: UniversityCountry[],
+): UniversityCountry[] {
+  const cmsBySlug = new Map(cmsCountries.map((country) => [country.slug, country]));
+  const localSlugs = new Set(UNIVERSITY_PARTNERS.map((country) => country.slug));
+  const merged = UNIVERSITY_PARTNERS.map((localCountry) => {
+    const cmsCountry = cmsBySlug.get(localCountry.slug);
+    if (!cmsCountry) return localCountry;
+    const cmsUniversities = new Set(cmsCountry.universities.map(universityKey));
+    return {
+      ...localCountry,
+      ...cmsCountry,
+      universities: [
+        ...cmsCountry.universities,
+        ...localCountry.universities.filter(
+          (university) => !cmsUniversities.has(universityKey(university)),
+        ),
+      ],
+    };
+  });
+  return [...merged, ...cmsCountries.filter((country) => !localSlugs.has(country.slug))];
+}
+
 export async function fetchUniversityCountries(): Promise<UniversityCountry[] | null> {
   const res = await fetchUniversityCountriesResult();
   return res.status === "ok" ? res.data : null;
@@ -180,7 +213,7 @@ export async function fetchUniversityCountriesResult(): Promise<SanityResult<Uni
         ...(u.coverImage ? { coverRef: u.coverImage } : {}),
       })) as University[],
     }));
-    return { status: "ok", data };
+    return { status: "ok", data: mergeUniversityCountriesWithFallback(data) };
   } catch (err) {
     console.error("[sanity] fetchUniversityCountries failed", err);
     return { status: "error", error: err instanceof Error ? err.message : "Unknown error" };
@@ -269,7 +302,17 @@ export async function fetchUniversityBySlugResult(
   try {
     const row = await sanityClient.fetch<UniversityDetail | null>(UNIVERSITY_DETAIL_QUERY, { slug });
     if (!row) return { status: "skipped" };
-    return { status: "ok", data: row };
+    const fallback = findStaticUniversityBySlug(slug);
+    return {
+      status: "ok",
+      data: fallback
+        ? {
+            ...fallback,
+            ...row,
+            country: row.country ? { ...fallback.country, ...row.country } : fallback.country,
+          }
+        : row,
+    };
   } catch (err) {
     console.error("[sanity] fetchUniversityBySlug failed", err);
     return { status: "error", error: err instanceof Error ? err.message : "Unknown error" };
@@ -404,4 +447,3 @@ export function findStaticUniversityBySlug(slug: string): UniversityDetail | nul
   }
   return null;
 }
-

@@ -55,6 +55,7 @@ function buildSources(domain: string) {
 
 function LogoImg({ uni }: { uni: University }) {
   const sanityLogo = (uni as unknown as { logoRef?: unknown }).logoRef;
+  const [sanityFailed, setSanityFailed] = useState(false);
 
   const initials = uni.name
     .replace(/^(The |University of |University College )/i, "")
@@ -66,7 +67,7 @@ function LogoImg({ uni }: { uni: University }) {
     .toUpperCase();
 
   // Prefer Sanity logo when available — deterministic, responsive, cacheable.
-  if (sanityLogo) {
+  if (sanityLogo && !sanityFailed) {
     return (
       <SanityImage
         image={sanityLogo as never}
@@ -75,6 +76,7 @@ function LogoImg({ uni }: { uni: University }) {
         sizes="80px"
         aspectRatio={1}
         className="h-20 w-20 rounded-xl bg-white object-contain p-2 shadow-sm ring-1 ring-black/5"
+        onError={() => setSanityFailed(true)}
       />
     );
   }

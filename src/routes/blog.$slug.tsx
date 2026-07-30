@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
+import { useEffect, useState } from "react";
 import { BLOGS, getBlog, type Blog } from "@/content/blogs";
 import { fetchBlogBySlug, type BlogWithPortableText } from "@/lib/sanity-queries";
 import { PortableBody } from "@/components/portable-text";
@@ -8,11 +9,11 @@ import { absUrl } from "@/lib/site-config";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
-    const remote = await fetchBlogBySlug(params.slug);
-    if (remote) return { blog: remote };
     const blog = getBlog(params.slug);
-    if (!blog) throw notFound();
-    return { blog: blog as BlogWithPortableText };
+    if (blog) return { blog: blog as BlogWithPortableText, refreshFromCms: true };
+    const remote = await fetchBlogBySlug(params.slug);
+    if (!remote) throw notFound();
+    return { blog: remote, refreshFromCms: false };
   },
   head: ({ params, loaderData }) => {
     const b = loaderData?.blog;
@@ -108,7 +109,24 @@ function formatDate(iso: string) {
 }
 
 function BlogPost() {
-  const { blog } = Route.useLoaderData() as { blog: BlogWithPortableText };
+  const { blog: initialBlog, refreshFromCms } = Route.useLoaderData() as {
+    blog: BlogWithPortableText;
+    refreshFromCms: boolean;
+  };
+  const [cmsBlog, setCmsBlog] = useState<BlogWithPortableText | null>(null);
+
+  useEffect(() => {
+    if (!refreshFromCms) return;
+    let cancelled = false;
+    fetchBlogBySlug(initialBlog.slug).then((blog) => {
+      if (!cancelled && blog) setCmsBlog(blog);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [initialBlog.slug, refreshFromCms]);
+
+  const blog = cmsBlog?.slug === initialBlog.slug ? cmsBlog : initialBlog;
   const related = BLOGS.filter((b) => b.slug !== blog.slug && b.category === blog.category).slice(
     0,
     3,
