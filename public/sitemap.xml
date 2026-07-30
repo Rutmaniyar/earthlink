@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.earthlink.org.uk/</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/about</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/services</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destinations</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/scholarships</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blogs</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/partner-universities</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/contact</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/testimonials</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/faq</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/partners/stonebridge</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/privacy</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/terms</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/service/profile-evaluation</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/service/career-counselling</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/service/university-shortlisting</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/service/admission-assistance</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/service/documentation</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/service/financial-planning</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/service/student-visa</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/service/visit-visa</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/service/recruitment</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/service/pre-departure</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/uk</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/usa</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/canada</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/australia</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/ireland</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/newzealand</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/europe</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/uae</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/uk-graduate-route-2026</loc>
+    <lastmod>2026-06-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>UK Graduate Route in 2026: What international students need to know</image:title>
+      <image:caption>The 2-year post-study work visa is still open — here&apos;s how to use it strategically for a sponsored job.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/sop-that-actually-works</loc>
+    <lastmod>2026-05-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>The SOP that actually works: a UK admissions officer&apos;s checklist</image:title>
+      <image:caption>Forget generic templates. Here&apos;s what a Russell Group reviewer looks for in the first 90 seconds.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/canada-pgwp-changes</loc>
+    <lastmod>2026-05-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1503614472-8c93d56e92ce?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Canada PGWP changes: which programmes still qualify</image:title>
+      <image:caption>IRCC tightened the Post-Graduation Work Permit list. Check your programme before you apply.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/us-f1-visa-interview-prep</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1543872084-c7bd3822856f?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>US F-1 visa interview: 12 questions you must rehearse</image:title>
+      <image:caption>Consular officers decide in under three minutes. Be ready for the ties, funds, and intent questions.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/chevening-vs-commonwealth</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Chevening vs Commonwealth: which UK scholarship fits you?</image:title>
+      <image:caption>Both are fully funded. The selection criteria and eligible countries differ sharply.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/australia-500-visa-financials</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Australia Subclass 500: getting your financials right the first time</image:title>
+      <image:caption>The Genuine Student test now weighs financial evidence more heavily than ever.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/career-after-msc-uk</loc>
+    <lastmod>2026-02-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Career after an MSc in the UK: routes that beat the salary threshold</image:title>
+      <image:caption>Skilled Worker visa requires £38,700 (2024 threshold). Here are the sectors that pay it.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/ielts-vs-pte-2026</loc>
+    <lastmod>2026-02-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>IELTS vs PTE Academic in 2026: which test to pick</image:title>
+      <image:caption>Both are accepted by nearly every UK, Australian, and Canadian institution. The right pick depends on your strengths.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/study-in-uk-complete-guide-2026</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Study in UK 2026: The Complete Guide for International Students</image:title>
+      <image:caption>Universities, costs, visas, scholarships, and post-study work — everything you need in one place.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/study-in-usa-complete-guide</loc>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Study in USA: Universities, Costs, and F-1 Visa Roadmap</image:title>
+      <image:caption>From Ivy League to state schools — how to choose, apply, fund, and land your F-1 visa.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/study-in-canada-complete-guide</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1517935706615-2717063c2225?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Study in Canada: SDS, PGWP, and PR pathway explained</image:title>
+      <image:caption>Canada&apos;s Student Direct Stream, work permits, and permanent residency routes for graduates.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/study-in-australia-complete-guide</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Study in Australia: Group of Eight, costs, and 485 visa</image:title>
+      <image:caption>Australia&apos;s top universities, tuition, GS requirements, and post-study work rights.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/study-in-ireland-guide</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Study in Ireland: Trinity, UCD, and the Third Level Graduate Scheme</image:title>
+      <image:caption>English-taught degrees, EU-adjacent lifestyle, and a 2-year post-study work permit.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/study-in-new-zealand-guide</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Study in New Zealand: quality of life meets post-study work</image:title>
+      <image:caption>Eight government-funded universities, work rights, and a clear pathway to residency.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/study-in-germany-free-tuition</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Study in Germany: free tuition and Blocked Account explained</image:title>
+      <image:caption>Public universities charge no tuition. Here&apos;s what you actually pay and how to prove funds.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/sop-samples-that-got-admits</loc>
+    <lastmod>2026-05-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>5 SOP samples that got admits to top UK universities</image:title>
+      <image:caption>Real openings, structures, and closings from students admitted to UCL, Imperial, Warwick, and Edinburgh.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/lor-guide-recommenders</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Letters of Recommendation: choosing the right recommenders</image:title>
+      <image:caption>A famous professor who doesn&apos;t know you loses to a junior faculty member who does.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/gre-vs-gmat-2026</loc>
+    <lastmod>2026-05-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1513258496099-48168024aec0?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>GRE vs GMAT in 2026: which one for MBA and MS applications?</image:title>
+      <image:caption>GRE now accepted at 1,300+ business schools. Here&apos;s when GMAT still wins.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/ielts-band-8-strategy</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>IELTS Band 8 strategy: what actually moves your score</image:title>
+      <image:caption>Speaking and Writing are where most candidates lose points. Here&apos;s the fix.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/uk-student-visa-checklist</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>UK Student Visa: the complete document checklist</image:title>
+      <image:caption>CAS, financial evidence, TB test, ATAS — miss one and your application stalls.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/us-opt-stem-extension</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>US OPT and STEM OPT extension: your 36 months explained</image:title>
+      <image:caption>12 months of OPT plus 24 months of STEM extension — how to use them for H-1B odds.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/canada-express-entry-crs</loc>
+    <lastmod>2026-04-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1519832979-6fa011b87667?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Canada Express Entry CRS: how graduates hit 470+</image:title>
+      <image:caption>Education, work experience, language, and provincial nomination — the CRS math for international students.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/russell-group-vs-non-russell</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Russell Group vs non-Russell Group: does it matter for jobs?</image:title>
+      <image:caption>The 24 research-intensive universities carry brand weight — but not always where you&apos;d expect.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/top-mba-programs-europe</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Top MBA programs in Europe 2026: LBS, INSEAD, IESE, HEC</image:title>
+      <image:caption>One-year MBAs, tuition, average salaries, and admission rates for European giants.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/cost-of-living-uk-cities</loc>
+    <lastmod>2026-03-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Cost of living: London vs Manchester vs Birmingham vs Edinburgh</image:title>
+      <image:caption>Rent, transport, and grocery costs across the UK&apos;s top student cities.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/scholarships-for-indian-students-uk</loc>
+    <lastmod>2026-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Top scholarships for Indian students in the UK</image:title>
+      <image:caption>Chevening, Commonwealth, GREAT, Rhodes, and university-specific awards worth applying for.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/scholarships-usa-fulbright</loc>
+    <lastmod>2026-03-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Fulbright, Knight-Hennessy, and top scholarships for USA</image:title>
+      <image:caption>Fully funded master&apos;s and PhD scholarships every international student should consider.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/part-time-work-uk-students</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Part-time work rules for UK international students</image:title>
+      <image:caption>20 hours during term, 40 in vacation — how to stay compliant and earn £8,000+ per year.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/how-to-choose-uk-university</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>How to shortlist UK universities: 7 filters that matter</image:title>
+      <image:caption>Rankings tell you 30% of the story. Here are the other filters admissions gurus use.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/canada-vs-uk-vs-usa</loc>
+    <lastmod>2026-02-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1526779259212-939e64788e3c?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Canada vs UK vs USA: which country for your master&apos;s?</image:title>
+      <image:caption>Cost, duration, post-study work, and PR pathways compared side by side.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/student-accommodation-uk</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Student accommodation UK: halls vs private vs homestay</image:title>
+      <image:caption>Costs, contracts, and how to avoid deposit scams as an international student.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/profile-evaluation-explained</loc>
+    <lastmod>2026-02-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Profile Evaluation: what actually gets you into top universities</image:title>
+      <image:caption>How admissions officers weigh academics, extracurriculars, essays, and recommendations.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/uk-dependent-visa-guide</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>UK Dependent Visa: bringing your spouse and children</image:title>
+      <image:caption>Rules tightened in 2024 — here&apos;s who still qualifies and how to prepare.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/australia-cost-of-living-2026</loc>
+    <lastmod>2026-01-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Australia cost of living 2026: Sydney vs Melbourne vs Brisbane</image:title>
+      <image:caption>Rent, groceries, and transport in Australia&apos;s top student cities.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/conditional-vs-unconditional-offer</loc>
+    <lastmod>2026-01-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Conditional vs unconditional offer: what each means for you</image:title>
+      <image:caption>How to convert a conditional offer and when to escalate to firm status.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/credential-evaluation-wes-eca</loc>
+    <lastmod>2026-01-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>WES ECA and credential evaluation: step-by-step</image:title>
+      <image:caption>Required for Canada Express Entry and many US universities — here&apos;s how to file it right.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/how-to-write-personal-statement-ucas</loc>
+    <lastmod>2026-01-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>UCAS personal statement: the 4,000-character formula</image:title>
+      <image:caption>What to include, what to cut, and how to write for 5 universities at once.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/post-arrival-checklist-uk</loc>
+    <lastmod>2026-01-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Post-arrival UK checklist: first 30 days as an international student</image:title>
+      <image:caption>BRP collection, bank account, NHS registration, and NI number — the order that saves weeks.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/scholarship-application-guide</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>How to secure fully-funded international scholarships: a step-by-step guide</image:title>
+      <image:caption>A practical playbook for winning Chevening, Commonwealth, Fulbright, DAAD and university-funded awards — plus how Earthlink screens eligibility and shapes essays.</image:caption>
+    </image:image>
+  </url>
+</urlset>

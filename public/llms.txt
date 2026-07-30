@@ -1,0 +1,24 @@
+# Earthlink Consultants
+
+> UK-based education and visa consultancy. Honest counselling for studies in the UK, USA, Canada, Australia, Ireland, Europe, New Zealand, and UAE.
+
+Earthlink Consultants is a UK-registered education and immigration consultancy operating from Harrow since 2017. We file student-visa, work-visa, and university admission applications every week across eight destination countries. Every file is owned end-to-end by a named adviser, and our legal work is signed off by our partners at Stonebridge Solicitors.
+
+## Pages
+
+- [/](https://www.earthlink.org.uk/): Home — Study abroad and visa consultancy overview with live route map, trust metrics, and free consultation booking.
+- [/about](https://www.earthlink.org.uk/about): About Earthlink — UK credibility, operating history, adviser profiles, and the honest-pledge difference.
+- [/services](https://www.earthlink.org.uk/services): Services grid — 10 service categories from profile evaluation to documentation and recruitment.
+- [/service/student-visa](https://www.earthlink.org.uk/service/student-visa): Student Visa Filing — end-to-end visa application support for UK, USA, Canada, Australia, Ireland, and more.
+- [/destinations](https://www.earthlink.org.uk/destinations): Destinations — country guides for UK, USA, Canada, Australia, Ireland, New Zealand, Europe, and UAE.
+- [/destination/uk](https://www.earthlink.org.uk/destination/uk): Study in the United Kingdom — graduate route, Russell Group pathways, tuition, and visa rules.
+- [/contact](https://www.earthlink.org.uk/contact): Contact — free consultation booking, phone, WhatsApp, and email details for the Harrow office.
+- [/faq](https://www.earthlink.org.uk/faq): FAQ — answers to common questions about visas, applications, finances, and post-study work.
+- [/scholarships](https://www.earthlink.org.uk/scholarships): Scholarships directory — Chevening, Commonwealth, GREAT, and university-specific awards.
+- [/testimonials](https://www.earthlink.org.uk/testimonials): Testimonials — success stories and verified student reviews.
+- [/partner-universities](https://www.earthlink.org.uk/partner-universities): Partnered Universities — flip-card directory of 180+ partner institutions and their specialities.
+- [/partners/stonebridge](https://www.earthlink.org.uk/partners/stonebridge): Solicitor Partner — Stonebridge Legal Solutions partnership, IAA Level 3 compliance, and legal handover workflow.
+- [/blogs](https://www.earthlink.org.uk/blogs): Blog — articles on visa policy, country guides, scholarships, and application strategy.
+- [/blog/uk-graduate-route-2026](https://www.earthlink.org.uk/blog/uk-graduate-route-2026): UK Graduate Route in 2026 — how international students can use the 2-year post-study work visa strategically.
+- [/privacy](https://www.earthlink.org.uk/privacy): Privacy Policy — data handling, cookies, and contact information.
+- [/terms](https://www.earthlink.org.uk/terms): Terms of Service — usage terms, liability, and legal disclaimers.
