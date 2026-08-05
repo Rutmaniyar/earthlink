@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { absUrl } from "@/lib/site-config";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { ArrowRight, ExternalLink, MapPin, Sparkles, CheckCircle2 } from "lucide-react";
 import FlipCard from "@/components/reactbits/FlipCard";
 import {
@@ -13,7 +13,7 @@ import { getCachedLogo, setCachedLogo } from "@/lib/logo-cache";
 import { fetchUniversityCountriesResult } from "@/lib/sanity-queries";
 import { checkSanityHealth, type SanityHealth } from "@/lib/sanity";
 import { SanityImage } from "@/components/sanity-image";
-import { CmsStatus, UniversityCardSkeleton } from "@/components/cms-status";
+import { CmsStatus } from "@/components/cms-status";
 
 export const Route = createFileRoute("/partner-universities")({
   head: () => ({
@@ -207,6 +207,7 @@ function PartnerUniversitiesPage() {
   const [reloadKey, setReloadKey] = useState(0);
   const [cmsHealth, setCmsHealth] = useState<SanityHealth | null>(null);
   const [cmsError, setCmsError] = useState<string | null>(null);
+  const [, startCmsSwitch] = useTransition();
   useEffect(() => {
     let cancelled = false;
     setCmsState("loading");
@@ -214,10 +215,12 @@ function PartnerUniversitiesPage() {
     fetchUniversityCountriesResult().then(async (res) => {
       if (cancelled) return;
       if (res.status === "ok" && res.data.length > 0) {
-        setCountries(res.data);
-        setCmsHealth({ status: "ok" });
-        setCmsError(null);
-        setCmsState("idle");
+        startCmsSwitch(() => {
+          setCountries(res.data);
+          setCmsHealth({ status: "ok" });
+          setCmsError(null);
+          setCmsState("idle");
+        });
       } else if (res.status === "error") {
         setCmsError(res.error);
         console.error("[cms] partner universities fetch failed:", res.error);
@@ -296,17 +299,6 @@ function PartnerUniversitiesPage() {
             errorDetail={cmsError}
             onRetry={() => setReloadKey((k) => k + 1)}
           />
-
-          {cmsState === "loading" && countries === UNIVERSITY_PARTNERS && (
-            <div
-              className="mt-4 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-              aria-hidden
-            >
-              {Array.from({ length: 4 }).map((_, i) => (
-                <UniversityCardSkeleton key={i} />
-              ))}
-            </div>
-          )}
         </div>
       )}
 
