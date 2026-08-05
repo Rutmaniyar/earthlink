@@ -27,7 +27,11 @@ export const university = defineType({
     defineField({ name: "website", type: "url" }),
     defineField({ name: "logo", type: "image", options: { hotspot: true } }),
     defineField({ name: "coverImage", type: "image", options: { hotspot: true } }),
-    defineField({ name: "speciality", type: "string", description: "Shown on the back of the card." }),
+    defineField({
+      name: "speciality",
+      type: "string",
+      description: "Shown on the back of the card.",
+    }),
     defineField({
       name: "highlights",
       type: "array",
@@ -42,8 +46,21 @@ export const university = defineType({
       of: [{ type: "string" }],
       options: { layout: "tags" },
     }),
-    defineField({ name: "intakes", type: "array", of: [{ type: "string" }], options: { layout: "tags" } }),
+    defineField({
+      name: "intakes",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
+    }),
     defineField({ name: "scholarshipsAvailable", type: "boolean", initialValue: false }),
+    defineField({
+      name: "applicationSupportNote",
+      title: "Application Support Only",
+      type: "boolean",
+      description:
+        "Enable when Earthlink can support the application process but must not present itself as this university's appointed representative.",
+      initialValue: false,
+    }),
     defineField({ name: "description", type: "blockContent" }),
     defineField({ name: "applyLink", type: "url" }),
     defineField({
@@ -77,7 +94,12 @@ export const university = defineType({
           options: { layout: "tags" },
           description: "e.g. Transcripts, SOP, LORs, CV, Passport copy",
         },
-        { name: "notes", type: "text", rows: 3, description: "Anything else applicants should know." },
+        {
+          name: "notes",
+          type: "text",
+          rows: 3,
+          description: "Anything else applicants should know.",
+        },
       ],
     }),
     defineField({ name: "order", type: "number", initialValue: 100 }),

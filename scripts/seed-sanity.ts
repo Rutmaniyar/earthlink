@@ -91,6 +91,7 @@ async function seedUniversities() {
         website: u.website,
         speciality: u.speciality,
         highlights: u.highlights,
+        ...(u.applicationSupportNote ? { applicationSupportNote: true } : {}),
         order: (i + 1) * 10,
       });
       count++;

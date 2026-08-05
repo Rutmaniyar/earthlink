@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 interface MarqueeProps {
   children: ReactNode;
@@ -19,17 +19,43 @@ export default function Marquee({
   className = "",
   pauseOnHover = true,
 }: MarqueeProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
+  const [active, setActive] = useState(true);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    let intersecting = true;
+    const sync = () => setActive(intersecting && !document.hidden);
+    const observer = new IntersectionObserver(([entry]) => {
+      intersecting = entry?.isIntersecting ?? true;
+      sync();
+    });
+    observer.observe(root);
+    document.addEventListener("visibilitychange", sync);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+    };
+  }, []);
+
+  const animationPlayState = active && !(pauseOnHover && hovered) ? "running" : "paused";
+
   return (
-    <div className={`group relative flex overflow-hidden ${className}`}>
+    <div
+      ref={rootRef}
+      className={`group relative flex overflow-hidden ${className}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <div
         className="flex shrink-0 items-center gap-12 pr-12"
         style={{
           animation: `marquee-loop ${speed}s linear infinite`,
           animationDirection: reverse ? "reverse" : "normal",
-          animationPlayState: "running",
+          animationPlayState,
         }}
-        onMouseEnter={(e) => pauseOnHover && (e.currentTarget.style.animationPlayState = "paused")}
-        onMouseLeave={(e) => pauseOnHover && (e.currentTarget.style.animationPlayState = "running")}
       >
         {children}
       </div>
@@ -39,6 +65,7 @@ export default function Marquee({
         style={{
           animation: `marquee-loop ${speed}s linear infinite`,
           animationDirection: reverse ? "reverse" : "normal",
+          animationPlayState,
         }}
       >
         {children}

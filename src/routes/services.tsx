@@ -2,8 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { absUrl } from "@/lib/site-config";
 import { SERVICES, JOURNEY, COMPANY } from "@/content/company";
 import { whatsappLink } from "@/lib/lead";
-import * as Icons from "lucide-react";
 import { Star, ShieldCheck, MapPin, Briefcase } from "lucide-react";
+import { SERVICE_ICON_MAP } from "@/lib/service-icons";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -12,20 +12,28 @@ export const Route = createFileRoute("/services")({
       {
         name: "description",
         content:
-          "Profile evaluation, university shortlisting, documentation, student & visit visas, recruitment, and post-arrival support — handled end to end.",
+          "Worldwide education, non-UK visa, visitor, and job-search support. Stonebridge alone handles every UK immigration route and application.",
       },
-      { property: "og:title", content: "Earthlink services — end-to-end study and visa support" },
+      {
+        property: "og:title",
+        content: "Earthlink services — worldwide education and application support",
+      },
       {
         property: "og:description",
-        content: "Ten services. One adviser. From eligibility review to first week abroad.",
+        content:
+          "Ten services with clear ownership, including a direct Stonebridge handover for every UK immigration matter.",
       },
       { property: "og:url", content: absUrl("/services") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Earthlink services — end-to-end study and visa support" },
+      {
+        name: "twitter:title",
+        content: "Earthlink services — worldwide education and application support",
+      },
       {
         name: "twitter:description",
-        content: "Ten services. One adviser. From eligibility review to first week abroad.",
+        content:
+          "Ten services with clear ownership, including a direct Stonebridge handover for every UK immigration matter.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/services") }],
@@ -36,8 +44,10 @@ export const Route = createFileRoute("/services")({
           "@context": "https://schema.org",
           "@type": "Service",
           provider: { "@type": "Organization", name: COMPANY.legalName },
-          serviceType: "International education and visa consultancy",
-          areaServed: "Worldwide",
+          serviceType: "International education, non-UK visa, and job-search support",
+          areaServed: "120+ countries served",
+          termsOfService:
+            "Stonebridge Legal Solutions alone provides UK immigration advice and handles every UK visa route and application.",
         }),
       },
     ],
@@ -53,11 +63,12 @@ function Services() {
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-gold">Services</p>
             <h1 className="mt-3 font-serif text-5xl text-balance md:text-6xl">
-              Education, visa, and recruitment — under one roof.
+              Education, global visa support, and job-search guidance — clearly scoped.
             </h1>
             <p className="mt-6 max-w-xl text-muted-foreground">
-              From the first eligibility call to your first week abroad, one Earthlink adviser owns
-              the file. Below: the ten services and the eight-step process that ties them together.
+              Earthlink owns education applications, supported non-UK visa work, and job-search
+              guidance. Stonebridge alone owns every UK immigration route and application. Below:
+              ten services and the eight-step process that connects them.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -96,7 +107,7 @@ function Services() {
             </div>
             <div className="absolute -right-4 bottom-24 hidden rounded border hairline bg-paper px-4 py-2 text-xs text-navy shadow-lg sm:flex sm:items-center sm:gap-2">
               <Briefcase className="h-3 w-3 text-brand" />
-              Recruitment support
+              Jobseeker support
             </div>
           </div>
         </div>
@@ -110,7 +121,7 @@ function Services() {
         </p>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => {
-            const Icon = (Icons as any)[s.icon] || Icons.ArrowRight;
+            const Icon = SERVICE_ICON_MAP[s.icon];
             return (
               <Link
                 key={s.slug}

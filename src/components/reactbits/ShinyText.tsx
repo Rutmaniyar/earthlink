@@ -38,13 +38,15 @@ const ShinyText: React.FC<ShinyTextProps> = ({
   const elapsedRef = useRef(0);
   const lastTimeRef = useRef<number | null>(null);
   const directionRef = useRef(direction === 'left' ? 1 : -1);
+  const elementRef = useRef<HTMLSpanElement>(null);
+  const visibleRef = useRef(true);
 
 
   const animationDuration = speed * 1000;
   const delayDuration = delay * 1000;
 
   useAnimationFrame(time => {
-    if (animationDisabled || isPaused) {
+    if (animationDisabled || isPaused || !visibleRef.current || document.hidden) {
       lastTimeRef.current = null;
       return;
     }
@@ -103,6 +105,17 @@ const ShinyText: React.FC<ShinyTextProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [direction]);
 
+  useEffect(() => {
+    const element = elementRef.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      visibleRef.current = entry?.isIntersecting ?? true;
+      if (!visibleRef.current) lastTimeRef.current = null;
+    });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
   // Transform: p=0 -> 150% (shine off right), p=100 -> -50% (shine off left)
   const backgroundPosition = useTransform(progress, p => `${150 - p * 2}% center`);
 
@@ -128,6 +141,7 @@ const ShinyText: React.FC<ShinyTextProps> = ({
 
   return (
     <motion.span
+      ref={elementRef}
       className={`inline-block ${className}`}
       style={{ ...gradientStyle, backgroundPosition }}
       onMouseEnter={handleMouseEnter}

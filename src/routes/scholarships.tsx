@@ -11,12 +11,13 @@ export const Route = createFileRoute("/scholarships")({
       {
         name: "description",
         content:
-          "Government, university, and external scholarships for UK, USA, Canada, Australia, Ireland, New Zealand, and Europe — and how Earthlink helps you compete for them.",
+          "Government, university, and external scholarships for applicants across 120+ countries, with selected featured destinations shown in detail.",
       },
       { property: "og:title", content: "Scholarships for international students" },
       {
         property: "og:description",
-        content: "Major government and university scholarships across 8 study destinations.",
+        content:
+          "Major government and university scholarships for applicants across 120+ countries and featured destinations.",
       },
       { property: "og:url", content: absUrl("/scholarships") },
       { property: "og:type", content: "website" },
@@ -24,7 +25,8 @@ export const Route = createFileRoute("/scholarships")({
       { name: "twitter:title", content: "Scholarships for international students" },
       {
         name: "twitter:description",
-        content: "Major government and university scholarships across 8 study destinations.",
+        content:
+          "Major government and university scholarships for applicants across 120+ countries and featured destinations.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/scholarships") }],

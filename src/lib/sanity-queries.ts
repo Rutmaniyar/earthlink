@@ -4,7 +4,11 @@
 
 import { sanityClient, sanityConfigured, imgUrl } from "./sanity";
 import { BLOGS, getBlog, type Blog } from "@/content/blogs";
-import { UNIVERSITY_PARTNERS, type University, type UniversityCountry } from "@/content/universities";
+import {
+  UNIVERSITY_PARTNERS,
+  type University,
+  type UniversityCountry,
+} from "@/content/universities";
 
 // ---------- Blog ----------
 
@@ -135,7 +139,8 @@ const UNIVERSITIES_QUERY = /* groq */ `
       programs,
       ranking,
       tuitionRange,
-      description
+      description,
+      applicationSupportNote
     }
   }
 `;
@@ -159,7 +164,9 @@ type SanityUniversityCountry = {
 };
 
 function universityKey(university: University): string {
-  return (university as University & { slug?: string }).slug ?? slugifyUniversityName(university.name);
+  return (
+    (university as University & { slug?: string }).slug ?? slugifyUniversityName(university.name)
+  );
 }
 
 export function mergeUniversityCountriesWithFallback(
@@ -200,18 +207,25 @@ export async function fetchUniversityCountriesResult(): Promise<SanityResult<Uni
       slug: c.slug,
       flag: c.flag,
       blurb: c.blurb,
-      universities: c.universities.map((u) => ({
-        name: u.name,
-        domain: u.domain,
-        city: u.city,
-        speciality: u.speciality,
-        highlights: u.highlights ?? [],
-        website: u.website,
-        // Passthrough (not part of the static type) — enables detail links + responsive images.
-        ...(u.slug ? { slug: u.slug } : {}),
-        ...(u.logo ? { logoRef: u.logo } : {}),
-        ...(u.coverImage ? { coverRef: u.coverImage } : {}),
-      })) as University[],
+      universities: c.universities.map((u) => {
+        const fallbackUniversity = UNIVERSITY_PARTNERS.find(
+          (country) => country.slug === c.slug,
+        )?.universities.find((candidate) => universityKey(candidate) === universityKey(u));
+        return {
+          name: u.name,
+          domain: u.domain,
+          city: u.city,
+          speciality: u.speciality,
+          highlights: u.highlights ?? [],
+          website: u.website,
+          applicationSupportNote:
+            u.applicationSupportNote ?? fallbackUniversity?.applicationSupportNote,
+          // Passthrough (not part of the static type) — enables detail links + responsive images.
+          ...(u.slug ? { slug: u.slug } : {}),
+          ...(u.logo ? { logoRef: u.logo } : {}),
+          ...(u.coverImage ? { coverRef: u.coverImage } : {}),
+        };
+      }) as University[],
     }));
     return { status: "ok", data: mergeUniversityCountriesWithFallback(data) };
   } catch (err) {
@@ -236,6 +250,7 @@ const UNIVERSITY_DETAIL_QUERY = /* groq */ `
     programs,
     intakes,
     scholarshipsAvailable,
+    applicationSupportNote,
     description,
     applyLink,
     logo,
@@ -281,6 +296,7 @@ export type UniversityDetail = {
   programs?: string[];
   intakes?: string[];
   scholarshipsAvailable?: boolean;
+  applicationSupportNote?: boolean;
   description?: unknown; // Portable Text
   applyLink?: string;
   logo?: unknown;
@@ -300,7 +316,9 @@ export async function fetchUniversityBySlugResult(
 ): Promise<SanityResult<UniversityDetail>> {
   if (!sanityConfigured || !sanityClient) return { status: "skipped" };
   try {
-    const row = await sanityClient.fetch<UniversityDetail | null>(UNIVERSITY_DETAIL_QUERY, { slug });
+    const row = await sanityClient.fetch<UniversityDetail | null>(UNIVERSITY_DETAIL_QUERY, {
+      slug,
+    });
     if (!row) return { status: "skipped" };
     const fallback = findStaticUniversityBySlug(slug);
     return {
@@ -309,6 +327,7 @@ export async function fetchUniversityBySlugResult(
         ? {
             ...fallback,
             ...row,
+            applicationSupportNote: row.applicationSupportNote ?? fallback.applicationSupportNote,
             country: row.country ? { ...fallback.country, ...row.country } : fallback.country,
           }
         : row,
@@ -344,6 +363,7 @@ const RELATED_UNIVERSITIES_QUERY = /* groq */ `
     tuitionRange,
     logo,
     coverImage,
+    applicationSupportNote,
     "country": country->{
       country,
       "slug": slug.current,
@@ -361,6 +381,7 @@ export type RelatedUniversity = {
   tuitionRange?: string;
   logo?: unknown;
   coverImage?: unknown;
+  applicationSupportNote?: boolean;
   country?: { country: string; slug: string; flag?: string };
 };
 
@@ -373,15 +394,12 @@ export async function fetchRelatedUniversitiesResult(args: {
   if (!sanityConfigured || !sanityClient) return { status: "skipped" };
   if (!args.countryId && !args.ranking) return { status: "ok", data: [] };
   try {
-    const rows = await sanityClient.fetch<RelatedUniversity[]>(
-      RELATED_UNIVERSITIES_QUERY,
-      {
-        slug: args.slug,
-        countryId: args.countryId ?? "",
-        ranking: args.ranking ?? null,
-        limit: args.limit ?? 3,
-      },
-    );
+    const rows = await sanityClient.fetch<RelatedUniversity[]>(RELATED_UNIVERSITIES_QUERY, {
+      slug: args.slug,
+      countryId: args.countryId ?? "",
+      ranking: args.ranking ?? null,
+      limit: args.limit ?? 3,
+    });
     return { status: "ok", data: rows ?? [] };
   } catch (err) {
     console.error("[sanity] fetchRelatedUniversities failed", err);
@@ -406,11 +424,10 @@ export function findStaticRelatedUniversities(
       name: u.name,
       city: u.city,
       speciality: u.speciality,
+      applicationSupportNote: u.applicationSupportNote,
       country: { country: country.country, slug: country.slug, flag: country.flag },
     }));
 }
-
-
 
 // Deterministic slug used across static + Sanity content. Matches Sanity's
 // default `slugify` behaviour closely enough for our seeded dataset.
@@ -435,6 +452,7 @@ export function findStaticUniversityBySlug(slug: string): UniversityDetail | nul
           website: u.website,
           speciality: u.speciality,
           highlights: u.highlights,
+          applicationSupportNote: u.applicationSupportNote,
           country: {
             country: c.country,
             slug: c.slug,

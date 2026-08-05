@@ -12,26 +12,26 @@ import {
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — Earthlink Consultants" },
+      { title: "Earthlink FAQs | Study, Visas & Job Search" },
       {
         name: "description",
         content:
-          "Honest answers about fees, refunds, visa guarantees, scholarships, and how Earthlink works.",
+          "Answers about Earthlink's education applications, worldwide visa support, UK referrals to Stonebridge, scholarships, fees, refunds, and job-search help.",
       },
-      { property: "og:title", content: "FAQ — Earthlink Consultants" },
+      { property: "og:title", content: "Earthlink FAQs | Study, Visas & Job Search" },
       {
         property: "og:description",
         content:
-          "Honest answers about fees, refunds, visa guarantees, scholarships, and how Earthlink works.",
+          "Answers about education applications, worldwide visa support, UK Stonebridge referrals, scholarships, fees, refunds, and job-search help.",
       },
       { property: "og:url", content: absUrl("/faq") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "FAQ — Earthlink Consultants" },
+      { name: "twitter:title", content: "Earthlink FAQs | Study, Visas & Job Search" },
       {
         name: "twitter:description",
         content:
-          "Honest answers about fees, refunds, visa guarantees, scholarships, and how Earthlink works.",
+          "Answers about education applications, worldwide visa support, UK Stonebridge referrals, scholarships, fees, refunds, and job-search help.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/faq") }],

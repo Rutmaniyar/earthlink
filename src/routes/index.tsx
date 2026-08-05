@@ -2,8 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { absUrl } from "@/lib/site-config";
 import { COMPANY, SERVICES, JOURNEY, VALUES, TESTIMONIALS } from "@/content/company";
 import { DESTINATIONS } from "@/content/destinations";
-import { whatsappLink, mailtoLink } from "@/lib/lead";
-import * as Icons from "lucide-react";
+import { whatsappLink, mailtoLink, callLink } from "@/lib/lead";
 import {
   ArrowRight,
   Star,
@@ -14,6 +13,7 @@ import {
   Globe2,
   Plane,
 } from "lucide-react";
+import { SERVICE_ICON_MAP } from "@/lib/service-icons";
 import { CountUp, ProgressBar, LiveBars, RadialGauge } from "@/components/infographics";
 import { AuroraClient } from "@/components/reactbits/aurora-client";
 import ShinyText from "@/components/reactbits/ShinyText";
@@ -29,32 +29,32 @@ import Marquee from "@/components/reactbits/Marquee";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Earthlink Consultants — Study Abroad, UK Visa & Recruitment" },
+      { title: "Education Consultants in Harrow | Earthlink Consultants" },
       {
         name: "description",
         content:
-          "UK-based education and visa consultancy. Honest counselling for studies in the UK, USA, Canada, Australia, Ireland, Europe, NZ, and UAE. Book a free consultation.",
+          "Education consultants in Harrow for university admissions and study abroad. Earthlink supports non-UK visas; Stonebridge handles every UK visa route.",
       },
       {
         property: "og:title",
-        content: "Earthlink Consultants — Move abroad with people who answer their phone",
+        content: "Education Consultants in Harrow — Earthlink Consultants",
       },
       {
         property: "og:description",
         content:
-          "8 years from Harrow. 398+ reviews. Real UK office, real advisers, no commission games.",
+          "Continuously trading since 2014. 398+ reviews. Worldwide education support with clearly scoped visa services.",
       },
       { property: "og:url", content: absUrl("/") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content: "Earthlink Consultants — Move abroad with people who answer their phone",
+        content: "Education Consultants in Harrow — Earthlink Consultants",
       },
       {
         name: "twitter:description",
         content:
-          "8 years from Harrow. 398+ reviews. Real UK office, real advisers, no commission games.",
+          "Continuously trading since 2014. 398+ reviews. Worldwide education support with clearly scoped visa services.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/") }],
@@ -114,7 +114,7 @@ function Home() {
               />
             </span>
             <h1 className="mt-6 font-serif text-5xl leading-[1.05] text-foreground text-balance md:text-6xl">
-              Move abroad with people who{" "}
+              Education consultants who{" "}
               <ShinyText
                 text="answer their phone."
                 color="#9BD936"
@@ -125,8 +125,9 @@ function Home() {
             </h1>
 
             <p className="mt-5 max-w-lg text-muted-foreground">
-              Earthlink files student-visa, work, and university applications every week — and tells
-              you the truth about your odds before you spend a pound.
+              From Harrow, Earthlink supports university admissions, study-abroad applications,
+              non-UK visa preparation, and jobseekers worldwide. Stonebridge alone handles every UK
+              immigration route and application.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Magnet padding={60} magnetStrength={4}>
@@ -148,6 +149,12 @@ function Home() {
                   WhatsApp an adviser
                 </a>
               </Magnet>
+              <a
+                href={callLink()}
+                className="inline-flex items-center gap-2 rounded-md border border-border px-6 py-3 text-sm text-foreground transition hover:border-gold hover:text-gold sm:hidden"
+              >
+                Call our Harrow office
+              </a>
             </div>
 
             {/* mini interactive process strip */}
@@ -200,7 +207,7 @@ function Home() {
             </p>
             <div className="mt-3 flex items-baseline gap-2">
               <span className="font-serif text-5xl text-gold-glow">
-                <CountUp to={2026 - COMPANY.founded} />
+                <CountUp to={COMPANY.operatingYears} />
               </span>
               <span className="text-sm text-muted-foreground">years</span>
             </div>
@@ -208,7 +215,7 @@ function Home() {
               UK-registered. Harrow office. Real advisers.
             </p>
             <div className="mt-3 flex items-center gap-2 text-[10px] text-gold">
-              <ShieldCheck className="h-3.5 w-3.5" /> Stonebridge legal partners
+              <ShieldCheck className="h-3.5 w-3.5" /> UK visa service partner: Stonebridge
             </div>
           </div>
         </div>
@@ -223,7 +230,7 @@ function Home() {
               value: 2400,
               suffix: "+",
               color: "var(--brand)",
-              info: "Total student-visa, work-visa, and admission files filed by Earthlink across the UK, USA, Canada, Australia, Ireland, NZ, Europe, and UAE between 2017 and 2026. Each file is owned end-to-end by one named adviser.",
+              info: "Total education, recruitment-support, and visa files across Earthlink's worldwide work and Stonebridge-managed UK immigration matters. Each matter has a clearly named owner.",
               cta: { label: "See our services", href: "/services" },
             },
             {
@@ -231,23 +238,23 @@ function Home() {
               value: 97,
               suffix: "%",
               color: "var(--gold-glow)",
-              info: "Rolling 12-month approval rate across student-visa filings. We pre-screen with an honest eligibility audit, so files that wouldn't clear an embassy never leave our office.",
+              info: "Rolling 12-month approval rate across supported visa matters. Earthlink handles non-UK preparation within scope; Stonebridge alone advises on and submits UK immigration applications.",
               cta: { label: "Visa services", href: "/service/student-visa" },
             },
             {
-              label: "Partner universities",
+              label: "Universities supported",
               value: 180,
               suffix: "+",
               color: "var(--navy)",
-              info: "Direct admission partnerships with universities and pathway colleges across our eight destination countries — including Russell Group, Group of Eight, U15 Canada, and EU technical universities.",
+              info: "Universities and pathway colleges we help applicants research and apply to.",
               cta: { label: "Explore destinations", href: "/destinations" },
             },
             {
               label: "Countries served",
-              value: 8,
-              suffix: "",
+              value: 120,
+              suffix: "+",
               color: "var(--brand)",
-              info: "United Kingdom, USA, Canada, Australia, Ireland, New Zealand, Europe (Germany / France / Netherlands), and UAE. We only open a destination once we have local university and visa expertise we can stand behind.",
+              info: "We serve applicants in 120+ countries worldwide. The UK, USA, Canada, Australia, Ireland, Malta, New Zealand, Europe, and UAE are featured study destinations, not the limit of our coverage.",
               cta: { label: "See all destinations", href: "/destinations" },
             },
           ].map((k) => (
@@ -336,7 +343,7 @@ function Home() {
                 a: "We read your transcripts, English score, finances, and gaps — then tell you what countries open up and which ones don't.",
                 score: 92,
                 detail:
-                  "We benchmark your academic profile against entry tariffs at 180+ partner universities, run a points-based eligibility check against UK SW, US F-1, Canada SDS, Australia GS, Ireland Stamp 2, and EU rules — and hand you a one-page country-by-country verdict.",
+                  "We benchmark your academic profile against published entry requirements across 180+ universities we support and give you a country-by-country education verdict. Stonebridge alone assesses UK immigration eligibility.",
                 href: "/service/profile-evaluation",
                 label: "Profile evaluation",
               },
@@ -354,7 +361,7 @@ function Home() {
                 a: "Refusal rates differ by country, university tier, profile, and embassy. We brief you before, not after.",
                 score: 97,
                 detail:
-                  "We score your file against the actual refusal codes UKVI, USCIS, IRCC, and DHA issued in the last 12 months — and rebuild the weak parts (SOP, financial documentation, intent) before submission.",
+                  "Earthlink prepares supported non-UK files against published requirements. Stonebridge alone provides UK immigration advice, reviews UK evidence, and handles every UK application.",
                 href: "/service/student-visa",
                 label: "Student visa filing",
               },
@@ -363,7 +370,7 @@ function Home() {
                 a: "Graduate Route, OPT, PGWP, 485, Stay Back — we map your route to a real job, not just a degree.",
                 score: 84,
                 detail:
-                  "Each destination plan ends with a post-study work brief: how to switch from Graduate Route to Skilled Worker, OPT to H-1B, PGWP to PR, 485 to 189 — including timelines, employer-sponsorship lists, and CV positioning.",
+                  "We help jobseekers identify suitable employers, strengthen their CV, organise applications, and prepare for interviews. We do not procure sponsorship, arrange sponsor licences, sell jobs, or guarantee offers.",
                 href: "/service/recruitment",
                 label: "Recruitment & jobs",
               },
@@ -381,7 +388,7 @@ function Home() {
                 a: "We do. Document collection, formatting, portal submissions, embassy uploads. You review and sign.",
                 score: 100,
                 detail:
-                  "Our documentation team formats academic records, drafts SOPs and LORs, runs financial-document checks, prepares CAS/I-20/LoA portals, and uploads to UKVI/IRCC/VFS/CGI on your behalf. You only review and sign.",
+                  "Our documentation team helps prepare academic records, SOPs, LOR guidance, and university application packs. Where a university requires direct submission, you submit personally. Stonebridge alone handles UK immigration forms and uploads.",
                 href: "/service/documentation",
                 label: "Documentation",
               },
@@ -499,7 +506,7 @@ function Home() {
 
           <div className="mt-10 grid auto-rows-[170px] grid-cols-2 gap-3 md:grid-cols-4 lg:grid-cols-5">
             {SERVICES.map((s, i) => {
-              const Icon = (Icons as any)[s.icon] || Icons.ArrowRight;
+              const Icon = SERVICE_ICON_MAP[s.icon];
               const featured = i === 0 || i === 5; // span larger
               return (
                 <TiltedCard
@@ -537,7 +544,7 @@ function Home() {
       <section className="border-y hairline bg-paper py-8">
         <div className="container-page mb-4 flex items-center justify-between">
           <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
-            University & visa partners
+            Universities we help applicants apply to
           </p>
           <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
             200+ institutions
@@ -582,7 +589,7 @@ function Home() {
             <div>
               <p className="text-xs uppercase tracking-[0.25em] text-gold">Destinations</p>
               <h2 className="mt-3 font-serif text-4xl text-foreground">
-                Eight countries we know inside out.
+                Featured study destinations, within worldwide support.
               </h2>
               <p className="mt-3 max-w-xl text-sm text-muted-foreground">
                 Hover or tap any card to flip and see the inside view.

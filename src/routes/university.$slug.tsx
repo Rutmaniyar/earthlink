@@ -49,7 +49,10 @@ export const Route = createFileRoute("/university/$slug")({
       return {
         meta: [
           { title: `University — ${SITE_NAME}` },
-          { name: "description", content: "Explore partner universities, admissions requirements and application deadlines." },
+          {
+            name: "description",
+            content: "Explore universities, admissions requirements and application deadlines.",
+          },
           { name: "robots", content: "noindex, follow" },
           { property: "og:title", content: `University — ${SITE_NAME}` },
           { property: "og:url", content: canonical },
@@ -82,9 +85,10 @@ export const Route = createFileRoute("/university/$slug")({
     // fallback is showing (no CMS record for this slug) so we don't index
     // pages missing rich content.
     const hasCmsRecord = Boolean(loaderData?.cms);
-    const robots = u.seo?.noIndex || !hasCmsRecord
-      ? "noindex, follow"
-      : "index, follow, max-image-preview:large, max-snippet:-1";
+    const robots =
+      u.seo?.noIndex || !hasCmsRecord
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large, max-snippet:-1";
 
     const meta: Array<Record<string, string>> = [
       { title },
@@ -116,8 +120,11 @@ export const Route = createFileRoute("/university/$slug")({
       <p className="text-sm text-muted-foreground">
         We couldn't load this university right now. {error.message}
       </p>
-      <Link to="/partner-universities" className="mt-4 inline-block text-sm text-brand hover:text-gold">
-        ← Back to partner universities
+      <Link
+        to="/partner-universities"
+        className="mt-4 inline-block text-sm text-brand hover:text-gold"
+      >
+        ← Back to Partnered Universities
       </Link>
     </div>
   ),
@@ -127,8 +134,11 @@ export const Route = createFileRoute("/university/$slug")({
       <p className="mt-3 text-sm text-muted-foreground">
         The university you're looking for isn't in our directory yet.
       </p>
-      <Link to="/partner-universities" className="mt-6 inline-flex items-center gap-1 text-sm text-brand hover:text-gold">
-        <ArrowLeft className="h-4 w-4" /> Browse partner universities
+      <Link
+        to="/partner-universities"
+        className="mt-6 inline-flex items-center gap-1 text-sm text-brand hover:text-gold"
+      >
+        <ArrowLeft className="h-4 w-4" /> Browse Partnered Universities
       </Link>
     </div>
   ),
@@ -286,15 +296,27 @@ function UniversityDetailPage() {
 
   const a = uni.admissions ?? {};
   const anyAdmissions =
-    a.ielts || a.toefl || a.pte || a.duolingo || a.gpa || a.gre || a.gmat || a.sat ||
-    a.applicationFee || a.deadlineFall || a.deadlineSpring ||
-    (a.requiredDocuments && a.requiredDocuments.length) || a.notes;
+    a.ielts ||
+    a.toefl ||
+    a.pte ||
+    a.duolingo ||
+    a.gpa ||
+    a.gre ||
+    a.gmat ||
+    a.sat ||
+    a.applicationFee ||
+    a.deadlineFall ||
+    a.deadlineSpring ||
+    (a.requiredDocuments && a.requiredDocuments.length) ||
+    a.notes;
 
   return (
     <article className="bg-paper">
       {/* Breadcrumb */}
       <div className="container-page pt-8 text-sm text-muted-foreground">
-        <Link to="/partner-universities" className="hover:text-brand">Partner universities</Link>
+        <Link to="/partner-universities" className="hover:text-brand">
+          Partnered Universities
+        </Link>
         {uni.country && (
           <>
             <span className="mx-2">/</span>
@@ -320,7 +342,6 @@ function UniversityDetailPage() {
           errorDetail={cmsError}
           onRetry={() => setReloadKey((k) => k + 1)}
         />
-
       </div>
 
       {/* Header */}
@@ -337,7 +358,9 @@ function UniversityDetailPage() {
               className="h-24 w-24 object-contain p-3"
             />
           ) : (
-            <span className="font-serif text-2xl text-navy">{uni.name.slice(0, 2).toUpperCase()}</span>
+            <span className="font-serif text-2xl text-navy">
+              {uni.name.slice(0, 2).toUpperCase()}
+            </span>
           )}
         </div>
         <div>
@@ -346,7 +369,9 @@ function UniversityDetailPage() {
               {uni.country.flag} {uni.country.country}
             </p>
           )}
-          <h1 className="mt-2 font-serif text-3xl leading-tight text-navy md:text-5xl">{uni.name}</h1>
+          <h1 className="mt-2 font-serif text-3xl leading-tight text-navy md:text-5xl">
+            {uni.name}
+          </h1>
           <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
             {uni.city && (
               <span className="inline-flex items-center gap-1">
@@ -399,7 +424,9 @@ function UniversityDetailPage() {
             )}
             <a
               href={whatsappLink(
-                { message: `Hi Earthlink — I'd like to apply to ${uni.name}. Can you share the next steps?` },
+                {
+                  message: `Hi Earthlink — I'd like to apply to ${uni.name}. Can you share the next steps?`,
+                },
                 `University detail: ${uni.name}`,
               )}
               className="inline-flex items-center rounded-sm border border-border px-5 py-2.5 text-sm font-medium hover:bg-background/50"
@@ -448,7 +475,10 @@ function UniversityDetailPage() {
               </h2>
               <ul className="mt-4 grid gap-2 sm:grid-cols-2">
                 {uni.highlights.map((h) => (
-                  <li key={h} className="rounded-md border hairline bg-paper p-3 text-sm text-foreground/85">
+                  <li
+                    key={h}
+                    className="rounded-md border hairline bg-paper p-3 text-sm text-foreground/85"
+                  >
                     {h}
                   </li>
                 ))}
@@ -481,7 +511,10 @@ function UniversityDetailPage() {
           <div className="sticky top-24 space-y-6">
             {anyAdmissions ? (
               <section aria-labelledby="admissions-heading">
-                <h2 id="admissions-heading" className="flex items-center gap-2 font-serif text-xl text-navy">
+                <h2
+                  id="admissions-heading"
+                  className="flex items-center gap-2 font-serif text-xl text-navy"
+                >
                   <FileText className="h-5 w-5 text-brand" /> Admissions requirements
                 </h2>
 
@@ -495,7 +528,11 @@ function UniversityDetailPage() {
                   <Field label="GMAT" value={a.gmat} />
                   <Field label="SAT" value={a.sat} />
                   <Field label="Application fee" value={a.applicationFee} icon={Wallet} />
-                  <Field label="Fall / Autumn deadline" value={a.deadlineFall} icon={CalendarClock} />
+                  <Field
+                    label="Fall / Autumn deadline"
+                    value={a.deadlineFall}
+                    icon={CalendarClock}
+                  />
                   <Field label="Spring deadline" value={a.deadlineSpring} icon={CalendarClock} />
                 </div>
 
@@ -525,7 +562,9 @@ function UniversityDetailPage() {
 
                 {uni.intakes && uni.intakes.length > 0 && (
                   <div className="mt-4 rounded-md border hairline bg-paper p-4">
-                    <div className="text-[11px] uppercase tracking-widest text-muted-foreground">Intakes</div>
+                    <div className="text-[11px] uppercase tracking-widest text-muted-foreground">
+                      Intakes
+                    </div>
                     <div className="mt-2 flex flex-wrap gap-1.5">
                       {uni.intakes.map((i) => (
                         <span

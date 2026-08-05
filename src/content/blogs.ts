@@ -13,36 +13,48 @@ export type Blog = {
 };
 
 export const BLOG_CATEGORIES: Blog["category"][] = [
-  "UK", "USA", "Canada", "Australia", "Visa", "Scholarships", "Careers", "Guides",
+  "UK",
+  "USA",
+  "Canada",
+  "Australia",
+  "Visa",
+  "Scholarships",
+  "Careers",
+  "Guides",
 ];
 
 export const BLOGS: Blog[] = [
   {
     slug: "uk-graduate-route-2026",
     title: "UK Graduate Route in 2026: What international students need to know",
-    excerpt: "The 2-year post-study work visa is still open — here's how to use it strategically for a sponsored job.",
+    excerpt:
+      "The 2-year post-study work visa is still open — here's how to use the period strategically for your job search.",
     category: "UK",
     author: "Earthlink Editorial",
     date: "2026-06-18",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "UK Graduate Route in 2026: What international students need to know",
     tags: ["Graduate Route", "Post-Study Work", "UK"],
     body: [
       "The UK Graduate Route lets eligible students stay for two years (three for PhDs) after completing an approved course. It's an unsponsored visa — you don't need a job offer to switch onto it.",
-      "The strategic play in 2026 is to treat the Graduate Route as a bridge to a Skilled Worker visa. Start applying to sponsored roles from month one, prioritise employers on the UK sponsor register, and be ready to switch before the two years run out.",
-      "Common mistakes: waiting until graduation to job hunt, applying only to household-name employers, and ignoring the salary thresholds on the Skilled Worker route.",
+      "Use the Graduate Route period to build relevant experience and run a focused job search. Start early, research suitable employers and role requirements, and keep records of your applications.",
+      "Common mistakes include waiting until graduation to job hunt, applying only to household-name employers, and relying on assumptions about later immigration options instead of taking advice from Stonebridge.",
+      "Earthlink's recruitment service is job-search support only and does not procure sponsorship or arrange sponsor licences. Stonebridge Legal Solutions alone provides UK immigration advice and handles Graduate Route or Skilled Worker applications.",
     ],
   },
   {
     slug: "sop-that-actually-works",
     title: "The SOP that actually works: a UK admissions officer's checklist",
-    excerpt: "Forget generic templates. Here's what a Russell Group reviewer looks for in the first 90 seconds.",
+    excerpt:
+      "Forget generic templates. Here's what a Russell Group reviewer looks for in the first 90 seconds.",
     category: "Guides",
     author: "Earthlink Editorial",
     date: "2026-05-30",
     readMinutes: 9,
-    cover: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "The SOP that actually works: a UK admissions officer's checklist",
     tags: ["SOP", "Applications", "Writing"],
     body: [
@@ -54,12 +66,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "canada-pgwp-changes",
     title: "Canada PGWP changes: which programmes still qualify",
-    excerpt: "IRCC tightened the Post-Graduation Work Permit list. Check your programme before you apply.",
+    excerpt:
+      "IRCC tightened the Post-Graduation Work Permit list. Check your programme before you apply.",
     category: "Canada",
     author: "Earthlink Editorial",
     date: "2026-05-12",
     readMinutes: 6,
-    cover: "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1503614472-8c93d56e92ce?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Canada PGWP changes: which programmes still qualify",
     tags: ["PGWP", "Canada", "IRCC"],
     body: [
@@ -70,12 +84,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "us-f1-visa-interview-prep",
     title: "US F-1 visa interview: 12 questions you must rehearse",
-    excerpt: "Consular officers decide in under three minutes. Be ready for the ties, funds, and intent questions.",
+    excerpt:
+      "Consular officers decide in under three minutes. Be ready for the ties, funds, and intent questions.",
     category: "Visa",
     author: "Earthlink Editorial",
     date: "2026-04-22",
     readMinutes: 8,
-    cover: "https://images.unsplash.com/photo-1543872084-c7bd3822856f?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1543872084-c7bd3822856f?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "US F-1 visa interview: 12 questions you must rehearse",
     tags: ["F-1", "USA", "Visa Interview"],
     body: [
@@ -91,7 +107,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-04-05",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Chevening vs Commonwealth: which UK scholarship fits you?",
     tags: ["Chevening", "Commonwealth", "UK Scholarships"],
     body: [
@@ -107,7 +124,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-03-18",
     readMinutes: 6,
-    cover: "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Australia Subclass 500: getting your financials right the first time",
     tags: ["Subclass 500", "Australia", "GS"],
     body: [
@@ -118,28 +136,33 @@ export const BLOGS: Blog[] = [
   {
     slug: "career-after-msc-uk",
     title: "Career after an MSc in the UK: routes that beat the salary threshold",
-    excerpt: "Skilled Worker visa requires £38,700 (2024 threshold). Here are the sectors that pay it.",
+    excerpt:
+      "Skilled Worker visa requires £38,700 (2024 threshold). Here are the sectors that pay it.",
     category: "Careers",
     author: "Earthlink Editorial",
     date: "2026-02-27",
     readMinutes: 8,
-    cover: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Career after an MSc in the UK: routes that beat the salary threshold",
     tags: ["Skilled Worker", "Salary Threshold", "UK Jobs"],
     body: [
       "Technology, financial services, healthcare, and engineering routinely pay above threshold for graduate roles. Marketing, HR, and generalist consulting often do not.",
       "New-entrant discounts and shortage-occupation reductions apply for many roles — check the Immigration Salary List before ruling out an offer.",
+      "Earthlink can help jobseekers research suitable employers, improve their CV, and prepare for interviews. Stonebridge Legal Solutions alone provides UK immigration advice and handles any visa application.",
     ],
   },
   {
     slug: "ielts-vs-pte-2026",
     title: "IELTS vs PTE Academic in 2026: which test to pick",
-    excerpt: "Both are accepted by nearly every UK, Australian, and Canadian institution. The right pick depends on your strengths.",
+    excerpt:
+      "Both are accepted by nearly every UK, Australian, and Canadian institution. The right pick depends on your strengths.",
     category: "Guides",
     author: "Earthlink Editorial",
     date: "2026-02-08",
     readMinutes: 5,
-    cover: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "IELTS vs PTE Academic in 2026: which test to pick",
     tags: ["IELTS", "PTE", "English Test"],
     body: [
@@ -150,29 +173,34 @@ export const BLOGS: Blog[] = [
   {
     slug: "study-in-uk-complete-guide-2026",
     title: "Study in UK 2026: The Complete Guide for International Students",
-    excerpt: "Universities, costs, visas, scholarships, and post-study work — everything you need in one place.",
+    excerpt:
+      "Universities, costs, visas, scholarships, and post-study work — everything you need in one place.",
     category: "UK",
     author: "Earthlink Editorial",
     date: "2026-06-25",
     readMinutes: 12,
-    cover: "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Study in UK 2026: The Complete Guide for International Students",
     tags: ["Study in UK", "Guide", "International Students"],
     body: [
       "The UK hosts over 680,000 international students across 140+ universities. Tuition ranges from £11,000 to £38,000 per year, with living costs of £12,000–£15,000 outside London and £15,000–£20,000 in London.",
       "Application windows: UCAS opens in September for the following autumn intake. Oxbridge and medicine close in mid-October; most other courses accept until late January, with clearing running through summer.",
       "The Student visa (Route) requires a CAS from your university, proof of funds, and English proficiency. After graduation, the Graduate Route gives 2 years (3 for PhDs) to work without sponsorship.",
+      "Earthlink may help with the university application. Stonebridge Legal Solutions alone provides UK immigration advice and handles every UK visa form and application.",
     ],
   },
   {
     slug: "study-in-usa-complete-guide",
     title: "Study in USA: Universities, Costs, and F-1 Visa Roadmap",
-    excerpt: "From Ivy League to state schools — how to choose, apply, fund, and land your F-1 visa.",
+    excerpt:
+      "From Ivy League to state schools — how to choose, apply, fund, and land your F-1 visa.",
     category: "USA",
     author: "Earthlink Editorial",
     date: "2026-06-20",
     readMinutes: 11,
-    cover: "https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Study in USA: Universities, Costs, and F-1 Visa Roadmap",
     tags: ["Study in USA", "F-1 Visa", "Universities"],
     body: [
@@ -184,12 +212,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "study-in-canada-complete-guide",
     title: "Study in Canada: SDS, PGWP, and PR pathway explained",
-    excerpt: "Canada's Student Direct Stream, work permits, and permanent residency routes for graduates.",
+    excerpt:
+      "Canada's Student Direct Stream, work permits, and permanent residency routes for graduates.",
     category: "Canada",
     author: "Earthlink Editorial",
     date: "2026-06-15",
     readMinutes: 10,
-    cover: "https://images.unsplash.com/photo-1517935706615-2717063c2225?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1517935706615-2717063c2225?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Study in Canada: SDS, PGWP, and PR pathway explained",
     tags: ["Canada", "SDS", "PGWP", "PR"],
     body: [
@@ -206,7 +236,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-06-10",
     readMinutes: 10,
-    cover: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Study in Australia: Group of Eight, costs, and 485 visa",
     tags: ["Australia", "Group of Eight", "485 Visa"],
     body: [
@@ -223,7 +254,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-06-05",
     readMinutes: 8,
-    cover: "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Study in Ireland: Trinity, UCD, and the Third Level Graduate Scheme",
     tags: ["Ireland", "Trinity", "Post-Study Work"],
     body: [
@@ -239,7 +271,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-05-28",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Study in New Zealand: quality of life meets post-study work",
     tags: ["New Zealand", "Post-Study Work", "Residency"],
     body: [
@@ -250,12 +283,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "study-in-germany-free-tuition",
     title: "Study in Germany: free tuition and Blocked Account explained",
-    excerpt: "Public universities charge no tuition. Here's what you actually pay and how to prove funds.",
+    excerpt:
+      "Public universities charge no tuition. Here's what you actually pay and how to prove funds.",
     category: "Guides",
     author: "Earthlink Editorial",
     date: "2026-05-22",
     readMinutes: 8,
-    cover: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Study in Germany: free tuition and Blocked Account explained",
     tags: ["Germany", "Blocked Account", "Free Tuition"],
     body: [
@@ -266,12 +301,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "sop-samples-that-got-admits",
     title: "5 SOP samples that got admits to top UK universities",
-    excerpt: "Real openings, structures, and closings from students admitted to UCL, Imperial, Warwick, and Edinburgh.",
+    excerpt:
+      "Real openings, structures, and closings from students admitted to UCL, Imperial, Warwick, and Edinburgh.",
     category: "Guides",
     author: "Earthlink Editorial",
     date: "2026-05-18",
     readMinutes: 10,
-    cover: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "5 SOP samples that got admits to top UK universities",
     tags: ["SOP", "Samples", "UK Admissions"],
     body: [
@@ -288,7 +325,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-05-14",
     readMinutes: 6,
-    cover: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Letters of Recommendation: choosing the right recommenders",
     tags: ["LOR", "Recommendations", "Applications"],
     body: [
@@ -304,7 +342,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-05-08",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1513258496099-48168024aec0?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "GRE vs GMAT in 2026: which one for MBA and MS applications?",
     tags: ["GRE", "GMAT", "MBA"],
     body: [
@@ -320,7 +359,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-05-02",
     readMinutes: 8,
-    cover: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "IELTS Band 8 strategy: what actually moves your score",
     tags: ["IELTS", "Band 8", "Test Prep"],
     body: [
@@ -336,12 +376,14 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-04-28",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1523995462485-3d171b5c8fa9?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "UK Student Visa: the complete document checklist",
     tags: ["UK Visa", "Checklist", "CAS"],
     body: [
       "Core documents: valid passport, CAS statement, tuition + first year living funds held for 28 consecutive days, English proficiency evidence, and TB test certificate (for most countries).",
       "ATAS certificate is required for research-heavy STEM courses. Start it 3+ months before your visa application — processing can take 4–8 weeks.",
+      "This checklist is general information, not individual immigration advice. Stonebridge Legal Solutions alone reviews UK visa evidence and handles every UK immigration application for Earthlink clients.",
     ],
   },
   {
@@ -352,7 +394,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-04-20",
     readMinutes: 8,
-    cover: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "US OPT and STEM OPT extension: your 36 months explained",
     tags: ["OPT", "STEM OPT", "H-1B"],
     body: [
@@ -363,12 +406,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "canada-express-entry-crs",
     title: "Canada Express Entry CRS: how graduates hit 470+",
-    excerpt: "Education, work experience, language, and provincial nomination — the CRS math for international students.",
+    excerpt:
+      "Education, work experience, language, and provincial nomination — the CRS math for international students.",
     category: "Canada",
     author: "Earthlink Editorial",
     date: "2026-04-14",
     readMinutes: 9,
-    cover: "https://images.unsplash.com/photo-1519832979-6fa011b87667?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1519832979-6fa011b87667?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Canada Express Entry CRS: how graduates hit 470+",
     tags: ["Express Entry", "CRS", "Canada PR"],
     body: [
@@ -379,12 +424,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "russell-group-vs-non-russell",
     title: "Russell Group vs non-Russell Group: does it matter for jobs?",
-    excerpt: "The 24 research-intensive universities carry brand weight — but not always where you'd expect.",
+    excerpt:
+      "The 24 research-intensive universities carry brand weight — but not always where you'd expect.",
     category: "UK",
     author: "Earthlink Editorial",
     date: "2026-04-08",
     readMinutes: 6,
-    cover: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Russell Group vs non-Russell Group: does it matter for jobs?",
     tags: ["Russell Group", "UK Universities", "Careers"],
     body: [
@@ -400,7 +447,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-04-02",
     readMinutes: 10,
-    cover: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Top MBA programs in Europe 2026: LBS, INSEAD, IESE, HEC",
     tags: ["MBA", "Europe", "Business School"],
     body: [
@@ -416,7 +464,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-03-26",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Cost of living: London vs Manchester vs Birmingham vs Edinburgh",
     tags: ["Cost of Living", "UK Cities", "Budgeting"],
     body: [
@@ -427,12 +476,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "scholarships-for-indian-students-uk",
     title: "Top scholarships for Indian students in the UK",
-    excerpt: "Chevening, Commonwealth, GREAT, Rhodes, and university-specific awards worth applying for.",
+    excerpt:
+      "Chevening, Commonwealth, GREAT, Rhodes, and university-specific awards worth applying for.",
     category: "Scholarships",
     author: "Earthlink Editorial",
     date: "2026-03-20",
     readMinutes: 8,
-    cover: "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Top scholarships for Indian students in the UK",
     tags: ["Scholarships", "Indian Students", "UK"],
     body: [
@@ -443,12 +494,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "scholarships-usa-fulbright",
     title: "Fulbright, Knight-Hennessy, and top scholarships for USA",
-    excerpt: "Fully funded master's and PhD scholarships every international student should consider.",
+    excerpt:
+      "Fully funded master's and PhD scholarships every international student should consider.",
     category: "Scholarships",
     author: "Earthlink Editorial",
     date: "2026-03-14",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Fulbright, Knight-Hennessy, and top scholarships for USA",
     tags: ["Fulbright", "Scholarships", "USA"],
     body: [
@@ -459,17 +512,20 @@ export const BLOGS: Blog[] = [
   {
     slug: "part-time-work-uk-students",
     title: "Part-time work rules for UK international students",
-    excerpt: "20 hours during term, 40 in vacation — how to stay compliant and earn £8,000+ per year.",
+    excerpt:
+      "20 hours during term, 40 in vacation — how to stay compliant and earn £8,000+ per year.",
     category: "UK",
     author: "Earthlink Editorial",
     date: "2026-03-08",
     readMinutes: 6,
-    cover: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Part-time work rules for UK international students",
     tags: ["Part-time Work", "UK Students", "Compliance"],
     body: [
       "Degree-level students can work up to 20 hours per week during term (10 hours for below-degree). Vacation periods allow unlimited hours.",
       "Retail, hospitality, and university roles (student ambassador, library, tutoring) are the most common. Avoid self-employment and cash-in-hand — both breach visa conditions.",
+      "Check the conditions printed on your own permission before working. Stonebridge Legal Solutions alone provides case-specific UK immigration advice.",
     ],
   },
   {
@@ -480,7 +536,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-03-02",
     readMinutes: 8,
-    cover: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "How to shortlist UK universities: 7 filters that matter",
     tags: ["University Selection", "UK", "Rankings"],
     body: [
@@ -496,7 +553,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-02-24",
     readMinutes: 9,
-    cover: "https://images.unsplash.com/photo-1526779259212-939e64788e3c?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1526779259212-939e64788e3c?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Canada vs UK vs USA: which country for your master's?",
     tags: ["Comparison", "Study Abroad", "Country Choice"],
     body: [
@@ -513,7 +571,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-02-18",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Student accommodation UK: halls vs private vs homestay",
     tags: ["Accommodation", "Halls", "UK Housing"],
     body: [
@@ -524,12 +583,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "profile-evaluation-explained",
     title: "Profile Evaluation: what actually gets you into top universities",
-    excerpt: "How admissions officers weigh academics, extracurriculars, essays, and recommendations.",
+    excerpt:
+      "How admissions officers weigh academics, extracurriculars, essays, and recommendations.",
     category: "Guides",
     author: "Earthlink Editorial",
     date: "2026-02-12",
     readMinutes: 8,
-    cover: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Profile Evaluation: what actually gets you into top universities",
     tags: ["Profile Evaluation", "Admissions", "Application"],
     body: [
@@ -545,12 +606,14 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-02-06",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "UK Dependent Visa: bringing your spouse and children",
     tags: ["Dependent Visa", "UK", "Family"],
     body: [
       "Since January 2024, only research-based postgraduate students (PhD, DPhil, other doctoral research) and government-sponsored students can bring dependents on the Student route.",
       "Skilled Worker route still permits dependents at all salary levels. Financial requirement: £845/month per dependent, held for 28 days pre-application.",
+      "Rules and financial requirements can change. Stonebridge Legal Solutions alone advises on eligibility and handles UK dependant visa applications for Earthlink clients.",
     ],
   },
   {
@@ -561,7 +624,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-01-31",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Australia cost of living 2026: Sydney vs Melbourne vs Brisbane",
     tags: ["Cost of Living", "Australia", "Sydney"],
     body: [
@@ -577,7 +641,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-01-25",
     readMinutes: 5,
-    cover: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Conditional vs unconditional offer: what each means for you",
     tags: ["Offer Letter", "Admissions", "UCAS"],
     body: [
@@ -588,12 +653,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "credential-evaluation-wes-eca",
     title: "WES ECA and credential evaluation: step-by-step",
-    excerpt: "Required for Canada Express Entry and many US universities — here's how to file it right.",
+    excerpt:
+      "Required for Canada Express Entry and many US universities — here's how to file it right.",
     category: "Guides",
     author: "Earthlink Editorial",
     date: "2026-01-19",
     readMinutes: 6,
-    cover: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "WES ECA and credential evaluation: step-by-step",
     tags: ["WES", "ECA", "Credential Evaluation"],
     body: [
@@ -609,7 +676,8 @@ export const BLOGS: Blog[] = [
     author: "Earthlink Editorial",
     date: "2026-01-13",
     readMinutes: 8,
-    cover: "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "UCAS personal statement: the 4,000-character formula",
     tags: ["UCAS", "Personal Statement", "Undergraduate"],
     body: [
@@ -620,12 +688,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "post-arrival-checklist-uk",
     title: "Post-arrival UK checklist: first 30 days as an international student",
-    excerpt: "BRP collection, bank account, NHS registration, and NI number — the order that saves weeks.",
+    excerpt:
+      "BRP collection, bank account, NHS registration, and NI number — the order that saves weeks.",
     category: "UK",
     author: "Earthlink Editorial",
     date: "2026-01-07",
     readMinutes: 7,
-    cover: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "Post-arrival UK checklist: first 30 days as an international student",
     tags: ["Post-Arrival", "UK Checklist", "BRP"],
     body: [
@@ -636,12 +706,14 @@ export const BLOGS: Blog[] = [
   {
     slug: "scholarship-application-guide",
     title: "How to secure fully-funded international scholarships: a step-by-step guide",
-    excerpt: "A practical playbook for winning Chevening, Commonwealth, Fulbright, DAAD and university-funded awards — plus how Earthlink screens eligibility and shapes essays.",
+    excerpt:
+      "A practical playbook for winning Chevening, Commonwealth, Fulbright, DAAD and university-funded awards — plus how Earthlink screens eligibility and shapes essays.",
     category: "Scholarships",
     author: "Earthlink Editorial",
     date: "2026-06-25",
     readMinutes: 12,
-    cover: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=70&auto=format&fit=crop",
+    cover:
+      "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=70&auto=format&fit=crop",
     coverCaption: "How to secure fully-funded international scholarships: a step-by-step guide",
     tags: ["Scholarships", "Chevening", "Commonwealth", "Fulbright", "DAAD", "Funding"],
     body: [

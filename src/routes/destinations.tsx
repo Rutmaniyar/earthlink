@@ -6,16 +6,17 @@ import { ArrowUpRight } from "lucide-react";
 export const Route = createFileRoute("/destinations")({
   head: () => ({
     meta: [
-      { title: "Study Abroad Destinations — UK, USA, Canada & More" },
+      { title: "Study Abroad Destinations Worldwide | Earthlink" },
       {
         name: "description",
         content:
-          "Compare 8 study-abroad destinations at a glance — UK, USA, Canada, Australia, Ireland, NZ, Europe & UAE. Tuition, intakes, visa routes and post-study work, side by side.",
+          "Earthlink serves applicants in 120+ countries worldwide. Compare our featured study destinations, tuition, intakes, visa routes and post-study options.",
       },
       { property: "og:title", content: "Destinations · Earthlink Consultants" },
       {
         property: "og:description",
-        content: "Pick a destination, see the real numbers, and book a free consultation.",
+        content:
+          "Worldwide application support with detailed guides to our featured study destinations.",
       },
       { property: "og:url", content: absUrl("/destinations") },
       { property: "og:type", content: "website" },
@@ -23,10 +24,35 @@ export const Route = createFileRoute("/destinations")({
       { name: "twitter:title", content: "Destinations · Earthlink Consultants" },
       {
         name: "twitter:description",
-        content: "Pick a destination, see the real numbers, and book a free consultation.",
+        content:
+          "Worldwide application support with detailed guides to our featured study destinations.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/destinations") }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Featured study destinations",
+          description:
+            "Earthlink serves applicants in 120+ countries worldwide and publishes detailed guides to selected featured study destinations.",
+          url: absUrl("/destinations"),
+          mainEntity: {
+            "@type": "ItemList",
+            name: "Featured study destinations",
+            numberOfItems: DESTINATIONS.length,
+            itemListElement: DESTINATIONS.map((d, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: d.name,
+              url: absUrl(`/destination/${d.slug}`),
+            })),
+          },
+        }),
+      },
+    ],
   }),
   component: Destinations,
 });
@@ -38,11 +64,12 @@ function Destinations() {
         <div className="container-page py-20">
           <p className="text-xs uppercase tracking-[0.25em] text-gold">Destinations</p>
           <h1 className="mt-3 max-w-3xl font-serif text-5xl text-balance md:text-6xl">
-            Eight countries we file applications for every week.
+            Worldwide support. Featured destinations in detail.
           </h1>
           <p className="mt-6 max-w-2xl text-muted-foreground">
-            These aren't brochure pages. Each destination below carries real intakes, real tuition
-            ranges, real work-rights rules — the things you need before you decide.
+            We serve applicants in 120+ countries. The guides below are our featured study
+            destinations, with practical intakes, tuition ranges, visa information, and post-study
+            considerations to help you decide.
           </p>
         </div>
       </section>

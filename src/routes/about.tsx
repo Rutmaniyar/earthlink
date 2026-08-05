@@ -7,17 +7,17 @@ import { PhasesOfDoubt, HonestPledge, ForParents } from "@/components/honest-ple
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Earthlink Consultants — UK Study & Visa Advisers" },
+      { title: "About Earthlink Consultants | Worldwide Study Support" },
       {
         name: "description",
         content:
-          "Earthlink Consultants — Harrow-based UK study abroad advisors with 12+ years placing students at 50+ partner universities. Meet the team, see our process, and book a free call.",
+          "Harrow-based study abroad advisers serving applicants in 120+ countries since 2014, with UK immigration handled only by Stonebridge Legal Solutions.",
       },
       { property: "og:title", content: "About Earthlink Consultants" },
       {
         property: "og:description",
         content:
-          "Operating from Harrow since 2018. UK-regulated. Solicitor-supported. Student-first.",
+          "Operating from Harrow since 2014. Worldwide education support. UK immigration handled only by Stonebridge.",
       },
       { property: "og:url", content: absUrl("/about") },
       { property: "og:type", content: "website" },
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "twitter:description",
         content:
-          "Operating from Harrow since 2018. UK-regulated. Solicitor-supported. Student-first.",
+          "Operating from Harrow since 2014. Worldwide education support. UK immigration handled only by Stonebridge.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/about") }],
@@ -35,33 +35,12 @@ export const Route = createFileRoute("/about")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": ["LocalBusiness", "EducationalOrganization"],
-          "@id": absUrl("/about#localbusiness"),
-          name: COMPANY.legalName,
-          image: absUrl("/"),
+          "@type": "AboutPage",
+          "@id": absUrl("/about#webpage"),
+          name: "About Earthlink Consultants",
           url: absUrl("/about"),
-          telephone: COMPANY.phoneHref,
-          email: COMPANY.email,
-          priceRange: "££",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: `${COMPANY.address.line1}, ${COMPANY.address.line2}`,
-            addressLocality: COMPANY.address.city,
-            postalCode: COMPANY.address.postcode,
-            addressCountry: "GB",
-          },
-          areaServed: [
-            { "@type": "Country", name: "United Kingdom" },
-            { "@type": "Place", name: "Worldwide" },
-          ],
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: COMPANY.rating.score,
-            reviewCount: COMPANY.rating.reviews,
-            bestRating: 5,
-            worstRating: 1,
-          },
-          parentOrganization: { "@id": absUrl("/#organization") },
+          about: { "@id": absUrl("/#organization") },
+          isPartOf: { "@id": absUrl("/#website") },
         }),
       },
     ],
@@ -80,8 +59,8 @@ function About() {
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
             Earthlink Consultants Ltd has operated from Harrow since {COMPANY.founded}. We're known
-            for honest counselling, careful documentation, and staying available after the visa is
-            approved.
+            for honest counselling, careful university applications, and staying available after
+            students arrive. Stonebridge alone handles UK immigration matters.
           </p>
         </div>
       </section>
@@ -93,21 +72,21 @@ function About() {
             <h2 className="mt-3 font-serif text-4xl text-navy">Built around one rule.</h2>
             <div className="prose mt-6 max-w-none text-muted-foreground">
               <p>
-                Earthlink started in 2018 out of a small office in Harrow, after years of watching
+                Earthlink started in 2014 out of a small office in Harrow, after years of watching
                 friends and family pay agencies for advice that didn't hold up at the visa
                 interview. The rule we built the firm around was simple: never recommend a country,
                 course, or university we wouldn't pick for our own.
               </p>
               <p>
-                Today we file applications across the UK, USA, Canada, Australia, Ireland, New
-                Zealand, Europe, and the UAE. We also handle visit visas and skilled-worker
-                recruitment — the kinds of cases that need both education and immigration knowledge
-                in one room.
+                Today we serve applicants in 120+ countries worldwide. The UK, USA, Canada,
+                Australia, Ireland, Malta, New Zealand, Europe, and the UAE are featured study
+                destinations. We also support non-UK visitor visas and help jobseekers find suitable
+                employers without procuring sponsorship or selling jobs.
               </p>
               <p>
-                Visa work is supported by our solicitor partner{" "}
-                <strong className="text-navy">{COMPANY.solicitors.name}</strong> in London, so
-                complex cases never get bounced to a junior caseworker.
+                Every UK visa route, advice matter, form, and application is handled only by our
+                solicitor partner <strong className="text-navy">{COMPANY.solicitors.name}</strong>
+                in London. Earthlink may continue to handle the university application separately.
               </p>
             </div>
           </div>
@@ -115,8 +94,8 @@ function About() {
             {[
               {
                 icon: ShieldCheck,
-                label: "UK regulated",
-                body: "Registered consultancy with solicitor partner for immigration matters.",
+                label: "UK office",
+                body: "Education support from Harrow; UK immigration work is owned by Stonebridge.",
               },
               {
                 icon: Heart,
@@ -130,8 +109,8 @@ function About() {
               },
               {
                 icon: Globe2,
-                label: "20+ countries",
-                body: "Active pathways across UK, EU, North America, ANZ, and the Gulf.",
+                label: "120+ countries",
+                body: "Applicants served worldwide, with detailed featured-destination guides.",
               },
             ].map((c) => (
               <div key={c.label} className="rounded border hairline bg-card p-5">

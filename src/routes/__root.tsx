@@ -17,7 +17,10 @@ import { ScrollProgress } from "@/components/scroll-progress";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { ScrollDepth } from "@/components/scroll-depth";
 import { ThemeProvider, themeInitScript } from "@/components/theme-provider";
+import { CookieConsent } from "@/components/cookie-consent";
+import { TrustindexCertificate } from "@/components/trustindex-certificate";
 import { COMPANY } from "@/content/company";
+import { DESTINATIONS } from "@/content/destinations";
 import { absUrl } from "@/lib/site-config";
 import logoUrl from "@/assets/earthlink-logo.png";
 
@@ -82,32 +85,45 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     const logoAbsUrl = absUrl(logoUrl);
     const organizationId = absUrl("/#organization");
     const websiteId = absUrl("/#website");
+    const socialPreviewUrl = absUrl("/earthlink-social-preview.jpg");
 
     return {
       meta: [
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { title: "Earthlink Consultants — UK Study, Visa & Recruitment" },
+        { title: "Earthlink Consultants | Worldwide Study Support" },
         {
           name: "description",
           content:
-            "Earthlink Consultants is a UK-based international education, visa, and recruitment consultancy operating from Harrow since 2018.",
+            "Earthlink Consultants has served applicants in 120+ countries from Harrow since 2014. Stonebridge alone handles every UK immigration matter.",
         },
         { name: "author", content: COMPANY.legalName },
         { property: "og:site_name", content: COMPANY.name },
         { property: "og:type", content: "website" },
+        { property: "og:image", content: socialPreviewUrl },
+        { property: "og:image:width", content: "1200" },
+        { property: "og:image:height", content: "630" },
         { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: socialPreviewUrl },
         { name: "theme-color", content: "#0B1633" },
       ],
       links: [
         { rel: "stylesheet", href: appCss },
         { rel: "icon", type: "image/png", href: logoUrl },
         { rel: "apple-touch-icon", href: logoUrl },
-        { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
         {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap",
+          rel: "preload",
+          href: "/fonts/inter-latin.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossOrigin: "anonymous",
+        },
+        {
+          rel: "preload",
+          href: "/fonts/fraunces-latin.woff2",
+          as: "font",
+          type: "font/woff2",
+          crossOrigin: "anonymous",
         },
       ],
       scripts: [
@@ -115,20 +131,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": ["Organization", "EducationalOrganization"],
+            "@type": ["Organization", "EducationalOrganization", "LocalBusiness"],
             "@id": organizationId,
             name: COMPANY.legalName,
             alternateName: COMPANY.name,
             url: homeUrl,
             logo: { "@type": "ImageObject", url: logoAbsUrl },
-            image: logoAbsUrl,
+            image: socialPreviewUrl,
             email: COMPANY.email,
             telephone: COMPANY.phoneHref,
-            foundingDate: String(COMPANY.founded),
+            foundingDate: COMPANY.incorporatedOn,
+            identifier: {
+              "@type": "PropertyValue",
+              propertyID: "Companies House company number",
+              value: COMPANY.companyNumber,
+            },
             slogan: COMPANY.tagline,
-            areaServed: [
-              { "@type": "Country", name: "United Kingdom" },
-              { "@type": "Place", name: "Worldwide" },
+            areaServed: "120+ countries served",
+            knowsAbout: [
+              "University admissions and application support",
+              "Study-abroad education consultancy",
+              "Non-UK student and visitor visa support",
+              ...DESTINATIONS.map(
+                (destination) => `International education applications for ${destination.name}`,
+              ),
             ],
             address: {
               "@type": "PostalAddress",
@@ -143,17 +169,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                 telephone: COMPANY.phoneHref,
                 email: COMPANY.email,
                 contactType: "customer service",
-                areaServed: ["GB", "IN", "PK", "NG", "AE"],
+                areaServed: "120+ countries served",
                 availableLanguage: ["English", "Hindi", "Urdu"],
               },
             ],
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: COMPANY.rating.score,
-              reviewCount: COMPANY.rating.reviews,
-              bestRating: 5,
-              worstRating: 1,
-            },
           }),
         },
         {
@@ -214,6 +233,8 @@ function RootComponent() {
           </main>
           <SiteFooter />
           <WhatsAppFab />
+          <TrustindexCertificate />
+          <CookieConsent />
         </div>
       </ThemeProvider>
     </QueryClientProvider>

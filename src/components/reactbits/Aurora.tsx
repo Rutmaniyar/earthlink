@@ -148,7 +148,8 @@ export default function Aurora(props: AuroraProps) {
         program.uniforms.uResolution.value = [width, height];
       }
     }
-    window.addEventListener('resize', resize);
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(ctn);
 
     const geometry = new Triangle(gl);
     if (geometry.attributes.uv) {
@@ -176,28 +177,75 @@ export default function Aurora(props: AuroraProps) {
     ctn.appendChild(gl.canvas);
 
     let animateId = 0;
+    let isIntersecting = true;
+    let elapsed = 0;
+    let lastFrame: number | null = null;
+    let colorKey = colorStops.join('|');
+    let cachedColorStops = colorStopsArray;
+
+    const stop = () => {
+      cancelAnimationFrame(animateId);
+      animateId = 0;
+      lastFrame = null;
+    };
+
+    const shouldAnimate = () => isIntersecting && !document.hidden;
+
     const update = (t: number) => {
-      animateId = requestAnimationFrame(update);
-      const { time = t * 0.01, speed = 1.0 } = propsRef.current;
+      if (!shouldAnimate()) {
+        stop();
+        return;
+      }
+
+      if (lastFrame !== null) elapsed += t - lastFrame;
+      lastFrame = t;
+
+      const { time, speed = 1.0 } = propsRef.current;
       if (program) {
-        program.uniforms.uTime.value = time * speed * 0.1;
+        program.uniforms.uTime.value = (time ?? elapsed * 0.01) * speed * 0.1;
         program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
         program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
         const stops = propsRef.current.colorStops ?? colorStops;
-        program.uniforms.uColorStops.value = stops.map((hex: string) => {
-          const c = new Color(hex);
-          return [c.r, c.g, c.b];
-        });
+        const nextColorKey = stops.join('|');
+        if (nextColorKey !== colorKey) {
+          colorKey = nextColorKey;
+          cachedColorStops = stops.map((hex: string) => {
+            const c = new Color(hex);
+            return [c.r, c.g, c.b];
+          });
+        }
+        program.uniforms.uColorStops.value = cachedColorStops;
         renderer.render({ scene: mesh });
       }
+      animateId = requestAnimationFrame(update);
     };
-    animateId = requestAnimationFrame(update);
+
+    const start = () => {
+      if (!animateId && shouldAnimate()) animateId = requestAnimationFrame(update);
+    };
+
+    const intersectionObserver = new IntersectionObserver(([entry]) => {
+      isIntersecting = entry?.isIntersecting ?? true;
+      if (isIntersecting) start();
+      else stop();
+    });
+    intersectionObserver.observe(ctn);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) stop();
+      else start();
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+
+    start();
 
     resize();
 
     return () => {
       cancelAnimationFrame(animateId);
-      window.removeEventListener('resize', resize);
+      resizeObserver.disconnect();
+      intersectionObserver.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       if (ctn && gl.canvas.parentNode === ctn) {
         ctn.removeChild(gl.canvas);
       }

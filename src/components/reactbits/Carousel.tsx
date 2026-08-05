@@ -24,6 +24,7 @@ export default function Carousel({
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   const scrollTo = useCallback((i: number) => {
     const track = trackRef.current;
@@ -38,10 +39,29 @@ export default function Carousel({
   const prev = useCallback(() => scrollTo((active - 1 + items.length) % items.length), [active, items.length, scrollTo]);
 
   useEffect(() => {
-    if (!autoPlay || paused) return;
+    if (!autoPlay || paused || !visible) return;
     const id = setInterval(next, interval);
     return () => clearInterval(id);
-  }, [autoPlay, paused, interval, next]);
+  }, [autoPlay, paused, visible, interval, next]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const root = track.parentElement;
+    if (!root) return;
+    let intersecting = true;
+    const sync = () => setVisible(intersecting && !document.hidden);
+    const observer = new IntersectionObserver(([entry]) => {
+      intersecting = entry?.isIntersecting ?? true;
+      sync();
+    });
+    observer.observe(root);
+    document.addEventListener("visibilitychange", sync);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+    };
+  }, []);
 
   // sync active index on manual scroll
   useEffect(() => {

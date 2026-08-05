@@ -14,12 +14,13 @@ const root = resolve(__dirname, "..");
 // Register a TS loader so we can import .ts content modules directly.
 // Node 22 doesn't natively load TS — bun run handles it.
 async function loadContent() {
-  const [{ BLOGS }, { DESTINATIONS }, { SERVICES }] = await Promise.all([
+  const [{ BLOGS }, { DESTINATIONS }, { SERVICES }, { UNIVERSITY_PARTNERS }] = await Promise.all([
     import(pathToFileURL(resolve(root, "src/content/blogs.ts")).href),
     import(pathToFileURL(resolve(root, "src/content/destinations.ts")).href),
     import(pathToFileURL(resolve(root, "src/content/company.ts")).href),
+    import(pathToFileURL(resolve(root, "src/content/universities.ts")).href),
   ]);
-  return { BLOGS, DESTINATIONS, SERVICES };
+  return { BLOGS, DESTINATIONS, SERVICES, UNIVERSITY_PARTNERS };
 }
 
 const DEFAULT_SITE_URL = "https://www.earthlink.org.uk";
@@ -37,6 +38,30 @@ const xmlEscape = (s) =>
     .replace(/'/g, "&apos;");
 
 const today = new Date().toISOString().split("T")[0];
+const universitySlug = (name) =>
+  name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+async function loadCmsUniversitySlugs() {
+  const projectId = process.env.VITE_SANITY_PROJECT_ID;
+  if (!projectId) return [];
+  const dataset = process.env.VITE_SANITY_DATASET || "production";
+  const query =
+    '*[_type == "university" && defined(slug.current)]{ "slug": slug.current, _updatedAt }';
+  const url = `https://${projectId}.apicdn.sanity.io/v2024-10-01/data/query/${dataset}?query=${encodeURIComponent(query)}`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const payload = await response.json();
+    return Array.isArray(payload.result) ? payload.result : [];
+  } catch (error) {
+    console.warn(`⚠ CMS university sitemap fetch failed; using static fallback only: ${error}`);
+    return [];
+  }
+}
 
 const staticEntries = [
   { path: "/", changefreq: "weekly", priority: "1.0" },
@@ -55,7 +80,21 @@ const staticEntries = [
 ];
 
 async function main() {
-  const { BLOGS, DESTINATIONS, SERVICES } = await loadContent();
+  const { BLOGS, DESTINATIONS, SERVICES, UNIVERSITY_PARTNERS } = await loadContent();
+  const cmsUniversities = await loadCmsUniversitySlugs();
+  const staticUniversities = UNIVERSITY_PARTNERS.flatMap((country) =>
+    country.universities.map((university) => ({
+      slug: universitySlug(university.name),
+    })),
+  );
+  const universities = [
+    ...new Map(
+      [...staticUniversities, ...cmsUniversities].map((university) => [
+        university.slug,
+        university,
+      ]),
+    ).values(),
+  ];
 
   const entries = [
     ...staticEntries,
@@ -75,6 +114,12 @@ async function main() {
       changefreq: "monthly",
       priority: "0.6",
       images: b.cover ? [{ loc: b.cover, title: b.title, caption: b.excerpt }] : undefined,
+    })),
+    ...universities.map((university) => ({
+      path: `/university/${university.slug}`,
+      lastmod: university._updatedAt?.split("T")[0],
+      changefreq: "monthly",
+      priority: "0.5",
     })),
   ];
 

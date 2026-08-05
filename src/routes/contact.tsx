@@ -1,10 +1,16 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { absUrl } from "@/lib/site-config";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { COMPANY, SERVICES } from "@/content/company";
 import { DESTINATIONS } from "@/content/destinations";
 import { whatsappLink, mailtoLink, callLink } from "@/lib/lead";
+import {
+  COOKIE_CONSENT_CHANGED_EVENT,
+  openCookieSettings,
+  readCookieConsent,
+  saveCookieConsent,
+} from "@/lib/cookie-consent";
 import {
   Phone,
   Mail,
@@ -19,13 +25,13 @@ import {
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Earthlink Consultants — Harrow office, WhatsApp, email" },
+      { title: "Education Consultants in Harrow | Contact Earthlink" },
       {
         name: "description",
         content:
-          "Visit our Harrow office, call +44 7721 069 814 (UK: 07721 069 814), WhatsApp, or email office@earthlink.org.uk. Free 30-minute consultation.",
+          "Meet Earthlink's education consultants in Harrow for university admission and study-abroad help, or speak by phone, WhatsApp, or video.",
       },
-      { property: "og:title", content: "Contact Earthlink Consultants" },
+      { property: "og:title", content: "Education Consultants in Harrow — Contact Earthlink" },
       {
         property: "og:description",
         content: "We answer the phone. Free 30-minute consultation in person, by call, or video.",
@@ -33,7 +39,7 @@ export const Route = createFileRoute("/contact")({
       { property: "og:url", content: absUrl("/contact") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Contact Earthlink Consultants" },
+      { name: "twitter:title", content: "Education Consultants in Harrow — Contact Earthlink" },
       {
         name: "twitter:description",
         content: "We answer the phone. Free 30-minute consultation in person, by call, or video.",
@@ -45,35 +51,12 @@ export const Route = createFileRoute("/contact")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": ["LocalBusiness", "EducationalOrganization"],
-          "@id": absUrl("/contact#localbusiness"),
-          name: COMPANY.legalName,
+          "@type": "ContactPage",
+          "@id": absUrl("/contact#webpage"),
+          name: "Contact Earthlink Consultants in Harrow",
           url: absUrl("/contact"),
-          telephone: COMPANY.phoneHref,
-          email: COMPANY.email,
-          priceRange: "££",
-          openingHours: ["Mo-Sa 10:00-19:00"],
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: `${COMPANY.address.line1}, ${COMPANY.address.line2}`,
-            addressLocality: COMPANY.address.city,
-            postalCode: COMPANY.address.postcode,
-            addressCountry: "GB",
-          },
-          contactPoint: [
-            {
-              "@type": "ContactPoint",
-              telephone: COMPANY.phoneHref,
-              email: COMPANY.email,
-              contactType: "customer service",
-              availableLanguage: ["English", "Hindi", "Urdu"],
-            },
-          ],
-          areaServed: [
-            { "@type": "Country", name: "United Kingdom" },
-            { "@type": "Place", name: "Worldwide" },
-          ],
-          parentOrganization: { "@id": absUrl("/#organization") },
+          mainEntity: { "@id": absUrl("/#organization") },
+          isPartOf: { "@id": absUrl("/#website") },
         }),
       },
     ],
@@ -189,12 +172,33 @@ function Contact() {
         <div className="container-page py-20">
           <p className="text-xs uppercase tracking-[0.25em] text-gold">Contact</p>
           <h1 className="mt-3 max-w-3xl font-serif text-5xl text-balance md:text-6xl">
-            Talk to an adviser this week. We actually pick up.
+            Meet an education consultant in Harrow.
           </h1>
           <p className="mt-6 max-w-2xl text-muted-foreground">
             Free 30-minute consultation. In person at our Harrow office, on a phone call, or video —
             whatever works for you.
           </p>
+          <nav aria-label="Local services" className="mt-6 flex flex-wrap gap-3 text-sm">
+            <Link
+              to="/service/$slug"
+              params={{ slug: "admission-assistance" }}
+              className="rounded-full border border-border px-4 py-2 text-brand hover:border-brand"
+            >
+              University admission help
+            </Link>
+            <Link
+              to="/services"
+              className="rounded-full border border-border px-4 py-2 text-brand hover:border-brand"
+            >
+              Study-abroad services
+            </Link>
+            <Link
+              to="/partners/stonebridge"
+              className="rounded-full border border-border px-4 py-2 text-brand hover:border-brand"
+            >
+              UK visa services by Stonebridge
+            </Link>
+          </nav>
         </div>
       </section>
 
@@ -421,6 +425,14 @@ function Contact() {
                   No spam. We reply within one working hour.
                 </p>
               </div>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                By contacting us, you ask Earthlink to use these details to respond to your enquiry.
+                See our{" "}
+                <a href="/privacy" className="text-brand underline underline-offset-2">
+                  privacy policy
+                </a>{" "}
+                for your rights and how to make a data-protection complaint to us or the ICO.
+              </p>
             </form>
           )}
         </div>
@@ -430,14 +442,7 @@ function Contact() {
         <div className="container-page py-12">
           <div className="grid overflow-hidden rounded border hairline bg-card lg:grid-cols-[1fr_320px]">
             <div className="aspect-[16/10] min-h-[320px] w-full lg:aspect-auto">
-              <iframe
-                title="Earthlink Consultants location on Google Maps"
-                src={EARTHLINK_MAP_EMBED_SRC}
-                className="h-full w-full"
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="strict-origin-when-cross-origin"
-              />
+              <ConsentGatedMap />
             </div>
             <div className="flex flex-col justify-between gap-6 p-6">
               <div>
@@ -459,6 +464,73 @@ function Contact() {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+
+function ConsentGatedMap() {
+  const [allowed, setAllowed] = useState(false);
+
+  useEffect(() => {
+    const sync = () => {
+      setAllowed(readCookieConsent()?.preferences.externalMedia === true);
+    };
+    sync();
+    window.addEventListener(COOKIE_CONSENT_CHANGED_EVENT, sync);
+    return () => window.removeEventListener(COOKIE_CONSENT_CHANGED_EVENT, sync);
+  }, []);
+
+  function allowMap() {
+    saveCookieConsent({ externalMedia: true });
+  }
+
+  if (allowed) {
+    return (
+      <iframe
+        title="Earthlink Consultants location on Google Maps"
+        src={EARTHLINK_MAP_EMBED_SRC}
+        className="h-full w-full"
+        loading="lazy"
+        allowFullScreen
+        referrerPolicy="strict-origin-when-cross-origin"
+      />
+    );
+  }
+
+  return (
+    <div className="flex h-full min-h-[320px] items-center justify-center bg-muted p-6 text-center">
+      <div className="max-w-md">
+        <MapPin className="mx-auto h-8 w-8 text-brand" aria-hidden />
+        <h3 className="mt-3 font-serif text-2xl text-navy">Google Map is off</h3>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          The map is supplied by Google and may store or access information on your device. It will
+          load only if you allow external media.
+        </p>
+        <div className="mt-5 flex flex-wrap justify-center gap-3">
+          <button
+            type="button"
+            onClick={allowMap}
+            className="btn-primary rounded-sm px-5 py-2.5 text-sm font-medium"
+          >
+            Allow Google Maps
+          </button>
+          <button
+            type="button"
+            onClick={openCookieSettings}
+            className="rounded-sm border border-navy/20 px-5 py-2.5 text-sm text-navy hover:border-brand"
+          >
+            Cookie settings
+          </button>
+        </div>
+        <a
+          href="https://policies.google.com/privacy"
+          target="_blank"
+          rel="noopener"
+          className="mt-4 inline-block text-xs text-brand underline underline-offset-4"
+        >
+          Google's privacy policy
+        </a>
+      </div>
     </div>
   );
 }

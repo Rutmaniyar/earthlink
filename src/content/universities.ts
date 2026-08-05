@@ -8,6 +8,7 @@ export type University = {
   speciality: string; // what they're best known for
   highlights: string[]; // 3 short bullets on the back of the card
   website: string;
+  applicationSupportNote?: boolean;
 };
 
 export type UniversityCountry = {
@@ -23,10 +24,18 @@ export const UNIVERSITY_PARTNERS: UniversityCountry[] = [
     country: "United Kingdom",
     slug: "uk",
     flag: "🇬🇧",
-    blurb: "We work with every recognised UK university on the Student Sponsor Register — Russell Group, red-bricks, post-92s, and specialist institutions. Below is a selection of the most-applied-to partners; ask us about any UK university not shown.",
+    blurb:
+      "Earthlink supports university selection and applications across recognised UK institutions. Stonebridge alone handles every UK visa route; Earthlink's university-application work remains separate.",
     universities: [
       // Russell Group
-      { name: "University of Oxford", domain: "ox.ac.uk", city: "Oxford", speciality: "PPE, Medicine & Research", highlights: ["Russell Group", "Est. 1096", "World top-5"], website: "https://www.ox.ac.uk" },
+      {
+        name: "University of Oxford",
+        domain: "ox.ac.uk",
+        city: "Oxford",
+        speciality: "PPE, Medicine & Research",
+        highlights: ["Russell Group", "Est. 1096", "World top-5"],
+        website: "https://www.ox.ac.uk",
+      },
       { name: "University of Cambridge", domain: "cam.ac.uk", city: "Cambridge", speciality: "Sciences, Engineering & Economics", highlights: ["Russell Group", "Est. 1209", "World top-5"], website: "https://www.cam.ac.uk" },
       { name: "Imperial College London", domain: "imperial.ac.uk", city: "London", speciality: "Engineering, Medicine & Business", highlights: ["Russell Group", "STEM specialist", "Top-10 (QS)"], website: "https://www.imperial.ac.uk" },
       { name: "University College London", domain: "ucl.ac.uk", city: "London", speciality: "Arts, Sciences & AI", highlights: ["Russell Group", "Central London", "Top-10 (QS)"], website: "https://www.ucl.ac.uk" },

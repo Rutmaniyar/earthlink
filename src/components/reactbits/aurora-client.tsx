@@ -12,28 +12,30 @@ export function AuroraClient(props: {
 }) {
   const [mounted, setMounted] = useState(false);
   const reduced = usePrefersReducedMotion();
-  useEffect(() => { setMounted(true); }, []);
-  if (!mounted) return null;
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const stops = (props.colorStops ?? ["#3A29FF", "#FF94B4", "#FF3232"]).join(", ");
+  const fallbackStyle = {
+    backgroundImage: `linear-gradient(120deg, ${stops})`,
+    opacity: 0.45,
+  };
+  const fallback = <div className={props.className} style={fallbackStyle} aria-hidden="true" />;
+
+  if (!mounted) return fallback;
 
   // Reduced-motion fallback: render a static linear-gradient using the same
   // color stops so the visual identity stays intact without WebGL motion.
   if (reduced) {
-    const stops = (props.colorStops ?? ["#3A29FF", "#FF94B4", "#FF3232"]).join(", ");
-    return (
-      <div
-        className={props.className}
-        style={{
-          backgroundImage: `linear-gradient(120deg, ${stops})`,
-          opacity: 0.45,
-        }}
-        aria-hidden="true"
-      />
-    );
+    return fallback;
   }
 
   return (
     <div className={props.className}>
-      <Suspense fallback={null}>
+      <Suspense
+        fallback={<div className="h-full w-full" style={fallbackStyle} aria-hidden="true" />}
+      >
         <Aurora
           colorStops={props.colorStops}
           amplitude={props.amplitude}

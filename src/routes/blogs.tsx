@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { absUrl } from "@/lib/site-config";
 import { useEffect, useMemo, useState } from "react";
-import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { zodValidator } from "@tanstack/zod-adapter";
 import { z } from "zod";
 import { BLOGS, BLOG_CATEGORIES, type Blog } from "@/content/blogs";
 import { fetchBlogListResult } from "@/lib/sanity-queries";
@@ -18,10 +18,10 @@ const PAGE_SIZE = 6;
 const CATEGORY_VALUES = ["All", ...BLOG_CATEGORIES] as const;
 
 const searchSchema = z.object({
-  page: fallback(z.number().int().min(1), 1).default(1),
-  q: fallback(z.string(), "").default(""),
-  cat: fallback(z.enum(CATEGORY_VALUES), "All").default("All"),
-  tag: fallback(z.string(), "").default(""),
+  page: z.number().int().min(1).optional().catch(undefined),
+  q: z.string().optional().catch(undefined),
+  cat: z.enum(CATEGORY_VALUES).optional().catch(undefined),
+  tag: z.string().optional().catch(undefined),
 });
 
 const FEATURED_COVER = BLOGS[0]?.cover;
@@ -87,7 +87,7 @@ function formatDate(iso: string) {
 }
 
 function BlogsPage() {
-  const { page, q, cat, tag } = Route.useSearch();
+  const { page = 1, q = "", cat = "All", tag = "" } = Route.useSearch();
   const navigate = useNavigate({ from: "/blogs" });
 
   const [posts, setPosts] = useState<Blog[]>(BLOGS);

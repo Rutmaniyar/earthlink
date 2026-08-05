@@ -18,26 +18,23 @@ import { CmsStatus, UniversityCardSkeleton } from "@/components/cms-status";
 export const Route = createFileRoute("/partner-universities")({
   head: () => ({
     meta: [
-      { title: "Partner Universities — Earthlink Consultants" },
+      { title: "Partnered Universities" },
       {
         name: "description",
-        content:
-          "Explore Earthlink Consultants' partner universities across the UK, USA, Canada, Australia, Ireland, New Zealand, Europe, and the UAE — with each institution's speciality on the back of the card.",
+        content: "Explore Earthlink Consultants' partnered universities by featured destination.",
       },
-      { property: "og:title", content: "Partner Universities — Earthlink Consultants" },
+      { property: "og:title", content: "Partnered Universities" },
       {
         property: "og:description",
-        content:
-          "Universities we partner with, grouped by country, each with its speciality on the back of a flip card.",
+        content: "Partnered universities grouped by featured destination.",
       },
       { property: "og:url", content: absUrl("/partner-universities") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Partner Universities — Earthlink Consultants" },
+      { name: "twitter:title", content: "Partnered Universities" },
       {
         name: "twitter:description",
-        content:
-          "Universities we partner with, grouped by country, each with its speciality on the back of a flip card.",
+        content: "Partnered universities grouped by featured destination.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/partner-universities") }],
@@ -140,7 +137,12 @@ function UniversityCard({ uni }: { uni: University }) {
     <FlipCard
       height="h-72"
       front={
-        <div className="flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-paper to-secondary/40 p-6 text-center hairline border">
+        <div className="relative flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-paper to-secondary/40 p-6 text-center hairline border">
+          {uni.applicationSupportNote && (
+            <span className="absolute right-3 top-3 rounded-full border border-brand/30 bg-paper/95 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-brand shadow-sm">
+              Application Support Only
+            </span>
+          )}
           <LogoImg uni={uni} />
           <div>
             <h3 className="font-serif text-lg leading-tight text-navy">{uni.name}</h3>
@@ -245,14 +247,13 @@ function PartnerUniversitiesPage() {
       <section className="relative overflow-hidden bg-muted text-foreground">
         <div className="pointer-events-none absolute inset-0 opacity-30 [background-image:radial-gradient(circle_at_20%_30%,_color-mix(in_oklab,_var(--color-brand)_40%,_transparent),_transparent_50%),radial-gradient(circle_at_80%_70%,_color-mix(in_oklab,_var(--color-gold)_30%,_transparent),_transparent_45%)]" />
         <div className="container-page relative py-20 md:py-28">
-          <p className="text-xs uppercase tracking-[0.3em] text-gold">Partner network</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-gold">University network</p>
           <h1 className="mt-4 max-w-3xl font-serif text-4xl leading-tight text-balance md:text-6xl">
-            Universities we <span className="text-brand">route students to</span> — grouped by
-            country
+            Partnered Universities
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-foreground/85">
-            {totals.unis}+ partner institutions across {totals.countries} destinations. Hover any
-            card to see what that university is known for and why we recommend it.
+            {totals.unis}+ institutions across {totals.countries} featured destinations. Hover any
+            card to see what that university is known for.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-2">
@@ -314,7 +315,7 @@ function PartnerUniversitiesPage() {
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div>
                 <p className="text-xs uppercase tracking-[0.25em] text-brand">
-                  {c.universities.length} partners
+                  {c.universities.length} universities
                 </p>
                 <h2 className="mt-2 font-serif text-3xl text-navy md:text-4xl">
                   <span className="mr-3">{c.flag}</span> {c.country}
@@ -344,8 +345,8 @@ function PartnerUniversitiesPage() {
         <div className="rounded-md bg-secondary p-10 text-center text-foreground md:p-16">
           <h2 className="font-serif text-3xl md:text-4xl">Don't see your dream university?</h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Our network extends beyond this page. Tell us your target course and country — we'll
-            confirm whether we have a direct partnership or an application route.
+            Our network extends beyond this page. Tell us your target course and country and we'll
+            confirm how Earthlink can help.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a

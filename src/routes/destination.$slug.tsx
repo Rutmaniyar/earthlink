@@ -48,6 +48,24 @@ export const Route = createFileRoute("/destination/$slug")({
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
+            "@type": "Service",
+            name: `International education application support for ${d.name}`,
+            description: d.short,
+            url,
+            provider: { "@id": absUrl("/#organization") },
+            areaServed: "120+ countries served",
+            audience: { "@type": "EducationalAudience", educationalRole: "prospective student" },
+            about: {
+              "@type": d.slug === "europe" ? "Place" : "Country",
+              name: d.name,
+            },
+            ...(d.source?.href ? { citation: absUrl(d.source.href) } : {}),
+          }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
             "@type": "FAQPage",
             mainEntity: d.faqs.map((f) => ({
               "@type": "Question",
@@ -209,6 +227,24 @@ function DestinationPage() {
                 </li>
               ))}
             </ul>
+            {d.source && (
+              <div className="mt-6 border-t hairline pt-5 text-xs text-muted-foreground">
+                <p className="font-medium text-navy">Official source</p>
+                {d.source.href ? (
+                  <a
+                    href={d.source.href}
+                    className="mt-1 inline-block text-brand hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {d.source.title}
+                  </a>
+                ) : (
+                  <p className="mt-1">{d.source.title}</p>
+                )}
+                <p className="mt-1">{d.source.version}</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

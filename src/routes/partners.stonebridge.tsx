@@ -19,29 +19,66 @@ import stonebridgeLogoUrl from "@/assets/stonebridge-logo.png";
 export const Route = createFileRoute("/partners/stonebridge")({
   head: () => ({
     meta: [
-      { title: "Our Solicitor Partner — Stonebridge Legal Solutions | Earthlink Consultants" },
+      { title: "UK Visa Services for Harrow Clients | Stonebridge" },
       {
         name: "description",
         content:
-          "Earthlink Consultants partners with Stonebridge Legal Solutions — IAA Level 3 UK immigration advisers — for regulated visa, sponsor licence, and family route casework.",
+          "UK visa advice and applications for Harrow clients are delivered only by Stonebridge under a separate contract; Earthlink provides no UK immigration advice.",
       },
-      { property: "og:title", content: "Our Solicitor Partner — Stonebridge Legal Solutions" },
+      { property: "og:title", content: "UK Visa Services for Harrow Clients — Stonebridge" },
       {
         property: "og:description",
         content:
-          "Regulated UK immigration advice through our partner solicitors. IAA Level 3, 5.0/158 Google reviews.",
+          "All UK visa advice and application processing through Stonebridge. 5.0/158 reviews.",
       },
       { property: "og:url", content: absUrl("/partners/stonebridge") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Our Solicitor Partner — Stonebridge Legal Solutions" },
+      { name: "twitter:title", content: "UK Visa Services for Harrow Clients — Stonebridge" },
       {
         name: "twitter:description",
         content:
-          "Regulated UK immigration advice through our partner solicitors. IAA Level 3, 5.0/158 Google reviews.",
+          "All UK visa advice and application processing through Stonebridge. 5.0/158 reviews.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/partners/stonebridge") }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "@id": absUrl("/partners/stonebridge#uk-visa-service"),
+          name: "UK visa advice and application processing for Harrow clients",
+          serviceType: "UK visa advice and application processing",
+          url: absUrl("/partners/stonebridge"),
+          areaServed: { "@type": "Country", name: "United Kingdom" },
+          provider: {
+            "@type": "Organization",
+            name: COMPANY.solicitors.name,
+            url: "https://stonebridgelegal.co.uk/",
+          },
+          termsOfService:
+            "Earthlink does not provide UK immigration advice or prepare UK visa applications. Stonebridge provides all UK visa advice and application processing under a separate contract.",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: absUrl("/") },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "UK visa services by Stonebridge",
+              item: absUrl("/partners/stonebridge"),
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: StonebridgePartnerPage,
 });
@@ -50,12 +87,12 @@ const PARTNER_SERVICES = [
   {
     title: "Student & Graduate Visas",
     blurb:
-      "Regulated representation for the visa stage of your study journey — from CAS to BRP collection.",
+      "Stonebridge handles the visa stage of your study journey, including advice and application processing.",
     items: [
       "Student Visa (Sponsored Study route)",
       "Child Student Visa",
       "Graduate Visa (2-year post-study work)",
-      "Switching from Visitor to Student in-country (where permitted)",
+      "Extensions and switching routes",
     ],
   },
   {
@@ -72,23 +109,22 @@ const PARTNER_SERVICES = [
   {
     title: "Skilled Worker & Health Care",
     blurb:
-      "Post-study employment routes and sponsor matching — handed off cleanly when you receive a CoS.",
+      "UK visa advice and applications after a jobseeker independently receives an eligible offer.",
     items: [
       "Skilled Worker Visa",
       "Health and Care Worker Visa",
-      "Sponsor Licence support for employers",
-      "Right to Work checks",
+      "Graduate-to-Skilled-Worker switching advice",
+      "Route eligibility and application advice",
     ],
   },
   {
     title: "Business, Innovator & Mobility",
-    blurb:
-      "Founders, transferees, and self-sponsored entrepreneurs who want a UK base after graduation.",
+    blurb: "UK visa advice and application processing for eligible business and mobility routes.",
     items: [
       "Innovator Founder Visa",
-      "Self-Sponsorship Visa",
       "UK Expansion Worker Visa",
       "Graduate Trainee & Specialist Worker Visa",
+      "High Potential Individual Visa",
     ],
   },
   {
@@ -101,62 +137,51 @@ const PARTNER_SERVICES = [
       "Parent of a Child Student Visa",
     ],
   },
-  {
-    title: "Compliance & Employer Support",
-    blurb:
-      "If your future employer needs sponsor-side support, we route them to Stonebridge directly.",
-    items: [
-      "Sponsor Licence Application & Renewal",
-      "Home Office Compliance Visit prep",
-      "Civil Penalty defence",
-      "Right to Work audits",
-    ],
-  },
 ];
 
 const WORKFLOW = [
   {
     n: "01",
     t: "You start with Earthlink",
-    b: "Counselling, university shortlisting, admission, CAS or I-20, and document checks — all handled by us.",
+    b: "Earthlink handles counselling, university shortlisting, and university applications within each institution's rules. Earthlink does not advise on UK immigration.",
   },
   {
     n: "02",
-    t: "We refer the legal work",
-    b: "When your case needs regulated immigration advice, we introduce you to Stonebridge Legal Solutions in writing.",
+    t: "We refer the UK visa work",
+    b: "Every UK visa route, advice matter, form, and application is referred to Stonebridge Legal Solutions in writing.",
   },
   {
     n: "03",
     t: "Stonebridge advises you directly",
-    b: "You sign a separate client-care letter with them. They quote their own fees and own the legal advice.",
+    b: "You sign a separate service agreement with them. They quote their own fees and own the UK visa advice and application work.",
   },
   {
     n: "04",
     t: "We coordinate, you stay informed",
-    b: "Earthlink and Stonebridge share updates — but you remain the client of both firms, with no duplication of work.",
+    b: "Earthlink can coordinate non-visa service timing with your Stonebridge handover only where you request and authorise the necessary update. Each contract remains separate.",
   },
 ];
 
 const FAQS = [
   {
-    q: "Are Stonebridge regulated?",
-    a: "Yes. Stonebridge Legal Solutions is led by an IAA Level 3 Immigration Adviser — the highest accreditation granted by the Immigration Advice Authority (formerly OISC). That covers complex casework including appeals.",
+    q: "Who handles UK visa advice and applications?",
+    a: "Stonebridge alone handles advice and application processing for every UK visa route presented through Earthlink. Earthlink's work is limited to its separately identified non-visa services.",
   },
   {
     q: "Do I pay Earthlink and Stonebridge separately?",
-    a: "Yes. Earthlink handles your education consultancy and applications; Stonebridge handles regulated immigration legal work under a separate engagement letter and fee. We tell you the likely Stonebridge fee range up-front, before any referral.",
+    a: "Yes. Earthlink and Stonebridge provide separate contracts for their respective scopes. Each party must state its own fees, cancellation and refund terms, and complaints route before work begins.",
   },
   {
     q: "Is Earthlink itself a law firm?",
-    a: "No. Earthlink Consultants is an education consultancy. UK regulations require regulated advisers (IAA-registered or solicitors) for immigration legal advice — that's why we partner with Stonebridge.",
+    a: "No. Earthlink is an education consultancy and does not provide UK visa advice, document assessment, form preparation, or application processing.",
   },
   {
-    q: "Will I have to go to Stratford to meet them?",
-    a: "Not necessarily. Stonebridge offer in-person, phone, and video consultations. We can sit in on the introduction call from our Harrow office if that helps.",
+    q: "Who decides a UK visa application?",
+    a: "The relevant UK authority makes every visa decision. Neither Earthlink nor Stonebridge can guarantee an outcome.",
   },
   {
     q: "What if I already have a solicitor?",
-    a: "That's fine — we'll work with your chosen adviser. The Stonebridge route is the default for students who don't have one and want a vetted partner.",
+    a: "You may choose an adviser independently, but Earthlink will not provide UK immigration advice or application work. UK visa services presented through Earthlink are delivered only by Stonebridge.",
   },
 ];
 
@@ -175,19 +200,20 @@ function StonebridgePartnerPage() {
             loading="eager"
           />
           <h1 className="mt-6 max-w-3xl font-serif text-4xl text-balance leading-tight md:text-6xl">
-            Our solicitor partner: <span className="text-brand">Stonebridge Legal Solutions</span>
+            UK visa services for Harrow clients — delivered by{" "}
+            <span className="text-brand">Stonebridge</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-foreground/85">
-            Earthlink handles your education journey. Stonebridge handles the regulated immigration
-            legal work that sits beside it — visas, sponsor licences, family routes, and appeals —
-            at IAA Level 3, the highest UK accreditation.
+            Earthlink handles your education journey. Stonebridge alone handles every UK immigration
+            route, advice matter, form, and application — including student, visitor, work, family,
+            business, and appeal matters.
           </p>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {[
-              { icon: BadgeCheck, label: "IAA Level 3", sub: "Highest UK accreditation" },
-              { icon: Scale, label: "5.0 / 158 reviews", sub: "Google verified" },
-              { icon: ShieldCheck, label: "London-based", sub: "Stratford E15 1NT" },
+              { icon: BadgeCheck, label: "All UK visa routes", sub: "Advice and applications" },
+              { icon: Scale, label: "5.0 / 158 reviews", sub: "Existing published figures" },
+              { icon: ShieldCheck, label: "Separate contract", sub: "Clear service scope" },
             ].map((s) => (
               <div
                 key={s.label}
@@ -228,30 +254,27 @@ function StonebridgePartnerPage() {
           <div>
             <p className="text-xs uppercase tracking-[0.25em] text-brand">About the firm</p>
             <h2 className="mt-3 font-serif text-3xl text-navy md:text-4xl">
-              Independent UK immigration advisers since 2022
+              Stonebridge handles every UK visa route
             </h2>
             <p className="mt-5 text-muted-foreground">
-              Stonebridge Legal Solutions Limited is a London-based immigration advisory firm
-              (Companies House <span className="font-mono text-navy">14359957</span>) led by an{" "}
-              <strong className="text-navy">IAA Level 3 Immigration Adviser</strong>. Level 3 is the
-              most senior tier of regulation issued by the Immigration Advice Authority, covering
-              complex applications, judicial reviews, and First-Tier Tribunal appeals.
+              Stonebridge alone provides the advice and application processing for UK student,
+              visitor, work, family, dependant, extension, switching, and other UK visa routes
+              presented through Earthlink.
             </p>
             <p className="mt-4 text-muted-foreground">
-              They've built a 5.0-star reputation across 158 verified Google reviews working with
-              students, families, and skilled workers from multi-ethnic backgrounds across the UK
-              and overseas — the same audience Earthlink files for every week. That overlap is why
-              the partnership works.
+              The existing published figures of 5.0 stars across 158 reviews are unchanged.
+              Stonebridge's engagement, fees, cancellation and refund responsibility, and complaints
+              route remain separate from Earthlink's non-visa services.
             </p>
 
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {[
-                "Regulated by the Immigration Advice Authority",
-                "First-Tier Tribunal & appeals capability",
-                "Sponsor licence work for employers",
-                "In-person, phone, and video consultations",
-                "Multi-lingual case handling",
-                "Transparent fixed-fee quotes per matter",
+                "All UK visa advice and applications",
+                "Student, visitor, work, and family routes",
+                "Extensions and switching routes",
+                "Separate service contract",
+                "Separate fees and refund responsibility",
+                "Separate complaints route",
               ].map((p) => (
                 <li key={p} className="flex items-start gap-2 text-sm text-navy">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
@@ -268,24 +291,8 @@ function StonebridgePartnerPage() {
               className="mb-5 h-16 w-auto"
               loading="lazy"
             />
-            <h3 className="font-serif text-xl text-navy">Stonebridge Legal Solutions</h3>
+            <h3 className="font-serif text-xl text-navy">Stonebridge</h3>
             <div className="mt-5 space-y-4 text-sm">
-              <div className="flex gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand" />
-                <div className="text-navy">
-                  64 Boardman House
-                  <br />
-                  Stratford, London E15 1NT
-                  <br />
-                  United Kingdom
-                </div>
-              </div>
-              <a
-                href="tel:+447926650908"
-                className="flex items-center gap-3 text-navy transition hover:text-brand"
-              >
-                <Phone className="h-4 w-4 text-brand" /> +44 7926 650 908
-              </a>
               <a
                 href="https://stonebridgelegal.co.uk"
                 target="_blank"
@@ -341,9 +348,8 @@ function StonebridgePartnerPage() {
             What we deliver together
           </h2>
           <p className="mt-5 max-w-2xl text-muted-foreground">
-            Earthlink owns the education side — universities, offers, documents, finances,
-            pre-departure. Stonebridge owns the regulated immigration side. Six service blocks, one
-            coordinated handover.
+            Earthlink owns the non-visa education side — universities, offers, documents, finances,
+            and pre-departure support. Stonebridge owns every UK visa advice and application step.
           </p>
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -387,9 +393,9 @@ function StonebridgePartnerPage() {
 
         <div className="mt-10 rounded-md border-l-4 border-brand bg-secondary/50 p-5 text-sm text-navy">
           <strong className="text-navy-deep">Plain English:</strong> Earthlink is your education
-          consultancy. Stonebridge is your regulated immigration adviser. We've worked together long
-          enough to make the handover invisible to you — but the engagement letters, fees, and legal
-          responsibility remain separate, as UK regulations require.
+          consultancy. Stonebridge is your UK visa service provider. The engagement letters, fees,
+          cancellation and refund responsibility, complaints routes, and service responsibility
+          remain separate.
         </div>
       </section>
 
@@ -413,12 +419,11 @@ function StonebridgePartnerPage() {
       {/* CTA */}
       <section className="container-page py-20">
         <div className="rounded-md bg-secondary p-10 text-center text-foreground md:p-16">
-          <h2 className="font-serif text-3xl md:text-4xl">
-            Ready for a regulated, joined-up plan?
-          </h2>
+          <h2 className="font-serif text-3xl md:text-4xl">Ready for a clearly scoped plan?</h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Start with a free 30-minute call with Earthlink. If your case needs regulated
-            immigration advice, we'll introduce you to Stonebridge in the same week.
+            Start with a free 30-minute call with Earthlink. If your case needs UK visa advice or
+            application processing, we'll introduce you to Stonebridge; Earthlink will not advise on
+            or submit the UK visa application.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a

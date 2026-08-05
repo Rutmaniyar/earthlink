@@ -32,6 +32,10 @@ dist-ssr/
 .agents/
 graphify-out/
 AGENTS.md
+/design.md
+
+# Sanity Studio generated runtime
+/sanity-studio/.sanity/
 
 # Local upload/source archives
 *.zip

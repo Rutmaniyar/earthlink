@@ -33,7 +33,7 @@ and add (no credentials):
 
 ## Content in this dataset (seeded from the site's built-in content)
 
-- 8 countries, 92 universities, 39 blog posts, 1 author — all with cover images.
+- 8 featured destination groups, 92 fallback universities, 39 blog posts, 1 author — all with cover images.
 - Re-run the seed at any time with:
   ```bash
   SANITY_WRITE_TOKEN=<token> bun run scripts/seed-sanity.ts
