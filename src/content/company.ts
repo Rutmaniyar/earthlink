@@ -48,7 +48,7 @@ export const NAV = [
   { to: "/services", label: "Services" },
   { to: "/destinations", label: "Destinations" },
   { to: "/partner-universities", label: "Universities" },
-  { to: "/partners/stonebridge", label: "UK Visa Partner" },
+  { to: "/partners/stonebridge", label: "Solicitor Partner" },
 
   { to: "/blogs", label: "Blogs" },
   { to: "/contact", label: "Contact" },
