@@ -23,7 +23,6 @@ export const post = defineType({
     }),
     defineField({ name: "author", type: "reference", to: [{ type: "author" }] }),
     defineField({ name: "publishedAt", type: "datetime", validation: (r) => r.required() }),
-    defineField({ name: "readMinutes", type: "number", initialValue: 5 }),
     defineField({
       name: "coverImage",
       type: "image",
@@ -31,8 +30,13 @@ export const post = defineType({
       validation: (r) => r.required(),
     }),
     defineField({ name: "coverCaption", type: "string" }),
-    defineField({ name: "tags", type: "array", of: [{ type: "string" }], options: { layout: "tags" } }),
-    defineField({ name: "body", type: "blockContent" }),
+    defineField({
+      name: "tags",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
+    }),
+    defineField({ name: "body", type: "blockContent", validation: (r) => r.required() }),
     defineField({
       name: "seo",
       type: "object",

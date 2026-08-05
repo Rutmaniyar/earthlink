@@ -193,7 +193,7 @@ export const VALUES = [
 
 export const WHY = [
   { stat: "Since 2014", label: "Continuously trading since incorporation on 9 October 2014." },
-  { stat: "4.9 ★", label: "398+ verified student reviews across destinations." },
+  { stat: "4.9 ★", label: "398+ published reviews across destinations." },
   {
     stat: "120+",
     label: "Countries served worldwide, with detailed guides for featured study destinations.",

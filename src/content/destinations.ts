@@ -26,7 +26,8 @@ export const DESTINATIONS: Destination[] = [
   {
     slug: "uk",
     name: "United Kingdom",
-    short: "Two-year graduate route, world-top universities, the route most of our students take.",
+    short:
+      "Graduate Route: 2 years for applications by 31 December 2026, 18 months from 1 January 2027; 3 years for doctoral graduates.",
     eyebrow: "Study in the",
     headline: "United Kingdom",
     intro:
@@ -36,7 +37,7 @@ export const DESTINATIONS: Destination[] = [
     whyStudy: [
       {
         title: "Graduate Route",
-        body: "Current rules provide post-study work for eligible graduates; Stonebridge advises on eligibility and handles every UK immigration application.",
+        body: "Eligible non-doctoral graduates receive 2 years if they apply on or before 31 December 2026 and 18 months if they apply on or after 1 January 2027. PhD and other doctoral graduates receive 3 years. Stonebridge advises on eligibility and handles UK immigration applications.",
       },
       {
         title: "One-year Masters",
@@ -56,7 +57,7 @@ export const DESTINATIONS: Destination[] = [
       },
     ],
     education:
-      "Three-year Bachelors, one-year Masters (taught), three-year research degrees. Sandwich/placement years are common and improve graduate-route outcomes.",
+      "Three-year Bachelors, one-year taught Masters and typically three-year research degrees. Sandwich and placement years are available on many courses.",
     documents: [
       "Academic transcripts and degree certificate",
       "IELTS / PTE / TOEFL score",
@@ -79,8 +80,9 @@ export const DESTINATIONS: Destination[] = [
     ],
     costs: {
       tuition: "£12,000 – £28,000 per year",
-      living: "£12,006 per year (UKVI rule); £15,609 in London",
-      visa: "£524 + £776/year IHS",
+      living:
+        "Up to £10,539 outside London or £13,761 in London under the Student visa maintenance rule",
+      visa: "£558 application fee + Immigration Health Surcharge",
     },
     workRights:
       "Published Student-route conditions commonly permit limited term-time work and more during official vacations. Stonebridge alone confirms individual conditions and handles UK immigration matters.",
@@ -93,7 +95,7 @@ export const DESTINATIONS: Destination[] = [
     faqs: [
       {
         q: "Will I get the Graduate Route?",
-        a: "Eligibility depends on the course, sponsor reporting, completion, location, and the rules in force when you apply. Stonebridge alone provides case-specific UK immigration advice and handles the application.",
+        a: "The Graduate Route is not automatic. Subject to eligibility, non-doctoral applications made on or before 31 December 2026 receive 2 years; applications made from 1 January 2027 receive 18 months. PhD and other doctoral graduates receive 3 years. Stonebridge alone provides case-specific UK immigration advice and handles the application.",
       },
       {
         q: "Do I need IELTS for every UK university?",
@@ -264,7 +266,7 @@ export const DESTINATIONS: Destination[] = [
       "Transcripts and degree",
       "IELTS Academic / CELPIP / PTE",
       "SOP",
-      "Proof of funds (GIC + tuition)",
+      "Proof of funds for tuition, living expenses and return travel",
       "Medical exam",
       "Biometrics",
       "PAL — Provincial Attestation Letter (new requirement)",
@@ -280,11 +282,12 @@ export const DESTINATIONS: Destination[] = [
     ],
     costs: {
       tuition: "CAD 15,000 – CAD 35,000 per year",
-      living: "CAD 10,000 – CAD 15,000 per year",
+      living:
+        "From CAD 22,895 for one applicant (IRCC living-cost minimum; tuition and travel excluded, Quebec differs)",
       visa: "CAD 150 + biometrics CAD 85",
     },
     workRights:
-      "20 hrs/week off-campus during term (currently 24 under the temporary policy), full-time in scheduled breaks. PGWP after graduation.",
+      "Eligible students may work off campus for up to 24 hours per week during regular academic sessions and unlimited hours during scheduled breaks, subject to their study-permit conditions. PGWP eligibility is separate.",
     scholarships: [
       "Vanier (PhD)",
       "Trudeau Scholarships",
@@ -294,7 +297,7 @@ export const DESTINATIONS: Destination[] = [
     faqs: [
       {
         q: "Is the GIC mandatory for a Canadian study permit?",
-        a: "Required under the SDS (Student Direct Stream) and strongly recommended for non-SDS applications. We use Scotiabank, ICICI, or CIBC depending on which has the fastest current turnaround.",
+        a: "No. A GIC is one accepted form of proof of financial support under the regular study-permit process, but it is not mandatory. Applicants must show enough for tuition, living expenses and transportation.",
       },
       {
         q: "What is the Provincial Attestation Letter (PAL) and how do I get one?",
@@ -302,19 +305,19 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "Will my PG Diploma qualify for the PGWP?",
-        a: "Yes if the college is a public DLI (Designated Learning Institution) and the programme is on the PGWP-eligible field-of-study list updated in 2024. Most private career colleges are excluded — we only shortlist public DLIs.",
+        a: "Not automatically. Check that both the DLI and programme are PGWP-eligible. Current applications can also require language results and, for some non-degree programmes, an eligible field of study. Bachelor’s, master’s and doctoral graduates do not have a field-of-study requirement.",
       },
       {
         q: "How much money do I need to show for a Canada study permit?",
-        a: "As of 2024 IRCC requires CAD 20,635 in living costs plus first-year tuition, on top of the GIC. Funds can be in a savings account, education loan disbursement, or GIC certificate.",
+        a: "For applications made on or after 1 September 2025, one applicant studying outside Quebec must show CAD 22,895 for first-year living expenses, plus first-year tuition and transportation. For programmes longer than one year, applicants must also explain how they plan to fund the remaining period. Quebec sets separate amounts, and IRCC updates these figures annually.",
       },
       {
         q: "Can I bring my spouse to Canada as a student?",
-        a: "Only if you are enrolled in a Masters, PhD, or select professional programmes. Undergraduate and college diploma students cannot bring a spouse on an open work permit under the 2024 rules.",
+        a: "A spouse or common-law partner may qualify for an open work permit if the student is in a master’s programme of at least 16 months, a doctoral programme, or certain listed professional or eligible programmes. Eligibility is not automatic and other requirements apply.",
       },
       {
         q: "How long does a Canada study permit take?",
-        a: "SDS: 4–8 weeks. Non-SDS: 10–16 weeks. Biometrics add 2 weeks. We time application submission around IRCC's public processing tracker, not marketing promises.",
+        a: "New applications use the regular study-permit process. Check IRCC’s live processing-times tool for the current estimate; times vary by application and are not a maximum or guarantee. The published estimate includes biometrics.",
       },
       {
         q: "Can I apply for PR while on a PGWP?",
@@ -339,11 +342,11 @@ export const DESTINATIONS: Destination[] = [
     whyStudy: [
       {
         title: "485 Graduate Visa",
-        body: "Two to four years post-study work depending on qualification and city.",
+        body: "Duration depends on stream and qualification: up to 18 months in the Post-Vocational Education Work stream, and generally 2 or 3 years in the Post-Higher Education Work stream.",
       },
       {
         title: "Regional bonuses",
-        body: "Study outside Sydney/Melbourne for extra PR points and a longer 485 visa.",
+        body: "Eligible regional graduates may qualify for a second Post-Higher Education Work visa lasting 1 or 2 years, depending on where they studied and lived.",
       },
       {
         title: "Skilled-migration alignment",
@@ -374,11 +377,11 @@ export const DESTINATIONS: Destination[] = [
     ],
     costs: {
       tuition: "AUD 22,000 – AUD 50,000 per year",
-      living: "AUD 24,505 per year (DHA requirement)",
-      visa: "AUD 1,600",
+      living: "AUD 29,710 for 12 months (current Student visa living-cost minimum)",
+      visa: "From AUD 2,500 for a primary Subclass 500 applicant from 1 July 2026; concessions may apply",
     },
     workRights:
-      "48 hours per fortnight during term, unlimited in breaks. 485 visa for 2–4 years after completion.",
+      "Most students may work up to 48 hours per fortnight while their course is in session and unlimited hours during scheduled breaks; research master’s and doctoral students have an exception. Temporary Graduate visa duration depends on stream, qualification and eligibility.",
     scholarships: [
       "Australia Awards",
       "Destination Australia (regional)",
@@ -391,11 +394,11 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "Is regional study in Australia worth it?",
-        a: "For long-term migration goals, yes. Regional study unlocks an extra year on the 485 visa (up to 4 years total in remote areas) and 5 bonus PR points. Adelaide, Perth, Hobart, and Canberra count as regional under the current DHA definition.",
+        a: "Eligible graduates who studied and lived in a designated regional area may qualify for a second Post-Higher Education Work visa: generally 1 extra year for Category 2 areas or 2 years for Category 3 areas. Separate skilled-migration points rules may apply.",
       },
       {
         q: "How much bank balance do I need for an Australian student visa?",
-        a: "AUD 24,505 in living costs (2024 DHA rule) plus one year of tuition, held for 3 months prior to application. Education loans with sanction letters are accepted.",
+        a: "If Home Affairs asks for financial evidence, calculate at least AUD 29,710 for 12 months of the student’s living costs, plus travel and up to 12 months of tuition, with additional amounts for accompanying family. The document checklist determines which evidence must be attached.",
       },
       {
         q: "Can I bring my spouse on an Australian student visa?",
@@ -403,7 +406,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "What is the 485 Graduate Visa and who qualifies?",
-        a: "The Subclass 485 Temporary Graduate Visa gives 2–4 years of post-study work after a CRICOS-registered degree of at least 2 academic years. Extensions apply for regional study and shortage-list occupations.",
+        a: "Duration depends on stream and qualification. Post-Vocational Education Work is up to 18 months. Post-Higher Education Work is generally 2 years for bachelor’s, coursework master’s and extended master’s qualifications, and 3 years for research master’s and doctoral qualifications. Eligible regional graduates may separately qualify for a 1- or 2-year second visa. The former select-degree extension ended on 1 July 2024.",
       },
       {
         q: "Which Australian occupations lead to permanent residency?",
@@ -411,7 +414,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "How long does an Australian student visa take?",
-        a: "Typical processing is 4–8 weeks. High-risk assessment level countries and courses under the ESOS list take longer. We submit with full evidence bundles to avoid RFI delays.",
+        a: "Processing times vary by priority, application volume, checks and completeness. Use Home Affairs’ live visa processing-time guide; it is indicative and not specific to an individual application.",
       },
     ],
   },
@@ -594,7 +597,7 @@ export const DESTINATIONS: Destination[] = [
     whyStudy: [
       {
         title: "Post-Study Work Visa",
-        body: "Up to 3 years of open work rights after a Level 7 or higher qualification.",
+        body: "Up to 3 years depending on qualification and study length; degree-level 7 or higher can allow open work, while eligible non-degree qualifications carry study-related work conditions.",
       },
       {
         title: "Skill-shortage pathways",
@@ -621,10 +624,10 @@ export const DESTINATIONS: Destination[] = [
     costs: {
       tuition: "NZD 22,000 – NZD 35,000 per year",
       living: "NZD 20,000 per year",
-      visa: "NZD 375",
+      visa: "From NZD 850 for a Fee Paying Student Visa",
     },
     workRights:
-      "20 hrs/week during study, full-time in breaks. PSWV of 1–3 years depending on qualification.",
+      "Eligible students with the relevant visa condition may work up to 25 hours per week during study and full-time during scheduled breaks. Holders of an older visa that still states 20 hours must obtain a variation of conditions or a new visa before working the extra hours. Post Study Work Visa duration depends on qualification and study length.",
     scholarships: ["New Zealand Excellence Awards", "University-specific entry scholarships"],
     faqs: [
       {
@@ -637,7 +640,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "What is the Post-Study Work Visa duration?",
-        a: "Level 4–6 qualifications: 1 year. Level 7 Bachelors: up to 3 years. Level 8 Postgrad Diploma: 1 year (3 years if the field matches the Green List). Level 9 Masters and Level 10 PhD: 3 years.",
+        a: "A Post Study Work Visa can last up to 3 years, depending on qualification level and how long the applicant studied in New Zealand. A degree-level 7 or higher qualification studied full-time in New Zealand for at least 30 weeks can allow open work. A non-degree level 7 or lower qualification must be on INZ’s eligible list and the work must relate to the study.",
       },
       {
         q: "Which NZ occupations lead to residency the fastest?",

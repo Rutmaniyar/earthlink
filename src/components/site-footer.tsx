@@ -24,8 +24,9 @@ export function SiteFooter() {
             Earthlink Consultants
           </div>
           <p className="mt-4 max-w-sm text-sm text-white/70">
-            Worldwide education, non-UK visa, and job-search support from Harrow since{" "}
-            {COMPANY.founded}. Stonebridge alone handles UK immigration.
+            Incorporated in {COMPANY.founded} and continuously trading since then. Worldwide
+            education, non-UK visa, and job-search support from Harrow. Stonebridge alone handles UK
+            immigration.
           </p>
           <div className="mt-6 space-y-2 text-sm text-white/80">
             <p className="flex items-start gap-2">

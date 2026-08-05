@@ -32,7 +32,7 @@ function Testimonials() {
         <div className="container-page py-20">
           <p className="text-xs uppercase tracking-[0.25em] text-gold">Student stories</p>
           <h1 className="mt-3 max-w-3xl font-serif text-5xl text-balance md:text-6xl">
-            {COMPANY.rating.score} stars from {COMPANY.rating.reviews}+ students.
+            {COMPANY.rating.score} stars from {COMPANY.rating.reviews}+ published reviews.
           </h1>
           <p className="mt-6 max-w-2xl text-muted-foreground">
             A few of the students who let us share their journey. Names abbreviated for privacy;
@@ -40,7 +40,7 @@ function Testimonials() {
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded border border-border px-4 py-2 text-sm">
             <Star className="h-4 w-4 fill-amber text-amber" />
-            <span>{COMPANY.rating.score} average · Google verified</span>
+            <span>{COMPANY.rating.score} average · Earthlink-approved published figure</span>
           </div>
         </div>
       </section>

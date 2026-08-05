@@ -1,5 +1,5 @@
 import { AlertTriangle, Loader2, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { SanityHealth } from "@/lib/sanity";
@@ -10,13 +10,13 @@ function healthCode(h: SanityHealth | null | undefined): string | null {
   return h.status.toUpperCase();
 }
 
-
 function healthMessage(h: SanityHealth | null | undefined): {
   title: string;
   hint?: string;
   showSettingsLink: boolean;
 } {
-  if (!h) return { title: "Couldn't load latest content — showing saved copy.", showSettingsLink: false };
+  if (!h)
+    return { title: "Couldn't load latest content — showing saved copy.", showSettingsLink: false };
   switch (h.status) {
     case "cors":
       return {
@@ -73,8 +73,11 @@ export function CmsStatus({
 }) {
   const [dismissed, setDismissed] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  if (state === "idle") return null;
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted || state === "idle") return null;
   if (state === "error" && dismissed) return null;
 
   if (state === "loading") {
@@ -157,14 +160,12 @@ export function CmsStatus({
       </div>
       {open && detailLines.length > 0 && (
         <pre className="mt-1 max-h-48 overflow-auto rounded bg-amber-950/10 p-2 font-mono text-[11px] leading-relaxed text-amber-950/90 dark:bg-amber-950/40 dark:text-amber-100">
-{detailLines.join("\n")}
+          {detailLines.join("\n")}
         </pre>
       )}
     </div>
   );
 }
-
-
 
 /**
  * Placeholder card matching the blog grid card footprint.

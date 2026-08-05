@@ -246,6 +246,12 @@ function DestinationPage() {
               </div>
             )}
           </div>
+          <p className="text-xs leading-relaxed text-muted-foreground lg:col-span-3">
+            Immigration figures and rules on this guide were reviewed against official government
+            sources on 5 August 2026. Requirements can change; verify the current authority guidance
+            before applying. Stonebridge alone provides advice and application processing for UK
+            visa routes.
+          </p>
         </div>
       </section>
 

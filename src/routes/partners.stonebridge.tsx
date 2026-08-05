@@ -91,7 +91,7 @@ const PARTNER_SERVICES = [
     items: [
       "Student Visa (Sponsored Study route)",
       "Child Student Visa",
-      "Graduate Visa (2-year post-study work)",
+      "Graduate Visa (2 years through 31 December 2026; 18 months from 1 January 2027; 3 years for doctoral graduates)",
       "Extensions and switching routes",
     ],
   },

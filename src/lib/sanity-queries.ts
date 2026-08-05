@@ -20,7 +20,7 @@ const BLOG_LIST_QUERY = /* groq */ `
     category,
     "author": coalesce(author->name, "Earthlink Editorial"),
     "date": publishedAt,
-    readMinutes,
+    "bodyText": pt::text(body),
     coverImage,
     coverCaption,
     tags
@@ -35,7 +35,7 @@ const BLOG_DETAIL_QUERY = /* groq */ `
     category,
     "author": coalesce(author->name, "Earthlink Editorial"),
     "date": publishedAt,
-    readMinutes,
+    "bodyText": pt::text(body),
     coverImage,
     coverCaption,
     tags,
@@ -50,7 +50,7 @@ type SanityBlogListItem = {
   category: Blog["category"];
   author: string;
   date: string;
-  readMinutes: number;
+  bodyText?: string;
   coverImage: unknown;
   coverCaption?: string;
   tags: string[];
@@ -60,6 +60,7 @@ type SanityBlogDetail = SanityBlogListItem & { body: unknown };
 
 function mapBlogList(item: SanityBlogListItem): Blog {
   const fallback = getBlog(item.slug);
+  const bodyText = item.bodyText?.trim() || fallback?.body.join(" ").trim() || "";
   return {
     slug: item.slug,
     title: item.title ?? fallback?.title ?? item.slug,
@@ -67,7 +68,7 @@ function mapBlogList(item: SanityBlogListItem): Blog {
     category: item.category ?? fallback?.category ?? "Guides",
     author: item.author ?? fallback?.author ?? "Earthlink Editorial",
     date: item.date ?? fallback?.date ?? "",
-    readMinutes: item.readMinutes ?? fallback?.readMinutes ?? 5,
+    readMinutes: Math.max(1, Math.ceil(bodyText.split(/\s+/).filter(Boolean).length / 200)),
     cover: imgUrl(item.coverImage as never, 1200) ?? fallback?.cover ?? "",
     coverCaption: item.coverCaption ?? fallback?.coverCaption,
     tags: item.tags ?? fallback?.tags ?? [],
@@ -200,7 +201,11 @@ export async function fetchUniversityCountries(): Promise<UniversityCountry[] | 
 export async function fetchUniversityCountriesResult(): Promise<SanityResult<UniversityCountry[]>> {
   if (!sanityConfigured || !sanityClient) return { status: "skipped" };
   try {
-    const rows = await sanityClient.fetch<SanityUniversityCountry[]>(UNIVERSITIES_QUERY);
+    const rows = await sanityClient.fetch<SanityUniversityCountry[]>(
+      UNIVERSITIES_QUERY,
+      {},
+      { timeout: 8_000 },
+    );
     if (!rows?.length) return { status: "skipped" };
     const data = rows.map((c) => ({
       country: c.country,

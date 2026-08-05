@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { absUrl } from "@/lib/site-config";
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { ArrowRight, ExternalLink, MapPin, Sparkles, CheckCircle2 } from "lucide-react";
 import FlipCard from "@/components/reactbits/FlipCard";
 import {
   UNIVERSITY_PARTNERS,
+  UNIVERSITY_DIRECTORY_DESTINATIONS,
+  UNIVERSITY_DIRECTORY_TOTAL,
   type University,
   type UniversityCountry,
 } from "@/content/universities";
@@ -16,6 +18,15 @@ import { SanityImage } from "@/components/sanity-image";
 import { CmsStatus } from "@/components/cms-status";
 
 export const Route = createFileRoute("/partner-universities")({
+  loader: async () => {
+    const result = await fetchUniversityCountriesResult();
+    const hasCmsBaseline = result.status === "ok" && result.data.length > 0;
+    return {
+      initialCountries: hasCmsBaseline ? result.data : UNIVERSITY_PARTNERS,
+      hasCmsBaseline,
+    };
+  },
+  shouldReload: false,
   head: () => ({
     meta: [
       { title: "Partnered Universities" },
@@ -202,19 +213,24 @@ function UniversityCard({ uni }: { uni: University }) {
 }
 
 function PartnerUniversitiesPage() {
-  const [countries, setCountries] = useState<UniversityCountry[]>(UNIVERSITY_PARTNERS);
-  const [cmsState, setCmsState] = useState<"loading" | "error" | "idle">("loading");
+  const { initialCountries, hasCmsBaseline } = Route.useLoaderData();
+  const [countries, setCountries] = useState<UniversityCountry[]>(initialCountries);
+  const signatureRef = useRef(JSON.stringify(initialCountries));
+  const [cmsState, setCmsState] = useState<"loading" | "error" | "idle">("idle");
   const [reloadKey, setReloadKey] = useState(0);
   const [cmsHealth, setCmsHealth] = useState<SanityHealth | null>(null);
   const [cmsError, setCmsError] = useState<string | null>(null);
   const [, startCmsSwitch] = useTransition();
   useEffect(() => {
     let cancelled = false;
-    setCmsState("loading");
+    if (!hasCmsBaseline) setCmsState("loading");
     setCmsError(null);
     fetchUniversityCountriesResult().then(async (res) => {
       if (cancelled) return;
       if (res.status === "ok" && res.data.length > 0) {
+        const nextSignature = JSON.stringify(res.data);
+        if (nextSignature === signatureRef.current) return;
+        signatureRef.current = nextSignature;
         startCmsSwitch(() => {
           setCountries(res.data);
           setCmsHealth({ status: "ok" });
@@ -222,6 +238,7 @@ function PartnerUniversitiesPage() {
           setCmsState("idle");
         });
       } else if (res.status === "error") {
+        if (hasCmsBaseline) return;
         setCmsError(res.error);
         console.error("[cms] partner universities fetch failed:", res.error);
         const health = await checkSanityHealth();
@@ -236,12 +253,7 @@ function PartnerUniversitiesPage() {
     return () => {
       cancelled = true;
     };
-  }, [reloadKey]);
-
-  const totals = useMemo(() => {
-    const unis = countries.reduce((n, c) => n + c.universities.length, 0);
-    return { unis, countries: countries.length };
-  }, [countries]);
+  }, [hasCmsBaseline, reloadKey]);
 
   const [activeSlug, setActiveSlug] = useState<string>("all");
   const visible = activeSlug === "all" ? countries : countries.filter((c) => c.slug === activeSlug);
@@ -257,8 +269,8 @@ function PartnerUniversitiesPage() {
             Partnered Universities
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-foreground/85">
-            {totals.unis}+ institutions across {totals.countries} featured destinations. Hover any
-            card to see what that university is known for.
+            {UNIVERSITY_DIRECTORY_TOTAL} institutions across {UNIVERSITY_DIRECTORY_DESTINATIONS}{" "}
+            featured destinations. Hover any card to see what that university is known for.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-2">
@@ -309,7 +321,7 @@ function PartnerUniversitiesPage() {
             <div className="flex flex-wrap items-end justify-between gap-6">
               <div>
                 <p className="text-xs uppercase tracking-[0.25em] text-brand">
-                  {c.universities.length} universities
+                  Featured universities
                 </p>
                 <h2 className="mt-2 font-serif text-3xl text-navy md:text-4xl">
                   <span className="mr-3">{c.flag}</span> {c.country}

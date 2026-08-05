@@ -58,18 +58,13 @@ export function CountUp({
   const display = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toLocaleString();
   const finalDisplay = decimals > 0 ? to.toFixed(decimals) : Math.round(to).toLocaleString();
   return (
-    <>
-      <span className="sr-only">
-        {prefix}
-        {finalDisplay}
-        {suffix}
-      </span>
-      <span ref={ref} className={className} aria-hidden="true">
+    <span ref={ref} className={className} aria-label={`${prefix}${finalDisplay}${suffix}`}>
+      <span aria-hidden="true">
         {prefix}
         {display}
         {suffix}
       </span>
-    </>
+    </span>
   );
 }
 

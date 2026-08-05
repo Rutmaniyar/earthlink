@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { absUrl } from "@/lib/site-config";
 import { FAQS } from "@/content/faqs";
 import { whatsappLink } from "@/lib/lead";
@@ -54,6 +55,8 @@ export const Route = createFileRoute("/faq")({
 });
 
 function FAQ() {
+  const [openItem, setOpenItem] = useState("");
+
   return (
     <div>
       <section className="bg-secondary text-foreground">
@@ -70,13 +73,25 @@ function FAQ() {
       </section>
 
       <section className="container-page py-20">
-        <Accordion type="single" collapsible className="mx-auto max-w-3xl">
+        <Accordion
+          type="single"
+          collapsible
+          value={openItem}
+          onValueChange={setOpenItem}
+          className="mx-auto max-w-3xl"
+        >
           {FAQS.map((f, i) => (
             <AccordionItem key={i} value={`item-${i}`} className="border-b hairline">
               <AccordionTrigger className="text-left font-serif text-lg text-navy">
                 {f.q}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">{f.a}</AccordionContent>
+              <AccordionContent
+                forceMount
+                aria-hidden={openItem !== `item-${i}`}
+                className="text-muted-foreground"
+              >
+                {f.a}
+              </AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

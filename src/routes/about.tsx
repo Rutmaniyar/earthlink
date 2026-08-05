@@ -11,13 +11,13 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Harrow-based study abroad advisers serving applicants in 120+ countries since 2014, with UK immigration handled only by Stonebridge Legal Solutions.",
+          "Earthlink Consultants Limited was incorporated on 9 October 2014, has traded continuously since then, and is now based in Harrow.",
       },
       { property: "og:title", content: "About Earthlink Consultants" },
       {
         property: "og:description",
         content:
-          "Operating from Harrow since 2014. Worldwide education support. UK immigration handled only by Stonebridge.",
+          "Incorporated on 9 October 2014 and continuously trading since then. Worldwide education support from Harrow; Stonebridge handles UK immigration.",
       },
       { property: "og:url", content: absUrl("/about") },
       { property: "og:type", content: "website" },
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "twitter:description",
         content:
-          "Operating from Harrow since 2014. Worldwide education support. UK immigration handled only by Stonebridge.",
+          "Incorporated on 9 October 2014 and continuously trading since then. Worldwide education support from Harrow; Stonebridge handles UK immigration.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/about") }],
@@ -58,9 +58,9 @@ function About() {
             A small UK consultancy doing the careful work that big agencies rush.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            Earthlink Consultants Ltd has operated from Harrow since {COMPANY.founded}. We're known
-            for honest counselling, careful university applications, and staying available after
-            students arrive. Stonebridge alone handles UK immigration matters.
+            Earthlink Consultants Limited was incorporated on 9 October {COMPANY.founded} and has
+            traded continuously since then. We are now based in Harrow. Stonebridge alone handles UK
+            immigration matters.
           </p>
         </div>
       </section>
@@ -72,10 +72,9 @@ function About() {
             <h2 className="mt-3 font-serif text-4xl text-navy">Built around one rule.</h2>
             <div className="prose mt-6 max-w-none text-muted-foreground">
               <p>
-                Earthlink started in 2014 out of a small office in Harrow, after years of watching
-                friends and family pay agencies for advice that didn't hold up at the visa
-                interview. The rule we built the firm around was simple: never recommend a country,
-                course, or university we wouldn't pick for our own.
+                Earthlink Consultants Limited was incorporated on 9 October 2014 and has traded
+                continuously since then. The rule we built the firm around was simple: never
+                recommend a country, course, or university we wouldn't pick for our own.
               </p>
               <p>
                 Today we serve applicants in 120+ countries worldwide. The UK, USA, Canada,
@@ -85,7 +84,7 @@ function About() {
               </p>
               <p>
                 Every UK visa route, advice matter, form, and application is handled only by our
-                solicitor partner <strong className="text-navy">{COMPANY.solicitors.name}</strong>
+                solicitor partner <strong className="text-navy">{COMPANY.solicitors.name}</strong>{" "}
                 in London. Earthlink may continue to handle the university application separately.
               </p>
             </div>

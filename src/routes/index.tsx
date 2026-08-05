@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { absUrl } from "@/lib/site-config";
 import { COMPANY, SERVICES, JOURNEY, VALUES, TESTIMONIALS } from "@/content/company";
 import { DESTINATIONS } from "@/content/destinations";
+import { UNIVERSITY_DIRECTORY_TOTAL } from "@/content/universities";
 import { whatsappLink, mailtoLink, callLink } from "@/lib/lead";
 import {
   ArrowRight,
@@ -182,7 +183,7 @@ function Home() {
           {/* Reviews tile */}
           <div className="bento-tile p-6 lg:col-span-3">
             <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
-              Google rating
+              Published rating
             </p>
             <div className="mt-3 flex items-baseline gap-2">
               <span className="font-serif text-5xl text-foreground">
@@ -196,7 +197,10 @@ function Home() {
               ))}
             </div>
             <p className="mt-3 text-xs text-muted-foreground">
-              <CountUp to={COMPANY.rating.reviews} suffix="+ verified reviews" />
+              <CountUp to={COMPANY.rating.reviews} suffix="+ published reviews" />
+            </p>
+            <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
+              Earthlink-approved published figure; individual outcomes are never guaranteed.
             </p>
           </div>
 
@@ -243,8 +247,8 @@ function Home() {
             },
             {
               label: "Universities supported",
-              value: 180,
-              suffix: "+",
+              value: UNIVERSITY_DIRECTORY_TOTAL,
+              suffix: "",
               color: "var(--navy)",
               info: "Universities and pathway colleges we help applicants research and apply to.",
               cta: { label: "Explore destinations", href: "/destinations" },
@@ -272,6 +276,7 @@ function Home() {
                   trackClass="bg-border"
                 />
               </div>
+              <p className="mt-3 text-[10px] leading-relaxed text-muted-foreground">{k.info}</p>
             </div>
           ))}
         </div>
@@ -342,8 +347,7 @@ function Home() {
                 q: "Am I actually eligible?",
                 a: "We read your transcripts, English score, finances, and gaps — then tell you what countries open up and which ones don't.",
                 score: 92,
-                detail:
-                  "We benchmark your academic profile against published entry requirements across 180+ universities we support and give you a country-by-country education verdict. Stonebridge alone assesses UK immigration eligibility.",
+                detail: `We benchmark your academic profile against published entry requirements across ${UNIVERSITY_DIRECTORY_TOTAL} universities we support and give you a country-by-country education verdict. Stonebridge alone assesses UK immigration eligibility.`,
                 href: "/service/profile-evaluation",
                 label: "Profile evaluation",
               },
@@ -525,7 +529,7 @@ function Home() {
                         <Icon className="h-5 w-5" />
                       </div>
                       <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                        0{i + 1}
+                        {String(i + 1).padStart(2, "0")}
                       </span>
                     </div>
                     <h3 className="mt-4 font-serif text-base text-navy">{s.title}</h3>
@@ -547,7 +551,7 @@ function Home() {
             Universities we help applicants apply to
           </p>
           <span className="text-[10px] uppercase tracking-widest text-muted-foreground">
-            200+ institutions
+            {UNIVERSITY_DIRECTORY_TOTAL} institutions
           </span>
         </div>
         <Marquee speed={40}>
@@ -696,9 +700,6 @@ function Home() {
                   {[0, 1, 2, 3, 4].map((s) => (
                     <Star key={s} className="h-4 w-4 fill-amber" />
                   ))}
-                  <span className="ml-auto text-[10px] uppercase tracking-widest text-muted-foreground">
-                    Verified
-                  </span>
                 </div>
                 <blockquote className="mt-4 flex-1 font-serif text-lg leading-snug text-navy">
                   "{t.quote}"

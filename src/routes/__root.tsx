@@ -95,7 +95,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         {
           name: "description",
           content:
-            "Earthlink Consultants has served applicants in 120+ countries from Harrow since 2014. Stonebridge alone handles every UK immigration matter.",
+            "Earthlink Consultants Limited was incorporated on 9 October 2014 and has traded continuously since then. We now serve applicants in 120+ countries from Harrow; Stonebridge handles UK immigration.",
         },
         { name: "author", content: COMPANY.legalName },
         { property: "og:site_name", content: COMPANY.name },

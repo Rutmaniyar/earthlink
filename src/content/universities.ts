@@ -19,6 +19,9 @@ export type UniversityCountry = {
   universities: University[];
 };
 
+export const UNIVERSITY_DIRECTORY_TOTAL = 176;
+export const UNIVERSITY_DIRECTORY_DESTINATIONS = 9;
+
 export const UNIVERSITY_PARTNERS: UniversityCountry[] = [
   {
     country: "United Kingdom",
@@ -74,7 +77,7 @@ export const UNIVERSITY_PARTNERS: UniversityCountry[] = [
       { name: "City, University of London", domain: "city.ac.uk", city: "London", speciality: "Business (Bayes), Law & Journalism", highlights: ["Bayes Business School", "Central London", "Industry links"], website: "https://www.city.ac.uk" },
       { name: "Brunel University London", domain: "brunel.ac.uk", city: "London", speciality: "Engineering, Design & Business", highlights: ["West London campus", "Sandwich placements", "Diverse cohort"], website: "https://www.brunel.ac.uk" },
       { name: "Aston University", domain: "aston.ac.uk", city: "Birmingham", speciality: "Business, Pharmacy & Engineering", highlights: ["City-centre campus", "Integrated placements", "Aston Business School"], website: "https://www.aston.ac.uk" },
-      { name: "Coventry University", domain: "coventry.ac.uk", city: "Coventry", speciality: "Automotive & Business", highlights: ["Modern London campus", "Strong placements", "Sponsor of Graduate Route"], website: "https://www.coventry.ac.uk" },
+      { name: "Coventry University", domain: "coventry.ac.uk", city: "Coventry", speciality: "Automotive & Business", highlights: ["Modern London campus", "Strong placements", "Career-focused courses"], website: "https://www.coventry.ac.uk" },
       { name: "University of Hertfordshire", domain: "herts.ac.uk", city: "Hatfield", speciality: "Computer Science & Aerospace", highlights: ["Near London", "Industry-embedded courses", "Scholarships available"], website: "https://www.herts.ac.uk" },
       { name: "De Montfort University", domain: "dmu.ac.uk", city: "Leicester", speciality: "Cyber Security & Design", highlights: ["Gold TEF rating", "Global-outlook courses", "Affordable living"], website: "https://www.dmu.ac.uk" },
       { name: "University of Greenwich", domain: "gre.ac.uk", city: "London", speciality: "Business, Engineering & Pharmacy", highlights: ["Historic riverside campus", "Central London reach", "Scholarships"], website: "https://www.gre.ac.uk" },
