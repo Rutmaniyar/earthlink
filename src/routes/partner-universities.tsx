@@ -138,11 +138,6 @@ function UniversityCard({ uni }: { uni: University }) {
       height="h-72"
       front={
         <div className="relative flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-paper to-secondary/40 p-6 text-center hairline border">
-          {uni.applicationSupportNote && (
-            <span className="absolute right-3 top-3 rounded-full border border-brand/30 bg-paper/95 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-brand shadow-sm">
-              Application Support Only
-            </span>
-          )}
           <LogoImg uni={uni} />
           <div>
             <h3 className="font-serif text-lg leading-tight text-navy">{uni.name}</h3>
@@ -158,9 +153,16 @@ function UniversityCard({ uni }: { uni: University }) {
       back={
         <div className="flex h-full w-full flex-col justify-between bg-muted p-6 text-foreground hairline border border-brand/30">
           <div>
-            <div className="flex items-center gap-2 text-gold">
-              <Sparkles className="h-4 w-4" />
-              <p className="text-[11px] uppercase tracking-widest">Speciality</p>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2 text-gold">
+                <Sparkles className="h-4 w-4" />
+                <p className="text-[11px] uppercase tracking-widest">Speciality</p>
+              </div>
+              {uni.applicationSupportNote && (
+                <span className="max-w-full rounded-full border border-brand/30 bg-paper/10 px-2.5 py-1 text-center text-[10px] font-medium uppercase tracking-wider text-brand">
+                  Application Support Only
+                </span>
+              )}
             </div>
             <h4 className="mt-2 font-serif text-lg leading-snug">{uni.speciality}</h4>
             <ul className="mt-4 space-y-2 text-sm text-foreground/85">
