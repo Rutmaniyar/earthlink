@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { absUrl } from "@/lib/site-config";
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { ArrowRight, ExternalLink, MapPin, Sparkles, CheckCircle2 } from "lucide-react";
 import FlipCard from "@/components/reactbits/FlipCard";
 import {
@@ -12,65 +12,19 @@ import {
 } from "@/content/universities";
 import { whatsappLink } from "@/lib/lead";
 import { getCachedLogo, setCachedLogo } from "@/lib/logo-cache";
-import { fetchUniversityCountriesBatchResult } from "@/lib/sanity-queries";
+import { fetchUniversityCountriesResult } from "@/lib/sanity-queries";
 import { checkSanityHealth, type SanityHealth } from "@/lib/sanity";
 import { SanityImage } from "@/components/sanity-image";
 import { CmsStatus } from "@/components/cms-status";
 
-const UNIVERSITY_BATCH_SIZE = 10;
-
-function getStaticCountryBatch(offset: number): UniversityCountry[] {
-  return UNIVERSITY_PARTNERS.map((country) => ({
-    ...country,
-    universities: country.universities.slice(offset, offset + UNIVERSITY_BATCH_SIZE),
-  }));
-}
-
-function staticDirectoryHasMore(offset: number): boolean {
-  return UNIVERSITY_PARTNERS.some((country) => country.universities.length > offset);
-}
-
-function universityKey(university: University): string {
-  return (
-    (university as University & { slug?: string }).slug ??
-    university.domain ??
-    university.name.toLocaleLowerCase()
-  );
-}
-
-function appendCountryBatch(
-  current: UniversityCountry[],
-  incoming: UniversityCountry[],
-): UniversityCountry[] {
-  const incomingBySlug = new Map(incoming.map((country) => [country.slug, country]));
-  const currentSlugs = new Set(current.map((country) => country.slug));
-  const merged = current.map((country) => {
-    const nextCountry = incomingBySlug.get(country.slug);
-    if (!nextCountry) return country;
-    const existingUniversities = new Set(country.universities.map(universityKey));
-    return {
-      ...country,
-      ...nextCountry,
-      universities: [
-        ...country.universities,
-        ...nextCountry.universities.filter(
-          (university) => !existingUniversities.has(universityKey(university)),
-        ),
-      ],
-    };
-  });
-  return [...merged, ...incoming.filter((country) => !currentSlugs.has(country.slug))];
-}
-
 export const Route = createFileRoute("/partner-universities")({
   loader: async () => {
-    const { fetchUniversityCountriesBatchResult } = await import("@/lib/sanity-queries");
-    const result = await fetchUniversityCountriesBatchResult(0, UNIVERSITY_BATCH_SIZE);
-    const hasCmsBaseline =
-      result.status === "ok" &&
-      result.data.countries.some((country) => country.universities.length > 0);
+    const { fetchUniversityCountriesResult } = await import("@/lib/sanity-queries");
+    const result = await fetchUniversityCountriesResult();
+    const hasCmsBaseline = result.status === "ok" && result.data.length > 0;
     return {
-      initialCountries: hasCmsBaseline ? result.data.countries : getStaticCountryBatch(0),
+      initialCountries: hasCmsBaseline ? result.data : UNIVERSITY_PARTNERS,
+      hasCmsBaseline,
     };
   },
   shouldReload: false,
@@ -265,113 +219,47 @@ function UniversityCard({ uni }: { uni: University }) {
 }
 
 function PartnerUniversitiesPage() {
-  const { initialCountries } = Route.useLoaderData();
+  const { initialCountries, hasCmsBaseline } = Route.useLoaderData();
   const [countries, setCountries] = useState<UniversityCountry[]>(initialCountries);
-  // Always refresh the first small page after hydration. Prerendered CMS data
-  // may be older than the current dataset, and starting at offset 10 in that
-  // case could otherwise duplicate or skip universities after an edit.
-  const [source, setSource] = useState<"cms-pending" | "cms" | "static">("cms-pending");
-  const [nextOffset, setNextOffset] = useState(0);
-  const [hasMore, setHasMore] = useState(true);
+  const signatureRef = useRef(JSON.stringify(initialCountries));
   const [cmsState, setCmsState] = useState<"loading" | "error" | "idle">("idle");
   const [reloadKey, setReloadKey] = useState(0);
   const [cmsHealth, setCmsHealth] = useState<SanityHealth | null>(null);
   const [cmsError, setCmsError] = useState<string | null>(null);
   const [, startCmsSwitch] = useTransition();
-
   useEffect(() => {
-    if (!hasMore) {
-      setCmsState((state) => (state === "loading" ? "idle" : state));
-      return;
-    }
-
     let cancelled = false;
-
-    if (source === "static") {
-      const nextBatchOffset = nextOffset || UNIVERSITY_BATCH_SIZE;
-      const timer = window.setTimeout(() => {
-        if (cancelled) return;
-        const batch = getStaticCountryBatch(nextBatchOffset);
-        const followingOffset = nextBatchOffset + UNIVERSITY_BATCH_SIZE;
-        startCmsSwitch(() => {
-          setCountries((current) => appendCountryBatch(current, batch));
-          setNextOffset(followingOffset);
-          setHasMore(staticDirectoryHasMore(followingOffset));
-        });
-      }, 0);
-      return () => {
-        cancelled = true;
-        window.clearTimeout(timer);
-      };
-    }
-
-    setCmsState("loading");
+    if (!hasCmsBaseline) setCmsState("loading");
     setCmsError(null);
-    fetchUniversityCountriesBatchResult(nextOffset, UNIVERSITY_BATCH_SIZE).then(async (res) => {
+    fetchUniversityCountriesResult().then(async (res) => {
       if (cancelled) return;
-      if (
-        res.status === "ok" &&
-        res.data.countries.some((country) => country.universities.length > 0)
-      ) {
+      if (res.status === "ok" && res.data.length > 0) {
+        const nextSignature = JSON.stringify(res.data);
+        if (nextSignature === signatureRef.current) return;
+        signatureRef.current = nextSignature;
         startCmsSwitch(() => {
-          setCountries((current) =>
-            source === "cms-pending"
-              ? res.data.countries
-              : appendCountryBatch(current, res.data.countries),
-          );
-          setSource("cms");
-          setNextOffset(res.data.nextOffset ?? nextOffset + UNIVERSITY_BATCH_SIZE);
-          setHasMore(res.data.hasMore);
+          setCountries(res.data);
           setCmsHealth({ status: "ok" });
           setCmsError(null);
+          setCmsState("idle");
         });
-        setCmsState(res.data.hasMore ? "loading" : "idle");
       } else if (res.status === "error") {
+        if (hasCmsBaseline) return;
         setCmsError(res.error);
         console.error("[cms] partner universities fetch failed:", res.error);
         const health = await checkSanityHealth();
         if (cancelled) return;
         console.error("[cms] health probe result:", health);
         setCmsHealth(health);
-        setCmsState("error");
-        if (source === "cms-pending") {
-          startCmsSwitch(() => {
-            setCountries(getStaticCountryBatch(0));
-            setSource("static");
-            setNextOffset(UNIVERSITY_BATCH_SIZE);
-            setHasMore(staticDirectoryHasMore(UNIVERSITY_BATCH_SIZE));
-          });
-        } else {
-          setHasMore(false);
-        }
-      } else if (source === "cms") {
-        setHasMore(false);
-        setCmsState("idle");
+        setCmsState(health.status === "ok" ? "idle" : "error");
       } else {
-        startCmsSwitch(() => {
-          setCountries(getStaticCountryBatch(0));
-          setSource("static");
-          setNextOffset(UNIVERSITY_BATCH_SIZE);
-          setHasMore(staticDirectoryHasMore(UNIVERSITY_BATCH_SIZE));
-        });
         setCmsState("idle");
       }
     });
     return () => {
       cancelled = true;
     };
-  }, [hasMore, nextOffset, reloadKey, source]);
-
-  const retryCms = () => {
-    setCmsError(null);
-    if (source === "static") {
-      setCountries(getStaticCountryBatch(0));
-      setSource("cms-pending");
-      setNextOffset(0);
-    }
-    setHasMore(true);
-    setReloadKey((key) => key + 1);
-  };
+  }, [hasCmsBaseline, reloadKey]);
 
   const [activeSlug, setActiveSlug] = useState<string>("all");
   const visible = activeSlug === "all" ? countries : countries.filter((c) => c.slug === activeSlug);
@@ -424,10 +312,10 @@ function PartnerUniversitiesPage() {
         <div className="container-page pt-8">
           <CmsStatus
             state={cmsState}
-            loadingLabel="Loading partner universities from the CMS in batches of 10…"
+            loadingLabel="Refreshing partner universities from the CMS…"
             health={cmsHealth}
             errorDetail={cmsError}
-            onRetry={retryCms}
+            onRetry={() => setReloadKey((k) => k + 1)}
           />
         </div>
       )}
