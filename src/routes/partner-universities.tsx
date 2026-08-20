@@ -19,6 +19,7 @@ import { CmsStatus } from "@/components/cms-status";
 
 export const Route = createFileRoute("/partner-universities")({
   loader: async () => {
+    const { fetchUniversityCountriesResult } = await import("@/lib/sanity-queries");
     const result = await fetchUniversityCountriesResult();
     const hasCmsBaseline = result.status === "ok" && result.data.length > 0;
     return {
@@ -95,18 +96,23 @@ function LogoImg({ uni }: { uni: University }) {
 
 function FaviconLogo({ uni, initials }: { uni: University; initials: string }) {
   const [state, setState] = useState<{ idx: number; failed: boolean; src: string | null }>(() => {
-    const cached = getCachedLogo(uni.domain);
-    if (cached) {
-      if (cached.src === null) return { idx: -1, failed: true, src: null };
-      return { idx: -1, failed: false, src: cached.src };
-    }
     const sources = buildSources(uni.domain);
     return { idx: 0, failed: false, src: sources[0] };
   });
 
   useEffect(() => {
-    if (state.idx === -1) return;
-  }, [state.idx]);
+    // Keep the server and browser's first render identical. Reading localStorage
+    // in the state initializer produces different HTML for returning visitors,
+    // which makes a direct page load fail hydration. Client-side navigation does
+    // not hydrate server HTML, so it masked the issue.
+    const cached = getCachedLogo(uni.domain);
+    if (!cached) return;
+    setState(
+      cached.src === null
+        ? { idx: -1, failed: true, src: null }
+        : { idx: -1, failed: false, src: cached.src },
+    );
+  }, [uni.domain]);
 
   if (state.failed || !state.src) {
     return (

@@ -4,8 +4,8 @@
 // callers should fall back to their local static content.
 
 import { createClient, type SanityClient } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-type SanityImageSource = Parameters<ReturnType<typeof imageUrlBuilder>["image"]>[0];
+import { createImageUrlBuilder } from "@sanity/image-url";
+type SanityImageSource = Parameters<ReturnType<typeof createImageUrlBuilder>["image"]>[0];
 
 const projectId = import.meta.env.VITE_SANITY_PROJECT_ID as string | undefined;
 const dataset = (import.meta.env.VITE_SANITY_DATASET as string | undefined) ?? "production";
@@ -25,7 +25,7 @@ export const sanityClient: SanityClient | null = projectId
     })
   : null;
 
-const builder = sanityClient ? imageUrlBuilder(sanityClient) : null;
+const builder = sanityClient ? createImageUrlBuilder(sanityClient) : null;
 
 export function urlFor(source: SanityImageSource) {
   if (!builder) throw new Error("Sanity not configured");
@@ -33,7 +33,10 @@ export function urlFor(source: SanityImageSource) {
 }
 
 // Safe helper for images that may be a Sanity image or a plain URL string fallback.
-export function imgUrl(source: SanityImageSource | string | undefined | null, width = 1200): string | undefined {
+export function imgUrl(
+  source: SanityImageSource | string | undefined | null,
+  width = 1200,
+): string | undefined {
   if (!source) return undefined;
   if (typeof source === "string") return source;
   if (!builder) return undefined;

@@ -1,4 +1,15 @@
-import { Check, X, Shield, Wallet, MessageSquare, Compass, Heart, Eye, Flag, Sparkles } from "lucide-react";
+import {
+  Check,
+  X,
+  Shield,
+  Wallet,
+  MessageSquare,
+  Compass,
+  Heart,
+  Eye,
+  Flag,
+  Sparkles,
+} from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { whatsappLink } from "@/lib/lead";
 import { COMPANY } from "@/content/company";
@@ -8,11 +19,31 @@ import { COMPANY } from "@/content/company";
  * of the study-abroad decision. Inspired by Excelencia International.
  */
 const PHASES = [
-  { icon: Compass, name: "Questioning", body: "Is studying abroad even for me? Can my family afford it? Is the return worth it?" },
-  { icon: Eye, name: "Clarity", body: "Which country, which course, which budget actually fits — without the agency sales pitch." },
-  { icon: Heart, name: "Courage", body: "Saying it out loud to parents. Choosing the harder, better option over the comfortable one." },
-  { icon: Flag, name: "Commitment", body: "Applications, deposits, visa file. The point of no return, with someone in your corner." },
-  { icon: Sparkles, name: "Becoming", body: "Landing, settling, graduating, working. The version of you the journey was always for." },
+  {
+    icon: Compass,
+    name: "Questioning",
+    body: "Is studying abroad even for me? Can my family afford it? Is the return worth it?",
+  },
+  {
+    icon: Eye,
+    name: "Clarity",
+    body: "Which country, which course, which budget actually fits — without the agency sales pitch.",
+  },
+  {
+    icon: Heart,
+    name: "Courage",
+    body: "Saying it out loud to parents. Choosing the harder, better option over the comfortable one.",
+  },
+  {
+    icon: Flag,
+    name: "Commitment",
+    body: "Applications, deposits, visa file. The point of no return, with someone in your corner.",
+  },
+  {
+    icon: Sparkles,
+    name: "Becoming",
+    body: "Landing, settling, graduating, working. The version of you the journey was always for.",
+  },
 ];
 
 export function PhasesOfDoubt() {
@@ -20,10 +51,14 @@ export function PhasesOfDoubt() {
     <section className="bg-cream">
       <div className="container-page py-24">
         <div className="max-w-2xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">Before You Cross Borders</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">
+            Before You Cross Borders
+          </p>
           <h2 className="mt-3 font-serif text-4xl text-navy md:text-5xl">You cross doubt first.</h2>
           <p className="mt-4 text-muted-foreground">
-            Every student stands at the edge of uncertainty. Our role isn't to push you forward — it's to make sure you're ready. We see five phases, and we sit with you through each one.
+            Every student stands at the edge of uncertainty. Our role isn't to push you forward —
+            it's to make sure you're ready. We see five phases, and we sit with you through each
+            one.
           </p>
         </div>
         <ol className="mt-12 grid gap-4 md:grid-cols-3 lg:grid-cols-5">
@@ -68,12 +103,22 @@ export function HonestPledge() {
       <div className="container-page py-24">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">Our pledge</p>
-            <h2 className="mt-3 font-serif text-4xl text-navy">Honest guidance.<br />No hidden agendas.</h2>
-            <p className="mt-4 text-muted-foreground">
-              We help students make informed decisions about their international education — not the easiest decision, the best one.
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brand">
+              Our pledge
             </p>
-            <Link to="/about" className="mt-6 inline-flex text-sm text-navy underline decoration-gold underline-offset-4">
+            <h2 className="mt-3 font-serif text-4xl text-navy">
+              Honest guidance.
+              <br />
+              No hidden agendas.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              We help students make informed decisions about their international education — not the
+              easiest decision, the best one.
+            </p>
+            <Link
+              to="/about"
+              className="mt-6 inline-flex text-sm text-navy underline decoration-gold underline-offset-4"
+            >
               Why we work this way →
             </Link>
           </div>
@@ -115,10 +160,26 @@ export function HonestPledge() {
  * "For Parents, With Care" — trust signals for the people who fund the journey.
  */
 const PARENT_POINTS = [
-  { icon: Shield, label: "Safety-first decisions", body: "City, halls, and route choices made with parent concerns weighted equally." },
-  { icon: Wallet, label: "Transparent finances", body: "Year-1 and year-2 budgets in writing. No surprise fees, no commission games." },
-  { icon: MessageSquare, label: "Continuous communication", body: "Parents looped in on every milestone — by WhatsApp, email, or phone." },
-  { icon: Heart, label: "Long-term outcomes", body: "We talk PR, jobs, and return options up front — not just the admission letter." },
+  {
+    icon: Shield,
+    label: "Safety-first decisions",
+    body: "City, halls, and route choices made with parent concerns weighted equally.",
+  },
+  {
+    icon: Wallet,
+    label: "Transparent finances",
+    body: "Year-1 and year-2 budgets in writing. No surprise fees, no commission games.",
+  },
+  {
+    icon: MessageSquare,
+    label: "Continuous communication",
+    body: "Parents looped in on every milestone — by WhatsApp, email, or phone.",
+  },
+  {
+    icon: Heart,
+    label: "Long-term outcomes",
+    body: "We talk PR, jobs, and return options up front — not just the admission letter.",
+  },
 ];
 
 export function ForParents() {
@@ -128,12 +189,16 @@ export function ForParents() {
       <div className="container-page py-24">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">For parents, with care</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">
+              For parents, with care
+            </p>
             <h2 className="mt-3 font-serif text-4xl text-balance md:text-5xl">
               Because trust matters as much as dreams.
             </h2>
             <p className="mt-5 max-w-md text-muted-foreground">
-              This journey isn't taken alone — it's shared by families who care deeply about safety, clarity, and what happens after graduation. We guide students forward, and keep parents confidently informed at every step.
+              This journey isn't taken alone — it's shared by families who care deeply about safety,
+              clarity, and what happens after graduation. We guide students forward, and keep
+              parents confidently informed at every step.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link

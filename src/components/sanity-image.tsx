@@ -48,7 +48,7 @@ export function SanityImage({
   const sanitySrc = hasRef ? imgUrl(image, fallbackWidth) : undefined;
   const [failedSanitySrc, setFailedSanitySrc] = useState<string | null>(null);
   const usingFallback = Boolean(src && sanitySrc && failedSanitySrc === sanitySrc);
-  const resolvedSrc = usingFallback ? src : sanitySrc ?? src ?? undefined;
+  const resolvedSrc = usingFallback ? src : (sanitySrc ?? src ?? undefined);
 
   if (!resolvedSrc) return null;
 

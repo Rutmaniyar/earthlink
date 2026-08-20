@@ -165,7 +165,7 @@ function Home() {
                 ["02", "Apply", "var(--gold)"],
                 ["03", "Arrive", "#ffffff"],
               ].map(([n, label, c]) => (
-                <button key={n as string} className="group text-left">
+                <div key={n as string} className="group text-left">
                   <div className="h-[3px] w-full overflow-hidden rounded-full bg-white/10">
                     <div
                       className="h-full w-0 transition-all duration-700 group-hover:w-full"
@@ -175,7 +175,7 @@ function Home() {
                   <p className="mt-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground transition-colors group-hover:text-foreground">
                     {n} · {label}
                   </p>
-                </button>
+                </div>
               ))}
             </div>
           </AnimatedContent>
@@ -457,15 +457,6 @@ function Home() {
                 <SpotlightCard
                   className="group relative h-full !rounded-xl !border-[color:color-mix(in_oklab,var(--navy)_10%,transparent)] !bg-card !p-5 transition-transform duration-200 hover:!border-[color:color-mix(in_oklab,var(--brand)_40%,transparent)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-background cursor-pointer"
                   spotlightColor="rgba(47, 163, 214, 0.22)"
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`Step ${j.step} of ${JOURNEY.length}: ${j.title}. ${j.body}`}
-                  onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      (e.currentTarget as HTMLElement).classList.toggle("is-pressed");
-                    }
-                  }}
                 >
                   <div className="flex items-start justify-between">
                     <span className="font-serif text-3xl text-brand transition-transform duration-300 group-hover:scale-110 group-[.is-pressed]:scale-110">

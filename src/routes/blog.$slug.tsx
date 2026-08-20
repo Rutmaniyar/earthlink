@@ -11,6 +11,7 @@ export const Route = createFileRoute("/blog/$slug")({
   loader: async ({ params }) => {
     const blog = getBlog(params.slug);
     if (blog) return { blog: blog as BlogWithPortableText, refreshFromCms: true };
+    const { fetchBlogBySlug } = await import("@/lib/sanity-queries");
     const remote = await fetchBlogBySlug(params.slug);
     if (!remote) throw notFound();
     return { blog: remote, refreshFromCms: false };

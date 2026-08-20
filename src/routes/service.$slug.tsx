@@ -63,6 +63,7 @@ export const Route = createFileRoute("/service/$slug")({
     const url = absUrl(`/service/${params.slug}`);
     const title = seo?.title ?? `${t} — Earthlink Consultants`;
     const ogImage = SERVICE_OG[params.slug];
+    const ogImageUrl = ogImage ? absUrl(ogImage) : undefined;
     const isVisaService = params.slug === "student-visa" || params.slug === "visit-visa";
     const isRecruitmentService = params.slug === "recruitment";
     const earthlinkProvider = {
@@ -107,7 +108,7 @@ export const Route = createFileRoute("/service/$slug")({
                   "@type": "Place",
                   name: "Worldwide excluding the United Kingdom",
                 },
-                ...(ogImage ? { image: ogImage } : {}),
+                ...(ogImageUrl ? { image: ogImageUrl } : {}),
                 hasOfferCatalog: offerCatalog,
               },
               {
@@ -136,7 +137,7 @@ export const Route = createFileRoute("/service/$slug")({
             description: desc,
             serviceType: loaderData.service.title,
             url,
-            ...(ogImage ? { image: ogImage } : {}),
+            ...(ogImageUrl ? { image: ogImageUrl } : {}),
             provider: earthlinkProvider,
             areaServed: "120+ countries served",
             ...(isRecruitmentService
@@ -157,9 +158,9 @@ export const Route = createFileRoute("/service/$slug")({
         { property: "og:type", content: "website" },
         { property: "og:url", content: url },
         { property: "og:site_name", content: COMPANY.name },
-        ...(ogImage
+        ...(ogImageUrl
           ? [
-              { property: "og:image", content: ogImage },
+              { property: "og:image", content: ogImageUrl },
               { property: "og:image:width", content: "1216" },
               { property: "og:image:height", content: "640" },
               { property: "og:image:alt", content: `${t} — Earthlink Consultants` },
@@ -168,7 +169,7 @@ export const Route = createFileRoute("/service/$slug")({
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: title },
         { name: "twitter:description", content: desc },
-        ...(ogImage ? [{ name: "twitter:image", content: ogImage }] : []),
+        ...(ogImageUrl ? [{ name: "twitter:image", content: ogImageUrl }] : []),
       ],
 
       links: [{ rel: "canonical", href: url }],
@@ -184,14 +185,19 @@ export const Route = createFileRoute("/service/$slug")({
                 "@context": "https://schema.org",
                 "@type": "BreadcrumbList",
                 itemListElement: [
-                  { "@type": "ListItem", position: 1, name: "Home", item: absUrl("/") },
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Home",
+                    item: { "@id": absUrl("/") },
+                  },
                   {
                     "@type": "ListItem",
                     position: 2,
                     name: "Services",
-                    item: absUrl("/services"),
+                    item: { "@id": absUrl("/services") },
                   },
-                  { "@type": "ListItem", position: 3, name: loaderData.service.title, item: url },
+                  { "@type": "ListItem", position: 3, name: loaderData.service.title },
                 ],
               }),
             },

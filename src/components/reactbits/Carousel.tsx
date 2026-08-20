@@ -35,8 +35,14 @@ export default function Carousel({
     setActive(i);
   }, []);
 
-  const next = useCallback(() => scrollTo((active + 1) % items.length), [active, items.length, scrollTo]);
-  const prev = useCallback(() => scrollTo((active - 1 + items.length) % items.length), [active, items.length, scrollTo]);
+  const next = useCallback(
+    () => scrollTo((active + 1) % items.length),
+    [active, items.length, scrollTo],
+  );
+  const prev = useCallback(
+    () => scrollTo((active - 1 + items.length) % items.length),
+    [active, items.length, scrollTo],
+  );
 
   useEffect(() => {
     if (!autoPlay || paused || !visible) return;
@@ -78,7 +84,10 @@ export default function Carousel({
         children.forEach((c, i) => {
           const mid = c.offsetLeft + c.clientWidth / 2 - track.offsetLeft;
           const d = Math.abs(mid - center);
-          if (d < bestDist) { bestDist = d; best = i; }
+          if (d < bestDist) {
+            bestDist = d;
+            best = i;
+          }
         });
         setActive(best);
       });
@@ -87,7 +96,12 @@ export default function Carousel({
     return () => track.removeEventListener("scroll", onScroll);
   }, []);
 
-  const basis = perView === 1 ? "basis-full" : perView === 2 ? "md:basis-1/2 basis-full" : "lg:basis-1/3 md:basis-1/2 basis-full";
+  const basis =
+    perView === 1
+      ? "basis-full"
+      : perView === 2
+        ? "md:basis-1/2 basis-full"
+        : "lg:basis-1/3 md:basis-1/2 basis-full";
 
   return (
     <div

@@ -13,14 +13,17 @@ import {
   Wallet,
 } from "lucide-react";
 import {
-  findStaticUniversityBySlug,
   fetchUniversityBySlugResult,
   fetchRelatedUniversitiesResult,
-  findStaticRelatedUniversities,
   type RelatedUniversity,
   type UniversityDetail,
 } from "@/lib/sanity-queries";
-import { imgUrl, checkSanityHealth, type SanityHealth } from "@/lib/sanity";
+import { checkSanityHealth, type SanityHealth } from "@/lib/sanity";
+import {
+  findStaticRelatedUniversities,
+  findStaticUniversityBySlug,
+  sanityHeadImageUrl,
+} from "@/lib/university-static";
 import { SITE_NAME, absUrl } from "@/lib/site-config";
 import { SanityImage } from "@/components/sanity-image";
 import { PortableBody } from "@/components/portable-text";
@@ -30,10 +33,12 @@ import { whatsappLink } from "@/lib/lead";
 
 export const Route = createFileRoute("/university/$slug")({
   loader: async ({ params }) => {
-    // Static fallback always available. Best-effort Sanity fetch enriches
-    // the page after first render, so a slow CMS cannot block local content.
+    // Keep client-side navigation immediate when a static fallback exists;
+    // the page effect enriches it from Sanity after rendering. During SSR and
+    // prerendering, fetch the CMS record so crawlers receive the richest HTML.
     const fallback = findStaticUniversityBySlug(params.slug);
-    if (fallback) return { fallback, cms: null };
+    if (fallback && typeof window !== "undefined") return { fallback, cms: null };
+    const { fetchUniversityBySlugResult } = await import("@/lib/sanity-queries");
     const cms = await fetchUniversityBySlugResult(params.slug);
     const cmsData = cms.status === "ok" ? cms.data : null;
     return { fallback, cms: cmsData };
@@ -76,19 +81,16 @@ export const Route = createFileRoute("/university/$slug")({
     const title = u.seo?.title?.trim() || fallbackTitle;
     const desc = u.seo?.description?.trim() || fallbackDesc;
     const ogImage =
-      imgUrl(u.seo?.ogImage as never, 1200) ||
-      imgUrl((u as UniversityDetail).coverImage as never, 1200) ||
-      imgUrl((u as UniversityDetail).logo as never, 1200) ||
+      sanityHeadImageUrl(u.seo?.ogImage, 1200) ||
+      sanityHeadImageUrl((u as UniversityDetail).coverImage, 1200) ||
+      sanityHeadImageUrl((u as UniversityDetail).logo, 1200) ||
       null;
 
-    // Robots: honour CMS override; also noindex when only the static
-    // fallback is showing (no CMS record for this slug) so we don't index
-    // pages missing rich content.
-    const hasCmsRecord = Boolean(loaderData?.cms);
-    const robots =
-      u.seo?.noIndex || !hasCmsRecord
-        ? "noindex, follow"
-        : "index, follow, max-image-preview:large, max-snippet:-1";
+    // A known static university is a valid page even if the CMS is temporarily
+    // unavailable during a build. Only an explicit editorial override noindexes it.
+    const robots = u.seo?.noIndex
+      ? "noindex, follow"
+      : "index, follow, max-image-preview:large, max-snippet:-1";
 
     const meta: Array<Record<string, string>> = [
       { title },
@@ -113,6 +115,30 @@ export const Route = createFileRoute("/university/$slug")({
     return {
       meta,
       links: [{ rel: "canonical", href: canonical }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: { "@id": absUrl("/") },
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Partnered Universities",
+                item: { "@id": absUrl("/partner-universities") },
+              },
+              { "@type": "ListItem", position: 3, name: u.name },
+            ],
+          }),
+        },
+      ],
     };
   },
   errorComponent: ({ error }) => (

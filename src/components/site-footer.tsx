@@ -5,7 +5,7 @@ import { SERVICES } from "@/content/company";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { whatsappLink } from "@/lib/lead";
 import { openCookieSettings } from "@/lib/cookie-consent";
-import logoUrl from "@/assets/earthlink-logo.png";
+import logoUrl from "@/assets/earthlink-logo-small.png";
 
 export function SiteFooter() {
   return (

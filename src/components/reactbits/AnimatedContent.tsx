@@ -1,8 +1,4 @@
-import React, { useRef, useEffect, createElement } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-if (typeof window !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+import React, { createElement, useEffect, useRef } from "react";
 
 type AsTag = keyof React.JSX.IntrinsicElements;
 
@@ -12,7 +8,7 @@ interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   container?: Element | string | null;
   distance?: number;
-  direction?: 'vertical' | 'horizontal';
+  direction?: "vertical" | "horizontal";
   reverse?: boolean;
   duration?: number;
   ease?: string;
@@ -28,15 +24,27 @@ interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElement> {
   onDisappearanceComplete?: () => void;
 }
 
+function cssEase(ease: string): string {
+  if (ease === "power3.in") return "cubic-bezier(0.64, 0, 0.78, 0)";
+  if (ease === "power3.inOut") return "cubic-bezier(0.65, 0, 0.35, 1)";
+  if (ease === "power3.out") return "cubic-bezier(0.22, 1, 0.36, 1)";
+  return ease;
+}
+
+/**
+ * Native Web Animations replacement for the previous GSAP/ScrollTrigger
+ * wrapper. It keeps the same transform, opacity, duration, and threshold
+ * controls while avoiding a large runtime and scroll-time layout work.
+ */
 const AnimatedContent: React.FC<AnimatedContentProps> = ({
   children,
-  as = 'div',
+  as = "div",
   container,
   distance = 100,
-  direction = 'vertical',
+  direction = "vertical",
   reverse = false,
   duration = 0.8,
-  ease = 'power3.out',
+  ease = "power3.out",
   initialOpacity = 0,
   animateOpacity = true,
   scale = 1,
@@ -44,99 +52,115 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
   delay = 0,
   disappearAfter = 0,
   disappearDuration = 0.5,
-  disappearEase = 'power3.in',
+  disappearEase = "power3.in",
   onComplete,
   onDisappearanceComplete,
-  className = '',
+  className = "",
   ...props
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-
-
-
-
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Respect prefers-reduced-motion: skip GSAP entirely and reveal in place.
-    const prefersReduced =
-      typeof window !== 'undefined' &&
-      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) {
-      gsap.set(el, { x: 0, y: 0, scale: 1, opacity: 1, visibility: 'visible' });
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) {
       onComplete?.();
       return;
     }
 
-    let scrollerTarget: Element | string | null = container || document.getElementById('snap-main-container') || null;
+    let root: Element | null = null;
+    if (typeof container === "string") root = document.querySelector(container);
+    else if (container instanceof Element) root = container;
+    else root = document.getElementById("snap-main-container");
 
-    if (typeof scrollerTarget === 'string') {
-      scrollerTarget = document.querySelector(scrollerTarget);
-    }
+    const axis = direction === "horizontal" ? "X" : "Y";
+    const offset = (reverse ? -1 : 1) * distance;
+    const fromTransform = `translate${axis}(${offset}px) scale(${scale})`;
+    const fromOpacity = animateOpacity ? initialOpacity : 1;
+    const startPct = Math.max(0, Math.min(100, (1 - threshold) * 100));
+    let entrance: Animation | null = null;
+    let exit: Animation | null = null;
+    let exitTimer = 0;
+    let observer: IntersectionObserver | null = null;
+    let played = false;
 
-    const axis = direction === 'horizontal' ? 'x' : 'y';
-    const offset = reverse ? -distance : distance;
-    const startPct = (1 - threshold) * 100;
+    const play = () => {
+      if (played) return;
+      played = true;
+      entrance = el.animate(
+        [
+          { transform: fromTransform, opacity: fromOpacity },
+          { transform: "translate3d(0, 0, 0) scale(1)", opacity: 1 },
+        ],
+        {
+          duration: duration * 1000,
+          delay: delay * 1000,
+          easing: cssEase(ease),
+          fill: "both",
+        },
+      );
+      entrance.onfinish = () => {
+        el.style.transform = "translate3d(0, 0, 0) scale(1)";
+        el.style.opacity = "1";
+        entrance?.cancel();
+        onComplete?.();
 
-    gsap.set(el, {
-      [axis]: offset,
-      scale,
-      opacity: animateOpacity ? initialOpacity : 1,
-      visibility: 'visible'
-    });
-
-    const tl = gsap.timeline({
-      paused: true,
-      delay,
-      onComplete: () => {
-        if (onComplete) onComplete();
         if (disappearAfter > 0) {
-          gsap.to(el, {
-            [axis]: reverse ? distance : -distance,
-            scale: 0.8,
-            opacity: animateOpacity ? initialOpacity : 0,
-            delay: disappearAfter,
-            duration: disappearDuration,
-            ease: disappearEase,
-            onComplete: () => onDisappearanceComplete?.()
-          });
+          exitTimer = window.setTimeout(() => {
+            const exitOffset = reverse ? distance : -distance;
+            exit = el.animate(
+              [
+                { transform: "translate3d(0, 0, 0) scale(1)", opacity: 1 },
+                {
+                  transform: `translate${axis}(${exitOffset}px) scale(0.8)`,
+                  opacity: animateOpacity ? initialOpacity : 0,
+                },
+              ],
+              {
+                duration: disappearDuration * 1000,
+                easing: cssEase(disappearEase),
+                fill: "forwards",
+              },
+            );
+            exit.onfinish = () => onDisappearanceComplete?.();
+          }, disappearAfter * 1000);
         }
-      }
-    });
+      };
+    };
 
-    tl.to(el, {
-      [axis]: 0,
-      scale: 1,
-      opacity: 1,
-      duration,
-      ease
-    });
-
+    // Measure before applying any animation style so this component does not
+    // cause a read-after-write layout flush during hydration.
     const rect = el.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-    const alreadyInView = rect.top < vh * (1 - 0) && rect.bottom > 0;
-
-    let st: ScrollTrigger | null = null;
-    if (alreadyInView) {
-      tl.play();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < viewportHeight && rect.bottom > 0) {
+      play();
     } else {
-      st = ScrollTrigger.create({
-        trigger: el,
-        scroller: scrollerTarget || window,
-        start: `top ${startPct}%`,
-        once: true,
-        onEnter: () => tl.play()
-      });
+      el.style.transform = fromTransform;
+      el.style.opacity = String(fromOpacity);
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry?.isIntersecting) {
+            observer?.disconnect();
+            play();
+          }
+        },
+        {
+          root,
+          rootMargin: `0px 0px -${100 - startPct}% 0px`,
+          threshold: 0,
+        },
+      );
+      observer.observe(el);
     }
 
     return () => {
-      st?.kill();
-      tl.kill();
+      observer?.disconnect();
+      entrance?.cancel();
+      exit?.cancel();
+      window.clearTimeout(exitTimer);
     };
-
   }, [
     container,
     distance,
@@ -153,15 +177,10 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
     disappearDuration,
     disappearEase,
     onComplete,
-    onDisappearanceComplete
+    onDisappearanceComplete,
   ]);
 
-  return createElement(
-    as,
-    { ref, className: `${className}`, ...props },
-    children
-  );
+  return createElement(as, { ref, className, ...props }, children);
 };
-
 
 export default AnimatedContent;

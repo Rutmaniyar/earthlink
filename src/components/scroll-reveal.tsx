@@ -33,12 +33,21 @@ export function ScrollReveal() {
 
     let raf = 0;
     let lastY = window.scrollY;
+    let maxScroll = 1;
+    let needsMetrics = true;
     const root = document.documentElement;
 
     const update = () => {
+      if (needsMetrics) {
+        maxScroll = Math.max(1, root.scrollHeight - root.clientHeight);
+        needsMetrics = false;
+      }
       const y = window.scrollY || root.scrollTop;
-      const max = Math.max(1, root.scrollHeight - root.clientHeight);
-      root.style.setProperty("--scroll-progress", String(Math.min(1, Math.max(0, y / max))));
+      const progress = Math.min(1, Math.max(0, y / maxScroll));
+      root.style.setProperty("--scroll-progress", String(progress));
+      root.style.setProperty("--depth-far-y", `${progress * -8}%`);
+      root.style.setProperty("--depth-near-y", `${progress * -18}%`);
+      root.style.setProperty("--depth-lift", `${progress * -24}px`);
       root.dataset.scrollDir =
         y > lastY + 2 ? "down" : y < lastY - 2 ? "up" : (root.dataset.scrollDir ?? "up");
       root.dataset.scrolled = y > 24 ? "true" : "false";
@@ -50,13 +59,23 @@ export function ScrollReveal() {
       raf = requestAnimationFrame(update);
     };
 
+    const onResize = () => {
+      needsMetrics = true;
+      onScroll();
+    };
+
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", onResize);
+    window.addEventListener("load", onResize, { once: true });
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(document.body);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("load", onResize);
+      resizeObserver.disconnect();
     };
   }, [pathname]);
 
@@ -128,12 +147,18 @@ export function ScrollReveal() {
 
     let raf = 0;
     const update = () => {
-      for (const el of els) {
-        const rect = el.getBoundingClientRect();
-        const vh = window.innerHeight;
+      const vh = window.innerHeight;
+      const measurements = els.map((el) => ({
+        el,
+        rect: el.getBoundingClientRect(),
+        speed: parseFloat(el.dataset.parallax || "0.2"),
+      }));
+
+      // Read every rectangle first, then write transforms together. This keeps
+      // layout reads from being interleaved with style invalidations.
+      for (const { el, rect, speed } of measurements) {
         // Only animate while element is roughly in viewport
         if (rect.bottom < -200 || rect.top > vh + 200) continue;
-        const speed = parseFloat(el.dataset.parallax || "0.2");
         const offset = (rect.top - vh / 2) * -speed;
         el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
       }

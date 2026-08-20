@@ -139,6 +139,18 @@
   * {
     border-color: var(--color-border);
   }
+
+  /*
+   * Responsive grids commonly add their column template at a breakpoint and
+   * rely on one implicit column below it. Let grid items shrink with that
+   * column so a live desktop-to-mobile resize cannot preserve a stale
+   * min-content width and clip the layout. Explicit min-width utilities live
+   * in the utilities layer and continue to override this default.
+   */
+  .grid > * {
+    min-width: 0;
+  }
+
   html {
     scroll-behavior: smooth;
     /* Offset for the sticky header when jumping to #anchors */
@@ -177,6 +189,11 @@
     background-color: color-mix(in oklab, var(--background) 92%, transparent);
   }
 
+  .scroll-progress-bar {
+    transform: scaleX(var(--scroll-progress, 0));
+    transition: transform 80ms linear;
+  }
+
   /* Reveal-on-scroll — set by src/components/scroll-reveal.tsx */
   [data-reveal] {
     opacity: 0;
@@ -191,7 +208,7 @@
   }
 
   [data-motion="section"] {
-    transform: perspective(1400px) translate3d(0, 26px, -28px) rotateX(1.4deg);
+    transform: translate3d(0, 26px, 0);
   }
 
   [data-motion="headline"] {
@@ -231,6 +248,18 @@
     box-shadow: 0 18px 60px -46px color-mix(in oklab, var(--navy) 55%, transparent);
   }
 
+  /*
+   * Perspective and horizontal reveal transforms can enlarge elements while
+   * they are waiting to enter the viewport. Full-width sections use vertical
+   * motion at every size; flatten the remaining reveal variants on phones so
+   * transformed boxes never exceed the viewport width.
+   */
+  @media (max-width: 767px) {
+    [data-reveal] {
+      transform: translate3d(0, 18px, 0);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] { opacity: 1; filter: none; clip-path: none; transform: none; transition: none; }
   }
@@ -266,12 +295,14 @@
 
 .depth-grid-far {
   top: 8vh;
+  translate: 0 var(--depth-far-y, 0%);
   transform: rotateX(64deg) rotateZ(-8deg) translateZ(-180px);
   opacity: 0.24;
 }
 
 .depth-grid-near {
   bottom: -8vh;
+  translate: 0 var(--depth-near-y, 0%);
   transform: rotateX(68deg) rotateZ(7deg) translateZ(-80px);
   opacity: 0.2;
 }
@@ -288,6 +319,12 @@
     color-mix(in oklab, var(--gold) 18%, transparent),
     transparent
   );
+  translate: 0 var(--depth-lift, 0px);
+}
+
+.depth-grid,
+.depth-edge {
+  transition: translate 120ms ease-out;
 }
 
 .depth-edge-left { left: clamp(18px, 4vw, 64px); }
@@ -374,6 +411,7 @@
 @keyframes sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
 @keyframes reveal-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes marquee-loop { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+@keyframes shiny-text-sweep { from { background-position: 150% center; } to { background-position: -50% center; } }
 
 .animate-orbit { animation: orbit-spin 28s linear infinite; }
 .animate-orbit-rev { animation: orbit-spin-rev 22s linear infinite; }

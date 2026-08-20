@@ -56,14 +56,11 @@ export function CountUp({
   }, [to, duration]);
 
   const display = decimals > 0 ? val.toFixed(decimals) : Math.round(val).toLocaleString();
-  const finalDisplay = decimals > 0 ? to.toFixed(decimals) : Math.round(to).toLocaleString();
   return (
-    <span ref={ref} className={className} aria-label={`${prefix}${finalDisplay}${suffix}`}>
-      <span aria-hidden="true">
-        {prefix}
-        {display}
-        {suffix}
-      </span>
+    <span ref={ref} className={className}>
+      {prefix}
+      {display}
+      {suffix}
     </span>
   );
 }

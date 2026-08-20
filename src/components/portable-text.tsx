@@ -10,17 +10,25 @@ const components: PortableTextComponents = {
         <figure className="my-6">
           <img src={src} alt={value?.alt ?? ""} loading="lazy" className="w-full rounded-md" />
           {value?.alt ? (
-            <figcaption className="mt-2 text-center text-xs text-muted-foreground">{value.alt}</figcaption>
+            <figcaption className="mt-2 text-center text-xs text-muted-foreground">
+              {value.alt}
+            </figcaption>
           ) : null}
         </figure>
       );
     },
   },
   block: {
-    h2: ({ children }) => <h2 className="mt-10 font-serif text-2xl text-navy md:text-3xl">{children}</h2>,
-    h3: ({ children }) => <h3 className="mt-8 font-serif text-xl text-navy md:text-2xl">{children}</h3>,
+    h2: ({ children }) => (
+      <h2 className="mt-10 font-serif text-2xl text-navy md:text-3xl">{children}</h2>
+    ),
+    h3: ({ children }) => (
+      <h3 className="mt-8 font-serif text-xl text-navy md:text-2xl">{children}</h3>
+    ),
     blockquote: ({ children }) => (
-      <blockquote className="my-6 border-l-4 border-brand pl-4 italic text-navy/80">{children}</blockquote>
+      <blockquote className="my-6 border-l-4 border-brand pl-4 italic text-navy/80">
+        {children}
+      </blockquote>
     ),
   },
   marks: {

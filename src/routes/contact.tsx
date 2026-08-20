@@ -230,7 +230,12 @@ function Contact() {
                 body: COMPANY.email,
                 action: { href: mailtoLink(), label: "Compose email" },
               },
-              { icon: Clock, title: "Hours", body: "Mon–Sat · 10:00 – 19:00 (UK)", action: null },
+              {
+                icon: Clock,
+                title: "Hours",
+                body: "Monday–Friday · 10:00–18:30\nSaturday–Sunday · Closed\nUK time",
+                action: null,
+              },
             ].map((c) => (
               <div key={c.title} className="rounded border hairline bg-card p-5">
                 <div className="flex items-start gap-4">

@@ -4,7 +4,7 @@
 // need a separate compile step. Since content files are plain data exports, we
 // use tsx-like dynamic import via the bundled runtime.
 
-import { writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, resolve } from "node:path";
 
@@ -37,12 +37,22 @@ const xmlEscape = (s) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&apos;");
 
-const today = new Date().toISOString().split("T")[0];
 const universitySlug = (name) =>
   name
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+
+function loadExistingUniversitySlugs() {
+  try {
+    const sitemap = readFileSync(resolve(root, "public/sitemap.xml"), "utf8");
+    return [...sitemap.matchAll(/<loc>[^<]*\/university\/([^<]+)<\/loc>/g)].map(([, slug]) => ({
+      slug: decodeURIComponent(slug),
+    }));
+  } catch {
+    return [];
+  }
+}
 
 async function loadCmsUniversitySlugs() {
   const projectId = process.env.VITE_SANITY_PROJECT_ID;
@@ -58,8 +68,11 @@ async function loadCmsUniversitySlugs() {
     const payload = await response.json();
     return Array.isArray(payload.result) ? payload.result : [];
   } catch (error) {
-    console.warn(`⚠ CMS university sitemap fetch failed; using static fallback only: ${error}`);
-    return [];
+    const existingUniversities = loadExistingUniversitySlugs();
+    console.warn(
+      `⚠ CMS university sitemap fetch failed; preserving ${existingUniversities.length} existing university URLs: ${error}`,
+    );
+    return existingUniversities;
   }
 }
 
@@ -127,7 +140,7 @@ async function main() {
     [
       `  <url>`,
       `    <loc>${BASE_URL}${e.path}</loc>`,
-      `    <lastmod>${e.lastmod || today}</lastmod>`,
+      e.lastmod ? `    <lastmod>${e.lastmod}</lastmod>` : null,
       e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
       e.priority ? `    <priority>${e.priority}</priority>` : null,
       ...(e.images ?? []).flatMap((img) => [

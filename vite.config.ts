@@ -5,6 +5,7 @@
 //     error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+import { readFileSync } from "node:fs";
 import { BLOGS } from "./src/content/blogs";
 import { DESTINATIONS } from "./src/content/destinations";
 import { SERVICES } from "./src/content/company";
@@ -16,29 +17,47 @@ const universitySlug = (name: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
+function loadSitemapUniversityRoutes(): string[] {
+  try {
+    const sitemap = readFileSync(new URL("./public/sitemap.xml", import.meta.url), "utf8");
+    return [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)]
+      .map(([, loc]) => new URL(loc).pathname)
+      .filter((path) => path.startsWith("/university/"));
+  } catch {
+    return [];
+  }
+}
+
+const sitemapUniversityRoutes = loadSitemapUniversityRoutes();
+
 // Fully static prerender routes for Cloudflare Pages.
+// `prebuild` refreshes sitemap.xml from Sanity before Vite loads this config,
+// so CMS-only university pages receive their own HTML instead of the SPA shell.
 const staticRoutes = [
-  "/",
-  "/about",
-  "/services",
-  "/destinations",
-  "/scholarships",
-  "/blogs",
-  "/partner-universities",
-  "/partners/stonebridge",
-  "/testimonials",
-  "/faq",
-  "/contact",
-  "/privacy",
-  "/terms",
-  "/style-guide",
-  "/settings/sanity",
-  ...SERVICES.map((s) => `/service/${s.slug}`),
-  ...DESTINATIONS.map((d) => `/destination/${d.slug}`),
-  ...BLOGS.map((b) => `/blog/${b.slug}`),
-  ...UNIVERSITY_PARTNERS.flatMap((country) =>
-    country.universities.map((university) => `/university/${universitySlug(university.name)}`),
-  ),
+  ...new Set([
+    "/",
+    "/about",
+    "/services",
+    "/destinations",
+    "/scholarships",
+    "/blogs",
+    "/partner-universities",
+    "/partners/stonebridge",
+    "/testimonials",
+    "/faq",
+    "/contact",
+    "/privacy",
+    "/terms",
+    "/style-guide",
+    "/settings/sanity",
+    ...SERVICES.map((s) => `/service/${s.slug}`),
+    ...DESTINATIONS.map((d) => `/destination/${d.slug}`),
+    ...BLOGS.map((b) => `/blog/${b.slug}`),
+    ...UNIVERSITY_PARTNERS.flatMap((country) =>
+      country.universities.map((university) => `/university/${universitySlug(university.name)}`),
+    ),
+    ...sitemapUniversityRoutes,
+  ]),
 ];
 
 export default defineConfig({
@@ -62,7 +81,7 @@ export default defineConfig({
   },
   vite: {
     environments: {
-      client: { build: { outDir: ".output/public" } },
+      client: { build: { outDir: ".output/public", sourcemap: true } },
       ssr: { build: { outDir: ".output/server" } },
     },
   },

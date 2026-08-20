@@ -9,6 +9,23 @@ import {
   type University,
   type UniversityCountry,
 } from "@/content/universities";
+import {
+  findStaticUniversityBySlug,
+  slugifyUniversityName,
+  type RelatedUniversity,
+  type UniversityDetail,
+} from "./university-static";
+
+export {
+  findStaticRelatedUniversities,
+  findStaticUniversityBySlug,
+  slugifyUniversityName,
+} from "./university-static";
+export type {
+  RelatedUniversity,
+  UniversityAdmissions,
+  UniversityDetail,
+} from "./university-static";
 
 // ---------- Blog ----------
 
@@ -272,45 +289,6 @@ const UNIVERSITY_DETAIL_QUERY = /* groq */ `
   }
 `;
 
-export type UniversityAdmissions = {
-  ielts?: string;
-  toefl?: string;
-  pte?: string;
-  duolingo?: string;
-  gpa?: string;
-  gre?: string;
-  gmat?: string;
-  sat?: string;
-  applicationFee?: string;
-  deadlineFall?: string;
-  deadlineSpring?: string;
-  requiredDocuments?: string[];
-  notes?: string;
-};
-
-export type UniversityDetail = {
-  slug: string;
-  name: string;
-  city?: string;
-  domain?: string;
-  website?: string;
-  speciality?: string;
-  highlights?: string[];
-  ranking?: string;
-  tuitionRange?: string;
-  programs?: string[];
-  intakes?: string[];
-  scholarshipsAvailable?: boolean;
-  applicationSupportNote?: boolean;
-  description?: unknown; // Portable Text
-  applyLink?: string;
-  logo?: unknown;
-  coverImage?: unknown;
-  admissions?: UniversityAdmissions;
-  seo?: { title?: string; description?: string; ogImage?: unknown; noIndex?: boolean };
-  country?: { _id?: string; country: string; slug: string; flag?: string; blurb?: string };
-};
-
 export async function fetchUniversityBySlug(slug: string): Promise<UniversityDetail | null> {
   const res = await fetchUniversityBySlugResult(slug);
   return res.status === "ok" ? res.data : null;
@@ -321,9 +299,11 @@ export async function fetchUniversityBySlugResult(
 ): Promise<SanityResult<UniversityDetail>> {
   if (!sanityConfigured || !sanityClient) return { status: "skipped" };
   try {
-    const row = await sanityClient.fetch<UniversityDetail | null>(UNIVERSITY_DETAIL_QUERY, {
-      slug,
-    });
+    const row = await sanityClient.fetch<UniversityDetail | null>(
+      UNIVERSITY_DETAIL_QUERY,
+      { slug },
+      { timeout: 8_000 },
+    );
     if (!row) return { status: "skipped" };
     const fallback = findStaticUniversityBySlug(slug);
     return {
@@ -377,19 +357,6 @@ const RELATED_UNIVERSITIES_QUERY = /* groq */ `
   }
 `;
 
-export type RelatedUniversity = {
-  slug: string;
-  name: string;
-  city?: string;
-  speciality?: string;
-  ranking?: string;
-  tuitionRange?: string;
-  logo?: unknown;
-  coverImage?: unknown;
-  applicationSupportNote?: boolean;
-  country?: { country: string; slug: string; flag?: string };
-};
-
 export async function fetchRelatedUniversitiesResult(args: {
   slug: string;
   countryId?: string | null;
@@ -410,63 +377,4 @@ export async function fetchRelatedUniversitiesResult(args: {
     console.error("[sanity] fetchRelatedUniversities failed", err);
     return { status: "error", error: err instanceof Error ? err.message : "Unknown error" };
   }
-}
-
-// Static fallback: same-country universities from the seeded partner list.
-export function findStaticRelatedUniversities(
-  slug: string,
-  countrySlug: string | undefined,
-  limit = 3,
-): RelatedUniversity[] {
-  if (!countrySlug) return [];
-  const country = UNIVERSITY_PARTNERS.find((c) => c.slug === countrySlug);
-  if (!country) return [];
-  return country.universities
-    .filter((u) => slugifyUniversityName(u.name) !== slug)
-    .slice(0, limit)
-    .map((u) => ({
-      slug: slugifyUniversityName(u.name),
-      name: u.name,
-      city: u.city,
-      speciality: u.speciality,
-      applicationSupportNote: u.applicationSupportNote,
-      country: { country: country.country, slug: country.slug, flag: country.flag },
-    }));
-}
-
-// Deterministic slug used across static + Sanity content. Matches Sanity's
-// default `slugify` behaviour closely enough for our seeded dataset.
-export function slugifyUniversityName(name: string): string {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-// Build a minimal UniversityDetail from the static partner list so the
-// detail page has something meaningful to render when Sanity is unreachable.
-export function findStaticUniversityBySlug(slug: string): UniversityDetail | null {
-  for (const c of UNIVERSITY_PARTNERS) {
-    for (const u of c.universities) {
-      if (slugifyUniversityName(u.name) === slug) {
-        return {
-          slug,
-          name: u.name,
-          city: u.city,
-          domain: u.domain,
-          website: u.website,
-          speciality: u.speciality,
-          highlights: u.highlights,
-          applicationSupportNote: u.applicationSupportNote,
-          country: {
-            country: c.country,
-            slug: c.slug,
-            flag: c.flag,
-            blurb: c.blurb,
-          },
-        };
-      }
-    }
-  }
-  return null;
 }

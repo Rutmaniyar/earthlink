@@ -23,33 +23,46 @@ export default function InfoBadge({
   const [open, setOpen] = useState(false);
   const btnRef = useRef<HTMLButtonElement>(null);
   const popRef = useRef<HTMLDivElement>(null);
-  const [pos, setPos] = useState<{ top: number; left: number; placement: "below" | "above" } | null>(null);
-
-  const reposition = () => {
-    const btn = btnRef.current;
-    if (!btn) return;
-    const r = btn.getBoundingClientRect();
-    const popW = 288; // w-72
-    const popH = popRef.current?.offsetHeight ?? 180;
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const spaceBelow = vh - r.bottom;
-    const placement: "below" | "above" = spaceBelow < popH + 16 ? "above" : "below";
-    let left = r.right - popW; // align right edges
-    left = Math.max(8, Math.min(left, vw - popW - 8));
-    const top = placement === "below" ? r.bottom + 8 : r.top - popH - 8;
-    setPos({ top, left, placement });
-  };
+  const [pos, setPos] = useState<{
+    top: number;
+    left: number;
+    placement: "below" | "above";
+  } | null>(null);
 
   useLayoutEffect(() => {
-    if (!open) { setPos(null); return; }
+    if (!open) {
+      setPos(null);
+      return;
+    }
+
+    let repositionFrame = 0;
+    const reposition = () => {
+      const btn = btnRef.current;
+      if (!btn) return;
+      const r = btn.getBoundingClientRect();
+      const popW = 288; // w-72
+      const popH = popRef.current?.offsetHeight ?? 180;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const spaceBelow = vh - r.bottom;
+      const placement: "below" | "above" = spaceBelow < popH + 16 ? "above" : "below";
+      let left = r.right - popW; // align right edges
+      left = Math.max(8, Math.min(left, vw - popW - 8));
+      const top = placement === "below" ? r.bottom + 8 : r.top - popH - 8;
+      setPos({ top, left, placement });
+    };
+    const scheduleReposition = () => {
+      cancelAnimationFrame(repositionFrame);
+      repositionFrame = requestAnimationFrame(reposition);
+    };
+
     reposition();
-    const onScroll = () => reposition();
-    window.addEventListener("scroll", onScroll, true);
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("scroll", scheduleReposition, true);
+    window.addEventListener("resize", scheduleReposition);
     return () => {
-      window.removeEventListener("scroll", onScroll, true);
-      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(repositionFrame);
+      window.removeEventListener("scroll", scheduleReposition, true);
+      window.removeEventListener("resize", scheduleReposition);
     };
   }, [open]);
 
@@ -61,7 +74,9 @@ export default function InfoBadge({
       if (popRef.current?.contains(t)) return;
       setOpen(false);
     };
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
     document.addEventListener("mousedown", onDown);
     document.addEventListener("keydown", onKey);
     return () => {
@@ -70,14 +85,19 @@ export default function InfoBadge({
     };
   }, [open]);
 
-  const stop = (e: React.SyntheticEvent) => { e.stopPropagation(); e.preventDefault(); };
+  const stop = (e: React.SyntheticEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+  };
 
-  const popTone = tone === "dark"
-    ? "border-border bg-navy-deep/95 text-foreground"
-    : "border-border bg-card text-navy";
-  const btnTone = tone === "dark"
-    ? "border-border bg-navy-deep/70 text-foreground/85 hover:border-gold hover:text-gold"
-    : "border-border bg-paper/95 text-navy/70 hover:border-brand hover:text-brand";
+  const popTone =
+    tone === "dark"
+      ? "border-border bg-navy-deep/95 text-foreground"
+      : "border-border bg-card text-navy";
+  const btnTone =
+    tone === "dark"
+      ? "border-border bg-navy-deep/70 text-foreground/85 hover:border-gold hover:text-gold"
+      : "border-border bg-paper/95 text-navy/70 hover:border-brand hover:text-brand";
 
   return (
     <>
@@ -86,7 +106,10 @@ export default function InfoBadge({
         type="button"
         aria-label={`More about ${title}`}
         aria-expanded={open}
-        onClick={(e) => { stop(e); setOpen((o) => !o); }}
+        onClick={(e) => {
+          stop(e);
+          setOpen((o) => !o);
+        }}
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={(e) => {
           // keep open if moving into popover
@@ -112,19 +135,26 @@ export default function InfoBadge({
           className={`z-50 rounded-xl border p-4 shadow-2xl backdrop-blur ${popTone} animate-fade-in`}
         >
           <div className="flex items-start justify-between gap-3">
-            <p className={`text-[10px] font-semibold uppercase tracking-[0.22em] ${tone === "dark" ? "text-gold-glow" : "text-brand"}`}>
+            <p
+              className={`text-[10px] font-semibold uppercase tracking-[0.22em] ${tone === "dark" ? "text-gold-glow" : "text-brand"}`}
+            >
               {title}
             </p>
             <button
               type="button"
               aria-label="Close"
-              onClick={(e) => { stop(e); setOpen(false); }}
+              onClick={(e) => {
+                stop(e);
+                setOpen(false);
+              }}
               className="opacity-60 hover:opacity-100"
             >
               <X className="h-3.5 w-3.5" />
             </button>
           </div>
-          <div className={`mt-2 text-xs leading-relaxed ${tone === "dark" ? "text-foreground/85" : "text-muted-foreground"}`}>
+          <div
+            className={`mt-2 text-xs leading-relaxed ${tone === "dark" ? "text-foreground/85" : "text-muted-foreground"}`}
+          >
             {children}
           </div>
           {cta && (

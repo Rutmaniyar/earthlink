@@ -3,8 +3,14 @@ import { MessageCircle, X } from "lucide-react";
 import { whatsappLink } from "@/lib/lead";
 
 const STEPS = [
-  { q: "Hi! What's your goal?", options: ["Study abroad", "Work / recruitment", "Visit visa", "University admission"] },
-  { q: "Got a destination in mind?", options: ["UK", "USA", "Canada", "Australia", "Not sure yet"] },
+  {
+    q: "Hi! What's your goal?",
+    options: ["Study abroad", "Work / recruitment", "Visit visa", "University admission"],
+  },
+  {
+    q: "Got a destination in mind?",
+    options: ["UK", "USA", "Canada", "Australia", "Not sure yet"],
+  },
   { q: "Ready to chat with an adviser?", options: ["Yes, open WhatsApp"] },
 ];
 
@@ -18,11 +24,14 @@ export function WhatsAppFab() {
     setAnswers(next);
     if (step === STEPS.length - 1) {
       window.open(
-        whatsappLink({
-          service: next[0],
-          country: next[1],
-          message: "Hi Earthlink, I'd like to book a free consultation.",
-        }, "WhatsApp widget"),
+        whatsappLink(
+          {
+            service: next[0],
+            country: next[1],
+            message: "Hi Earthlink, I'd like to book a free consultation.",
+          },
+          "WhatsApp widget",
+        ),
         "_blank",
         "noopener",
       );
@@ -47,7 +56,9 @@ export function WhatsAppFab() {
               aria-label="Close adviser chat"
               onClick={() => setOpen(false)}
               className="rounded-sm p-1 text-foreground/85 transition-colors hover:bg-background/50 hover:text-foreground active:bg-background/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            ><X className="h-4 w-4" /></button>
+            >
+              <X className="h-4 w-4" />
+            </button>
           </div>
           <div className="p-4">
             <p className="text-sm text-navy">{STEPS[step].q}</p>
@@ -62,7 +73,9 @@ export function WhatsAppFab() {
                 </button>
               ))}
             </div>
-            <p className="mt-4 text-xs text-muted-foreground">No data is stored. You'll continue on WhatsApp.</p>
+            <p className="mt-4 text-xs text-muted-foreground">
+              No data is stored. You'll continue on WhatsApp.
+            </p>
           </div>
         </div>
       )}

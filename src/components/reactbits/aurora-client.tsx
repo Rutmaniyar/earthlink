@@ -10,11 +10,37 @@ export function AuroraClient(props: {
   speed?: number;
   className?: string;
 }) {
-  const [mounted, setMounted] = useState(false);
+  const [ready, setReady] = useState(false);
   const reduced = usePrefersReducedMotion();
+
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (reduced) return;
+
+    let idleId: number | undefined;
+    let timerId: number | undefined;
+    let cancelled = false;
+
+    const activate = () => {
+      if (!cancelled) setReady(true);
+    };
+    const schedule = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(activate, { timeout: 2500 });
+      } else {
+        timerId = window.setTimeout(activate, 800);
+      }
+    };
+
+    if (document.readyState === "complete") schedule();
+    else window.addEventListener("load", schedule, { once: true });
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("load", schedule);
+      if (idleId !== undefined) window.cancelIdleCallback(idleId);
+      if (timerId !== undefined) window.clearTimeout(timerId);
+    };
+  }, [reduced]);
 
   const stops = (props.colorStops ?? ["#3A29FF", "#FF94B4", "#FF3232"]).join(", ");
   const fallbackStyle = {
@@ -23,11 +49,9 @@ export function AuroraClient(props: {
   };
   const fallback = <div className={props.className} style={fallbackStyle} aria-hidden="true" />;
 
-  if (!mounted) return fallback;
-
   // Reduced-motion fallback: render a static linear-gradient using the same
   // color stops so the visual identity stays intact without WebGL motion.
-  if (reduced) {
+  if (reduced || !ready) {
     return fallback;
   }
 

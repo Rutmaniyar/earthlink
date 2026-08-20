@@ -83,8 +83,8 @@ export function SanityCorsHelp({ className = "" }: { className?: string }) {
         </li>
         <li>
           <span className="font-medium">2.</span> Under <em>CORS origins</em>, click{" "}
-          <em>Add CORS origin</em> and paste each entry below. Leave{" "}
-          <em>Allow credentials</em> off (public CDN, no token).
+          <em>Add CORS origin</em> and paste each entry below. Leave <em>Allow credentials</em> off
+          (public CDN, no token).
         </li>
         <li>
           <span className="font-medium">3.</span> Save, then refresh this app.
@@ -106,8 +106,8 @@ export function SanityCorsHelp({ className = "" }: { className?: string }) {
       </ul>
 
       <p className="mt-4 text-xs text-muted-foreground">
-        Symptom of a missing origin: the CMS banner says{" "}
-        <em>“Couldn't reach the CMS”</em> and the browser console logs a CORS error against{" "}
+        Symptom of a missing origin: the CMS banner says <em>“Couldn't reach the CMS”</em> and the
+        browser console logs a CORS error against{" "}
         <code className="rounded bg-secondary/60 px-1 py-0.5 text-[11px]">{cdnHost}</code>.
       </p>
     </section>

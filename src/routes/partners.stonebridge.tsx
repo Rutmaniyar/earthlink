@@ -68,12 +68,16 @@ export const Route = createFileRoute("/partners/stonebridge")({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: absUrl("/") },
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: { "@id": absUrl("/") },
+            },
             {
               "@type": "ListItem",
               position: 2,
               name: "UK visa services by Stonebridge",
-              item: absUrl("/partners/stonebridge"),
             },
           ],
         }),
