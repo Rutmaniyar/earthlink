@@ -601,7 +601,7 @@ function Home() {
               return (
                 <FlipCard
                   key={d.slug}
-                  height="h-72"
+                  minHeight="min-h-72"
                   front={
                     <div className="relative h-full w-full">
                       <img

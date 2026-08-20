@@ -152,7 +152,7 @@ function FaviconLogo({ uni, initials }: { uni: University; initials: string }) {
 function UniversityCard({ uni }: { uni: University }) {
   return (
     <FlipCard
-      height="h-72"
+      minHeight="min-h-72"
       front={
         <div className="relative flex h-full w-full flex-col items-center justify-center gap-4 bg-gradient-to-br from-paper to-secondary/40 p-6 text-center hairline border">
           <LogoImg uni={uni} />
