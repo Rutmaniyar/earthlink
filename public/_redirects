@@ -1,0 +1,15 @@
+# Permanent redirects for high-confidence legacy WordPress destinations.
+# Paths with no close replacement intentionally fall through to the real 404 page.
+/study-in-uk-old/ /destination/uk 301
+/study-in-uk/ /destination/uk 301
+/study-in-usa-diff/ /destination/usa 301
+/study-in-canada/ /destination/canada 301
+/study-in-canada-2/ /destination/canada 301
+/study-in-australia/ /destination/australia 301
+/study-in-ireland/ /destination/ireland 301
+/study-in-maltadef/ /destination/malta 301
+/study-in-poland/ /destination/europe 301
+/study-in-slovakia/ /destination/europe 301
+/study-in-czech-republic/ /destination/europe 301
+/study-in-germany/ /destination/europe 301
+/testimonials/ /testimonials 301

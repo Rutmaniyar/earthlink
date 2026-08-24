@@ -184,14 +184,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             name: COMPANY.name,
             url: homeUrl,
             publisher: { "@id": organizationId },
-            potentialAction: {
-              "@type": "SearchAction",
-              target: {
-                "@type": "EntryPoint",
-                urlTemplate: `${absUrl("/blogs")}?q={search_term_string}`,
-              },
-              "query-input": "required name=search_term_string",
-            },
           }),
         },
       ],

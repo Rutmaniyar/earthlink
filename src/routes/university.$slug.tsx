@@ -236,6 +236,45 @@ function UniversitySkeleton() {
   );
 }
 
+function UniversityOverview({ university }: { university: UniversityDetail }) {
+  const location = [university.city, university.country?.country].filter(Boolean).join(", ");
+  const highlights = university.highlights?.filter(Boolean) ?? [];
+
+  return (
+    <section>
+      <h2 className="font-serif text-2xl text-navy">About {university.name}</h2>
+      <div className="prose mt-4 max-w-none space-y-4 text-base leading-relaxed text-navy/90">
+        <p>
+          {university.name}
+          {location
+            ? ` is based in ${location}`
+            : " is included in Earthlink's university directory"}
+          .
+          {university.speciality
+            ? ` Applicants commonly explore the institution for ${university.speciality}.`
+            : " Applicants can explore its current study options through the university's official information."}{" "}
+          Course availability, entry criteria and start dates can vary by programme, qualification
+          level and applicant background, so current details should always be confirmed before an
+          application is prepared.
+        </p>
+        {highlights.length > 0 && (
+          <p>
+            Directory highlights for {university.name} include {highlights.join(", ")}. These points
+            are a starting place for comparison rather than a substitute for the university's
+            current course pages, admissions policies or offer conditions.
+          </p>
+        )}
+        <p>
+          Earthlink can help applicants compare suitable courses, organise supporting documents and
+          understand the application steps for {university.name}. Final admissions decisions, entry
+          requirements, tuition fees and deadlines are set by the university. Applicants should use
+          the official website for the latest institutional information before making a decision.
+        </p>
+      </div>
+    </section>
+  );
+}
+
 function UniversityDetailPage() {
   const { slug } = Route.useParams();
   const { fallback, cms } = Route.useLoaderData() as {
@@ -491,7 +530,9 @@ function UniversityDetailPage() {
                 <PortableBody value={uni.description} />
               </div>
             </section>
-          ) : null}
+          ) : (
+            <UniversityOverview university={uni} />
+          )}
 
           {/* Highlights */}
           {uni.highlights && uni.highlights.length > 0 && (
@@ -605,19 +646,41 @@ function UniversityDetailPage() {
                 )}
               </section>
             ) : (
-              <p className="text-sm text-muted-foreground">
-                Admissions requirements will be published soon. In the meantime,{" "}
+              <section aria-labelledby="application-planning-heading">
+                <h2
+                  id="application-planning-heading"
+                  className="flex items-center gap-2 font-serif text-xl text-navy"
+                >
+                  <FileText className="h-5 w-5 text-brand" /> Application planning
+                </h2>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  Requirements for {uni.name} differ by course and intake. Before applying, confirm
+                  the exact academic, English-language and document requirements on the official
+                  course page.
+                </p>
+                <ol className="mt-4 space-y-3 text-sm text-foreground/85">
+                  <li className="rounded-md border hairline bg-paper p-3">
+                    1. Choose the course and intended intake.
+                  </li>
+                  <li className="rounded-md border hairline bg-paper p-3">
+                    2. Check entry criteria, fees and the application deadline.
+                  </li>
+                  <li className="rounded-md border hairline bg-paper p-3">
+                    3. Prepare transcripts, references and English-language evidence where required.
+                  </li>
+                </ol>
                 <a
                   href={whatsappLink(
-                    { message: `Please share the admissions requirements for ${uni.name}.` },
+                    {
+                      message: `Please help me check the application requirements for ${uni.name}.`,
+                    },
                     `University detail: ${uni.name}`,
                   )}
-                  className="text-brand hover:text-gold"
+                  className="mt-4 inline-flex text-sm text-brand hover:text-gold"
                 >
-                  ask us on WhatsApp
+                  Ask Earthlink about application support
                 </a>
-                .
-              </p>
+              </section>
             )}
           </div>
         </aside>
