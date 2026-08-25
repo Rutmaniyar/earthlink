@@ -132,7 +132,7 @@ export const UNIVERSITY_PARTNERS: UniversityCountry[] = [
         domain: "gla.ac.uk",
         city: "Glasgow",
         speciality: "Computing Science & Life Sciences",
-        highlights: ["Russell Group", "Est. 1451", "£1bn campus investment"],
+        highlights: ["Russell Group", "Est. 1451", "Major campus investment"],
         website: "https://www.gla.ac.uk",
       },
       {

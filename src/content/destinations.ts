@@ -1,3 +1,10 @@
+import { CONTENT_REVIEW_NOTICE, COUNTRY_SOURCES, type SourceRef } from "./authority";
+
+export type BudgetCategory = {
+  title: string;
+  guidance: string;
+};
+
 export type Destination = {
   slug: string;
   name: string;
@@ -11,12 +18,21 @@ export type Destination = {
   documents: string[];
   intakes: string[];
   courses: string[];
-  costs: { tuition: string; living: string; visa: string };
+  budget: BudgetCategory[];
   workRights: string;
   scholarships: string[];
   faqs: { q: string; a: string }[];
   landmark: string; // for 3D scene
-  source?: { title: string; version: string; href?: string };
+  directAnswer?: string;
+  applicantFit?: string[];
+  programmeChecks?: string[];
+  applicationRoute?: string[];
+  nationalityNotes?: { title: string; body: string }[];
+  sources?: SourceRef[];
+  relatedDestinations?: string[];
+  relatedGuides?: string[];
+  reviewedAt?: string;
+  reviewNotice?: string;
 };
 
 const heroFor = (kw: string) =>
@@ -41,11 +57,11 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         title: "One-year Masters",
-        body: "Most taught Masters finish in 12 months — half the tuition of equivalent US programmes.",
+        body: "Many taught Masters follow an intensive one-year format. Compare workload, placement options, assessment, and progression before choosing.",
       },
       {
         title: "Globally ranked",
-        body: "Four of the world's top ten universities and over 150 institutions with strong international placement.",
+        body: "The UK has a broad mix of research-intensive, specialist, modern, and pathway institutions. Compare the exact subject and course, not overall rank alone.",
       },
       {
         title: "Direct UK office support",
@@ -53,7 +69,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         title: "Pathways for every profile",
-        body: "Foundation, top-up, PG Diploma, and direct entry — we'll pick the route your transcript actually qualifies for.",
+        body: "Foundation, top-up, postgraduate diploma, and direct-entry routes can fit different academic backgrounds. We check the actual entry rules before shortlisting.",
       },
     ],
     education:
@@ -78,12 +94,56 @@ export const DESTINATIONS: Destination[] = [
       "Hospitality & Tourism Management",
       "Creative Arts & Architecture",
     ],
-    costs: {
-      tuition: "£12,000 – £28,000 per year",
-      living:
-        "Up to £10,539 outside London or £13,761 in London under the Student visa maintenance rule",
-      visa: "£558 application fee + Immigration Health Surcharge",
-    },
+    budget: [
+      {
+        title: "Tuition and course charges",
+        guidance:
+          "Compare the current university fee page, deposit terms, and any placement or laboratory charges for each offer.",
+      },
+      {
+        title: "Living and travel",
+        guidance:
+          "Plan for accommodation, household bills, food, local travel, study materials, and arrival costs in the city you choose.",
+      },
+      {
+        title: "Immigration and health",
+        guidance:
+          "Check the live GOV.UK pages for the current visa charge, health surcharge, and financial-evidence requirement.",
+      },
+    ],
+    directAnswer:
+      "The UK can suit applicants who want a wide course choice, intensive postgraduate study, and a clearly documented university application route. Course entry, Student visa conditions, dependant rules, and post-study options must be checked against the live rules for your circumstances.",
+    applicantFit: [
+      "Applicants who can explain why a specific course supports a credible academic or career plan",
+      "Students comparing intensive taught Masters, research degrees, foundation routes, or placement options",
+      "Applicants prepared to verify course entry, English evidence, finances, and immigration conditions before accepting an offer",
+    ],
+    programmeChecks: [
+      "Confirm the awarding university, campus, course level, modules, assessment, and delivery mode",
+      "Check entry and English-language requirements on the exact course page",
+      "Review placement wording, professional accreditation, and any subject-specific clearance requirements",
+    ],
+    applicationRoute: [
+      "Choose the course and confirm the university's application route",
+      "Prepare academic, English-language, reference, and purpose documents",
+      "Accept the offer only after checking conditions, deposits, and refund terms",
+      "Use the CAS and current GOV.UK guidance for the Student visa stage",
+    ],
+    nationalityNotes: [
+      {
+        title: "Nationality and residence checks",
+        body: "English evidence, tuberculosis testing, document format, and application location can differ by nationality or residence. Check the current GOV.UK route and use Stonebridge for UK immigration advice.",
+      },
+    ],
+    sources: [COUNTRY_SOURCES.ukStudentVisa, COUNTRY_SOURCES.ukGraduateVisa],
+    relatedDestinations: ["ireland", "malta", "germany", "france"],
+    relatedGuides: [
+      "cost-of-living-uk-cities",
+      "part-time-work-uk-students",
+      "uk-graduate-route-2026",
+    ],
+    reviewedAt: "2026-08-25",
+    reviewNotice: CONTENT_REVIEW_NOTICE,
     workRights:
       "Published Student-route conditions commonly permit limited term-time work and more during official vacations. Stonebridge alone confirms individual conditions and handles UK immigration matters.",
     scholarships: [
@@ -134,21 +194,22 @@ export const DESTINATIONS: Destination[] = [
   {
     slug: "usa",
     name: "United States",
-    short: "Research depth, generous funding, the deepest job market in the world.",
+    short:
+      "Broad programme choice, major research networks, and a structured F-1 study route that must be checked course by course.",
     eyebrow: "Study in the",
     headline: "United States",
     intro:
-      "STEM-OPT, research assistantships, and the broadest course catalogue on the planet. We handle profile shortlisting, SOP, and the F1 interview prep that actually matters.",
+      "The United States offers broad programme choice, flexible curricula, and major research networks. Earthlink helps applicants research accredited institutions, prepare applications, and organise F-1 interview preparation.",
     heroImage: heroFor("1485871981521-5b1fd3805eee"),
     landmark: "liberty",
     whyStudy: [
       {
-        title: "STEM OPT — 3 years",
-        body: "Twelve months OPT plus a 24-month STEM extension means three years of legal work post-degree.",
+        title: "Practical training pathways",
+        body: "Eligible students may use curriculum-related or post-completion practical training. The programme, school record, authorisation, and current DHS rules all matter.",
       },
       {
         title: "Assistantships & funding",
-        body: "RA/TA positions can cover tuition plus a stipend — common at the PhD level and selective at Masters.",
+        body: "Research and teaching assistantships exist, especially in research-led programmes. Availability, duties, eligibility, and funding terms vary by department.",
       },
       {
         title: "Course flexibility",
@@ -156,11 +217,11 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         title: "Research output",
-        body: "More patents, more publications, more lab funding than any other study destination.",
+        body: "Research strength varies by institution, department, laboratory, and supervisor. Compare current projects, facilities, funding terms, and student outcomes.",
       },
     ],
     education:
-      "Four-year Bachelors, two-year Masters (mostly), PhDs of 4–6 years. Credit system means part-time and acceleration are both possible.",
+      "US institutions use a credit-based system with different undergraduate, graduate, and research structures. Programme length, transfer credit, full-time status, and practical-training eligibility must be checked course by course.",
     documents: [
       "Transcripts (WES evaluation if asked)",
       "GRE / GMAT (subject-dependent)",
@@ -180,13 +241,54 @@ export const DESTINATIONS: Destination[] = [
       "Public Health",
       "Finance & Quant",
     ],
-    costs: {
-      tuition: "$18,000 – $58,000 per year",
-      living: "$12,000 – $20,000 per year",
-      visa: "$185 + $350 SEVIS",
-    },
+    budget: [
+      {
+        title: "University charges",
+        guidance:
+          "Use each institution's current cost-of-attendance page and separate tuition, mandatory fees, insurance, and course materials.",
+      },
+      {
+        title: "Living and travel",
+        guidance:
+          "Budget by campus location for housing, food, local transport, health cover, books, and travel to the United States.",
+      },
+      {
+        title: "Visa and SEVIS",
+        guidance:
+          "Check the live Department of State and DHS pages before paying or preparing financial evidence.",
+      },
+    ],
+    directAnswer:
+      "The USA can suit applicants who want a broad accredited-institution choice, course flexibility, research access, and a campus-based academic experience. The right decision depends on accreditation, programme fit, the institution's current cost of attendance, and the F-1 requirements for your case.",
+    applicantFit: [
+      "Applicants ready to compare institutional accreditation, programme outcomes, curriculum, and campus location",
+      "Students who can explain a coherent academic plan and how the chosen programme fits it",
+      "Applicants prepared to document their education and funding plan consistently across the I-20 and visa process",
+    ],
+    programmeChecks: [
+      "Confirm institutional accreditation and the exact degree, campus, delivery mode, and start term",
+      "Check prerequisites, testing policy, transfer-credit rules, and assistantship conditions on the programme page",
+      "Ask the designated school official how the programme is recorded for practical-training purposes",
+    ],
+    applicationRoute: [
+      "Research accredited institutions and build an academic and financial shortlist",
+      "Submit the institution-specific application and required academic evidence",
+      "After admission, review the I-20 carefully and follow the official SEVIS and visa steps",
+      "Prepare for the interview using consistent, truthful answers and current official guidance",
+    ],
+    nationalityNotes: [
+      {
+        title: "Consular process",
+        body: "Appointment availability, document handling, and local instructions can differ by embassy or consulate. Use the official page for the place where you will apply.",
+      },
+    ],
+    sources: [COUNTRY_SOURCES.usaEducation, COUNTRY_SOURCES.usaVisa, COUNTRY_SOURCES.usaWork],
+    relatedDestinations: ["uk", "canada", "germany", "france"],
+    relatedGuides: ["study-in-usa-complete-guide"],
+    reviewedAt: "2026-08-25",
+    reviewNotice: CONTENT_REVIEW_NOTICE,
     workRights:
-      "On-campus 20 hrs/week from day one. CPT during studies, OPT for 12 months after, plus 24-month STEM extension.",
+      "F-1 employment is controlled by the student's status, school record, work type, timing, and authorisation. Do not start work or practical training based on a general summary; confirm the current DHS rules and speak to the designated school official.",
     scholarships: [
       "Fulbright (foreign students)",
       "University assistantships",
@@ -196,7 +298,7 @@ export const DESTINATIONS: Destination[] = [
     faqs: [
       {
         q: "Do I need the GRE for a US Masters in 2026?",
-        a: "Many top-tier universities have permanently waived the GRE for Masters programmes in CS, DS, and Analytics. We confirm waiver status per programme before you spend $220 on the exam.",
+        a: "Testing policies vary by programme and intake. We confirm the current GRE position for every course before you book an exam.",
       },
       {
         q: "What are the most common F1 visa refusal reasons?",
@@ -208,11 +310,11 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "How much bank balance do I need to show for an F1 visa?",
-        a: "One full year of tuition plus living expenses, typically $45,000–$75,000. Funds can be liquid assets, education loans (sanctioned), or a mix. Property is not accepted as F1 evidence.",
+        a: "The required evidence is tied to the institution's current cost estimate and your circumstances. Check the I-20, official visa guidance, and the consulate instructions, then ask Earthlink to review the document plan.",
       },
       {
         q: "What is STEM OPT and which courses qualify?",
-        a: "STEM OPT is a 24-month extension on top of the standard 12-month OPT for graduates of DHS-designated STEM programmes — CS, DS, Analytics, Engineering, and most Applied Maths programmes qualify. Business Analytics increasingly qualifies; MBA does not.",
+        a: "STEM OPT is an additional practical-training route for eligible graduates of qualifying programmes. Check the programme's current classification, your school record, employer requirements, timing, and the live DHS rules with the designated school official.",
       },
       {
         q: "Can I apply to US universities with a 3-year Bachelors?",
@@ -257,7 +359,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         title: "Lower tuition than US/UK",
-        body: "Most diplomas under CAD 18,000/year; degrees CAD 18–35k/year.",
+        body: "Public colleges and universities publish different fee schedules. Compare the current programme fee, living plan, and permit eligibility together.",
       },
     ],
     education:
@@ -280,12 +382,23 @@ export const DESTINATIONS: Destination[] = [
       "Healthcare Administration",
       "Supply Chain",
     ],
-    costs: {
-      tuition: "CAD 15,000 – CAD 35,000 per year",
-      living:
-        "From CAD 22,895 for one applicant (IRCC living-cost minimum; tuition and travel excluded, Quebec differs)",
-      visa: "CAD 150 + biometrics CAD 85",
-    },
+    budget: [
+      {
+        title: "Tuition and compulsory fees",
+        guidance:
+          "Use the institution's current programme page and confirm whether ancillary, health, and placement charges are included.",
+      },
+      {
+        title: "Living and travel",
+        guidance:
+          "Build a location-specific plan for accommodation, food, transport, winter clothing, insurance, and travel.",
+      },
+      {
+        title: "Study-permit evidence",
+        guidance:
+          "Use IRCC's live proof-of-financial-support page because requirements are reviewed and can differ for Quebec.",
+      },
+    ],
     workRights:
       "Eligible students may work off campus for up to 24 hours per week during regular academic sessions and unlimited hours during scheduled breaks, subject to their study-permit conditions. PGWP eligibility is separate.",
     scholarships: [
@@ -309,7 +422,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "How much money do I need to show for a Canada study permit?",
-        a: "For applications made on or after 1 September 2025, one applicant studying outside Quebec must show CAD 22,895 for first-year living expenses, plus first-year tuition and transportation. For programmes longer than one year, applicants must also explain how they plan to fund the remaining period. Quebec sets separate amounts, and IRCC updates these figures annually.",
+        a: "IRCC requires evidence for tuition, living expenses, and transportation, with separate Quebec rules. Use the live government page for the current requirement and ask Earthlink to review how the evidence fits your study plan.",
       },
       {
         q: "Can I bring my spouse to Canada as a student?",
@@ -375,11 +488,22 @@ export const DESTINATIONS: Destination[] = [
       "Construction Management",
       "Hospitality",
     ],
-    costs: {
-      tuition: "AUD 22,000 – AUD 50,000 per year",
-      living: "AUD 29,710 for 12 months (current Student visa living-cost minimum)",
-      visa: "From AUD 2,500 for a primary Subclass 500 applicant from 1 July 2026; concessions may apply",
-    },
+    budget: [
+      {
+        title: "Tuition and course costs",
+        guidance:
+          "Compare the current course fee, required health cover, materials, and placement costs on the provider's website.",
+      },
+      {
+        title: "Living and travel",
+        guidance: "Plan by city for housing, food, transport, utilities, insurance, and travel.",
+      },
+      {
+        title: "Visa and financial evidence",
+        guidance:
+          "Use the live Department of Home Affairs checklist for current charges and evidence requirements.",
+      },
+    ],
     workRights:
       "Most students may work up to 48 hours per fortnight while their course is in session and unlimited hours during scheduled breaks; research master’s and doctoral students have an exception. Temporary Graduate visa duration depends on stream, qualification and eligibility.",
     scholarships: [
@@ -398,7 +522,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "How much bank balance do I need for an Australian student visa?",
-        a: "If Home Affairs asks for financial evidence, calculate at least AUD 29,710 for 12 months of the student’s living costs, plus travel and up to 12 months of tuition, with additional amounts for accompanying family. The document checklist determines which evidence must be attached.",
+        a: "The Department of Home Affairs document checklist determines whether financial evidence is required and what it must cover. Check the live checklist for your application and family circumstances.",
       },
       {
         q: "Can I bring my spouse on an Australian student visa?",
@@ -448,17 +572,29 @@ export const DESTINATIONS: Destination[] = [
       "Transcripts",
       "IELTS 6.5 typical",
       "SOP",
-      "Financial evidence €10,000+",
+      "Current financial evidence",
       "Passport",
       "Medical and TB screening",
     ],
     intakes: ["September", "January (limited)"],
     courses: ["MSc Data Analytics", "International Business", "Pharma & Biotech", "Cybersecurity"],
-    costs: {
-      tuition: "€10,000 – €25,000 per year",
-      living: "€10,000 – €13,000 per year",
-      visa: "€60 single entry, €100 multi",
-    },
+    budget: [
+      {
+        title: "Tuition and course charges",
+        guidance:
+          "Use the institution's live fee schedule and confirm deposits, insurance, materials, and placement charges.",
+      },
+      {
+        title: "Living and travel",
+        guidance:
+          "Compare housing availability and daily costs across Dublin and regional study cities.",
+      },
+      {
+        title: "Immigration costs and evidence",
+        guidance:
+          "Check the live Irish authority guidance for current charges and financial requirements.",
+      },
+    ],
     workRights:
       "20 hrs/week term, 40 hrs in holidays. Stay Back of 24 months after Masters, 12 after Bachelors.",
     scholarships: ["Government of Ireland Scholarship", "Walsh Scholarships", "University awards"],
@@ -477,7 +613,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "How much money do I need for an Irish student visa?",
-        a: "You must show €10,000 for the first year on top of the tuition fee, either as a bank balance or an approved study-abroad loan.",
+        a: "Use the live Irish immigration guidance for the current evidence requirement and accepted sources of funds, then ask Earthlink to review your document plan.",
       },
       {
         q: "Can I work part-time while studying in Ireland?",
@@ -493,96 +629,126 @@ export const DESTINATIONS: Destination[] = [
     slug: "malta",
     name: "Malta",
     short:
-      "Plan a Malta study route with the official national-visa checklist: timing, enrolment evidence, funds, insurance, travel, accommodation, and fees.",
+      "Verify the provider and programme first, then build the application and visa plan from live Maltese sources.",
     eyebrow: "Study in",
     headline: "Malta",
     intro:
-      "A Mediterranean study destination with a detailed national-visa checklist for courses lasting more than 90 days. This guide follows Identità Central Visa Unit Version 2.1 dated 13 August 2025.",
+      "Malta offers English-medium higher education in a compact European setting. Earthlink helps applicants verify the provider, programme, academic route, and application documents before they rely on the current Identita visa process.",
     heroImage: heroFor("1514222134-b57cbb8ce073"),
     landmark: "cliffs",
     whyStudy: [
       {
-        title: "Official 12-part checklist",
-        body: "The Central Visa Unit sets out the required form, passport, enrolment, funds, insurance, travel, accommodation, and supporting documents.",
+        title: "Provider verification",
+        body: "MFHEA publishes the official register used to check whether a provider is licensed and a programme is accredited.",
       },
       {
-        title: "Plan at least 9 weeks ahead",
-        body: "The supplied checklist says the application must be submitted at least nine weeks before the course begins.",
+        title: "English-medium options",
+        body: "Many institutions teach in English. Applicants still need to confirm the exact language, attendance, and assessment requirements for the programme.",
       },
       {
-        title: "Clear financial evidence",
-        body: "Applicants provide three months of bank statements plus a recent bank certificate showing funds for the stay.",
+        title: "Documented visa route",
+        body: "Identita publishes the live visa guidance. Use it to confirm timing, documents, insurance, travel, accommodation, and financial evidence.",
       },
       {
-        title: "MFHEA course verification",
-        body: "The enrolment letter must identify the registered institution, course, MQF level, ECTS, duration, schedule, and lecture address.",
+        title: "Compact study location",
+        body: "A smaller destination can suit students who value short travel distances and a Mediterranean environment, subject to programme fit and housing plans.",
       },
     ],
     education:
-      "Choose a programme at an institution registered with the Malta Further and Higher Education Authority (MFHEA). The enrolment letter must state the full course name, MQF level, ECTS, duration, study mode, hiatus periods, weekly and contact hours, and teaching address.",
+      "Start with the MFHEA register. Confirm the provider, programme title, qualification level, credits, delivery mode, teaching location, attendance, assessment, and awarding body against the offer letter.",
     documents: [
-      "Completed and signed visa application form",
-      "Passport valid for at least 10 months",
-      "One ICAO-standard passport photo",
-      "VFS appointment letter; apply at least 9 weeks before the course",
-      "Detailed MFHEA institution enrolment letter and proof of payment",
-      "Last 3 months of bank statements plus a recent bank certificate",
-      "Sponsor documents where applicable: statements, declaration, and ID",
-      "Copy of the international bank card used to access funds in Malta",
-      "Schengen-valid medical and travel insurance with at least €30,000 cover",
-      "Full flight itinerary and return ticket where the course is under 6 months",
-      "Accommodation in the applicant's name for at least the first 14 nights",
-      "Additional legalised and translated documents for applicants under 18",
+      "Passport and identity documents",
+      "Academic records and English-language evidence required by the provider",
+      "Offer or enrolment evidence with programme and provider details",
+      "Current tuition-payment evidence requested for the application",
+      "Financial and sponsor evidence required by the live checklist",
+      "Insurance, accommodation, and travel evidence required for the route",
+      "Consent, custody, translation, or legalisation documents where applicable",
     ],
-    intakes: ["Institution-dependent; allow at least 9 weeks for the visa application"],
-    courses: ["MFHEA-registered programmes", "MQF Level 5 and above", "MQF Level 4 and below"],
-    costs: {
-      tuition: "Institution and course-dependent",
-      living: "Show at least 75% of Malta's national minimum wage for each month of study",
-      visa: "Age 12+: €100 standard or €150 extended; lower age bands apply",
-    },
+    intakes: ["Institution-dependent", "Apply early enough for the current visa process"],
+    courses: ["Business and management", "Computing", "Hospitality", "Health and social care"],
+    budget: [
+      {
+        title: "Tuition and provider charges",
+        guidance:
+          "Confirm the current fee, deposit, refund policy, and all compulsory course charges directly with the licensed provider.",
+      },
+      {
+        title: "Living, insurance, and travel",
+        guidance:
+          "Plan for accommodation, food, transport, insurance, and travel using current local and provider sources.",
+      },
+      {
+        title: "Visa and financial evidence",
+        guidance:
+          "Use the live Identita guidance for current charges, evidence rules, and application arrangements.",
+      },
+    ],
+    directAnswer:
+      "Malta can suit applicants seeking English-medium study in a compact European destination, but the decision should begin with provider and programme verification. Do not rely on a college name or agent brochure alone; check the live MFHEA register and then follow Identita's current visa guidance.",
+    applicantFit: [
+      "Applicants who have verified the exact provider and programme on the MFHEA register",
+      "Students comfortable with a smaller destination and a programme-led rather than ranking-led shortlist",
+      "Applicants who can document their study, accommodation, insurance, travel, and funding plan",
+    ],
+    programmeChecks: [
+      "Match the provider and programme to the current MFHEA register",
+      "Confirm the qualification level, credits, delivery mode, campus, and awarding body",
+      "Read the provider's attendance, progression, refund, and complaints terms before paying",
+    ],
+    applicationRoute: [
+      "Verify the provider and programme on the MFHEA register",
+      "Complete the provider's academic application and check every offer condition",
+      "Prepare the current Identita visa evidence for your course and circumstances",
+      "Recheck the official guidance before booking travel or making non-refundable commitments",
+    ],
+    nationalityNotes: [
+      {
+        title: "Document and application location",
+        body: "Translation, legalisation, parental-consent, and application-centre steps can differ by age, nationality, and residence. Follow the live checklist for the place where you apply.",
+      },
+    ],
+    sources: [COUNTRY_SOURCES.maltaProgrammes, COUNTRY_SOURCES.maltaVisa],
+    relatedDestinations: ["uk", "ireland", "spain", "portugal"],
+    relatedGuides: ["verify-malta-university-course"],
+    reviewedAt: "2026-08-25",
+    reviewNotice: CONTENT_REVIEW_NOTICE,
     workRights:
-      "The supplied Central Visa Unit checklist does not state student work rights. Confirm current conditions with the official Maltese authorities before relying on employment income.",
+      "Do not use possible part-time work to make an unaffordable plan appear viable. Confirm your own conditions and the current official rules before accepting any employment.",
     scholarships: [
       "Check awards offered by the chosen MFHEA-registered institution",
       "Confirm current national schemes through official Maltese sources",
     ],
     faqs: [
       {
-        q: "When should I submit a Malta student national-visa application?",
-        a: "The supplied Central Visa Unit checklist says to submit at least nine weeks before the course commencement date.",
+        q: "How do I verify a Malta university or college?",
+        a: "Search the live MFHEA register for both the provider and the exact programme. Confirm the qualification level, credits, delivery location, and awarding body against the offer.",
       },
       {
         q: "What must the Malta school enrolment letter include?",
-        a: "It must identify the MFHEA-registered institution, full course name, MQF level, ECTS, course duration and mode, hiatus periods, weekly and contact hours, lecture address, and proof of payment.",
+        a: "It should identify the licensed provider and exact programme clearly enough to match the official register and current visa checklist. Ask the provider to correct any mismatch before applying.",
       },
       {
-        q: "How much money must I show?",
-        a: "The checklist requires three months of bank statements and a recent bank certificate showing funds equal to at least 75% of the national minimum wage for every month of study. Sponsor evidence is also required where relevant.",
+        q: "What financial evidence is required?",
+        a: "The live Identita guidance sets the current calculation and accepted evidence. Ask Earthlink to review how your own funds, sponsor documents, course payments, and travel plan fit the checklist.",
       },
       {
         q: "What insurance is required?",
-        a: "Insurance must cover the Schengen area, be valid for study, and provide at least €30,000 medical cover. MQF Level 5+ applicants eligible for a residence permit need at least 91 consecutive days; MQF Level 4 and below need cover for the full stay.",
+        a: "Use the live Identita guidance to confirm the required territory, purpose, duration, and coverage before buying a policy.",
       },
       {
-        q: "What accommodation proof is accepted?",
-        a: "Provide at least the first 14 consecutive nights in the applicant's name. The checklist permits documented school accommodation, a registered lease, notarised free-host accommodation with supporting evidence, or a hotel or short-term booking.",
+        q: "When should I apply for the visa?",
+        a: "Application timing and appointment availability can change. Work backwards from the course start date using the live Identita and application-centre guidance, and leave time to correct documents.",
       },
       {
         q: "Do all documents have to be in English?",
-        a: "Yes. The checklist says all documents must be submitted in English and translations must come from the approved list of authorised translators.",
+        a: "Follow the language and translation rules in the current checklist. Do not assume an informal translation or a document accepted by the college will also satisfy the visa process.",
       },
       {
         q: "What are the visa fees?",
-        a: "For applicants aged 12+, the supplied checklist lists €100 for a standard appointment and €150 for an extended next-day appointment. Ages 6–11 are €50 and ages 0–5 are free. Check current fees before applying.",
+        a: "Visa charges and service options change. Check the live Identita and application-centre pages immediately before paying.",
       },
     ],
-    source: {
-      title:
-        "Identità Central Visa Unit — Documentation Required for Student National Visa (more than 90 days)",
-      version: "Version 2.1 dated 13 August 2025",
-      href: "/malta-student-national-visa-checklist.pdf",
-    },
   },
   {
     slug: "newzealand",
@@ -611,7 +777,7 @@ export const DESTINATIONS: Destination[] = [
       "Transcripts",
       "IELTS 6.0/6.5",
       "Statement of Purpose",
-      "Financial evidence NZD 20,000/year",
+      "Current financial evidence",
       "Medical and chest X-ray",
     ],
     intakes: ["February", "July"],
@@ -621,11 +787,23 @@ export const DESTINATIONS: Destination[] = [
       "Healthcare",
       "Agriculture & Environment",
     ],
-    costs: {
-      tuition: "NZD 22,000 – NZD 35,000 per year",
-      living: "NZD 20,000 per year",
-      visa: "From NZD 850 for a Fee Paying Student Visa",
-    },
+    budget: [
+      {
+        title: "Tuition and provider charges",
+        guidance:
+          "Use the provider's current course page for tuition, compulsory fees, insurance, and materials.",
+      },
+      {
+        title: "Living and travel",
+        guidance:
+          "Build a city-specific plan for accommodation, food, transport, insurance, and flights.",
+      },
+      {
+        title: "Visa and financial evidence",
+        guidance:
+          "Use Immigration New Zealand's live guidance for current charges and evidence requirements.",
+      },
+    ],
     workRights:
       "Eligible students with the relevant visa condition may work up to 25 hours per week during study and full-time during scheduled breaks. Holders of an older visa that still states 20 hours must obtain a variation of conditions or a new visa before working the extra hours. Post Study Work Visa duration depends on qualification and study length.",
     scholarships: ["New Zealand Excellence Awards", "University-specific entry scholarships"],
@@ -636,7 +814,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "How much money do I need for a New Zealand student visa?",
-        a: "NZD 20,000 per year in living costs (INZ rule) plus one year of tuition. Funds must be held in your account, a parent's account, or as part of an approved education loan.",
+        a: "Use Immigration New Zealand's live guidance for the current amount, coverage period, and accepted evidence, then ask Earthlink to review the document plan.",
       },
       {
         q: "What is the Post-Study Work Visa duration?",
@@ -660,33 +838,33 @@ export const DESTINATIONS: Destination[] = [
     slug: "europe",
     name: "Europe",
     short:
-      "Low or zero tuition in Germany, Czech Republic, Poland, Portugal, Lithuania and beyond.",
+      "Compare country-specific study systems, application routes, programme checks, and residence rules before choosing a European destination.",
     eyebrow: "Study in",
     headline: "Europe",
     intro:
-      "If budget is the constraint, mainland Europe is where the maths starts to work. Public universities in Germany, Czech Republic, Poland, and Portugal offer English-taught programmes at a fraction of UK fees.",
+      "Europe is a comparison hub, not a single admissions or visa system. Start with programme fit, teaching language, recognition, application route, housing, and the live national rules for Germany, France, Spain, Portugal, or another country.",
     heroImage: heroFor("1467269204594-9661b134dd2b"),
     landmark: "eiffel",
     whyStudy: [
       {
-        title: "Low or no tuition",
-        body: "Germany public universities charge admin fees only. Portugal, Poland, Czech Republic and Lithuania run programmes under €4,000/year.",
+        title: "Different national systems",
+        body: "Admissions, academic calendars, recognition, visas, residence, and work conditions are country-specific. Compare them separately.",
       },
       {
-        title: "Schengen access",
-        body: "Travel, internships, and conferences across 27 countries on a single residence permit.",
+        title: "Programme-led choice",
+        body: "The strongest shortlist begins with the exact curriculum, language, accreditation, entry route, and graduate outcomes, not a continent-wide claim.",
       },
       {
         title: "English-taught programmes",
-        body: "Hundreds of Bachelors and Masters fully in English — no German or Polish required.",
+        body: "English-taught options exist across Europe, but applicants should verify teaching, assessment, placements, and daily-life language needs.",
       },
       {
-        title: "Post-study stay",
-        body: "Germany offers an 18-month job-seeker visa after graduation; most EU countries offer 9–12 months.",
+        title: "Country-specific next steps",
+        body: "Student work and post-study routes differ and can change. Use each country's official source before treating employment as part of the decision.",
       },
     ],
     education:
-      "Bologna-aligned: three-year Bachelors, two-year Masters across all EU member states.",
+      "European higher education shares some common qualification frameworks, but degree structures, admission routes, professional recognition, language, and institution types still vary by country and programme.",
     documents: [
       "Transcripts (apostilled)",
       "English/German proficiency",
@@ -696,19 +874,65 @@ export const DESTINATIONS: Destination[] = [
     ],
     intakes: ["September / October", "February / March"],
     courses: [
-      "Engineering (Germany)",
+      "Engineering",
       "Computer Science",
       "International Business",
       "Architecture",
-      "Medicine (selected)",
+      "Arts and social sciences",
     ],
-    costs: {
-      tuition: "€0 – €6,000 per year (public)",
-      living: "€800 – €1,200 per month",
-      visa: "€75 – €100",
-    },
+    budget: [
+      {
+        title: "Tuition model",
+        guidance:
+          "Compare public and private institutions country by country. Confirm tuition, semester contributions, and compulsory course charges on the live programme page.",
+      },
+      {
+        title: "Living and travel",
+        guidance:
+          "Plan by city and country for accommodation, food, transport, insurance, study materials, and travel.",
+      },
+      {
+        title: "Visa and residence",
+        guidance:
+          "Use the relevant national authority for current charges, proof-of-funds rules, insurance, and residence steps.",
+      },
+    ],
+    directAnswer:
+      "There is no single Europe application, visa, work, or post-study rule. Use this page to compare destinations and move into the relevant country hub before choosing a programme or preparing documents.",
+    applicantFit: [
+      "Applicants willing to compare countries on programme fit, recognition, language, application route, and daily life",
+      "Students who will verify the exact provider and programme before paying",
+      "Applicants prepared to follow a country-specific visa and residence process",
+    ],
+    programmeChecks: [
+      "Confirm the institution's legal status and the programme's recognition in the destination country",
+      "Check the teaching and assessment language, course structure, placement terms, and awarding body",
+      "For regulated careers, confirm professional recognition in the country where you may work",
+    ],
+    applicationRoute: [
+      "Choose a country and course based on academic and career fit",
+      "Identify the national or institution-specific application route",
+      "Verify document format, recognition, translation, and language requirements",
+      "Use the country's live visa or residence source after admission",
+    ],
+    nationalityNotes: [
+      {
+        title: "EU, EEA, Swiss, and other applicants",
+        body: "Application, tuition status, visa, and residence steps can differ by citizenship and residence. Use the destination hub and live national source for your category.",
+      },
+    ],
+    sources: [
+      COUNTRY_SOURCES.germanyStudy,
+      COUNTRY_SOURCES.franceApplications,
+      COUNTRY_SOURCES.spainStudy,
+      COUNTRY_SOURCES.portugalAdmission,
+    ],
+    relatedDestinations: ["germany", "france", "spain", "portugal"],
+    relatedGuides: ["germany-vs-france-vs-spain-vs-portugal", "top-mba-programs-europe"],
+    reviewedAt: "2026-08-25",
+    reviewNotice: CONTENT_REVIEW_NOTICE,
     workRights:
-      "Typically 20 hrs/week during term across EU member states. 18-month Job Seeker visa in Germany after graduation.",
+      "Student employment and post-study residence are national matters. Check the official country source, your residence conditions, and any required authorisation before working.",
     scholarships: [
       "DAAD (Germany)",
       "Erasmus Mundus",
@@ -718,31 +942,532 @@ export const DESTINATIONS: Destination[] = [
     faqs: [
       {
         q: "Is Germany really free for international students?",
-        a: "Most public universities are tuition-free at Bachelors level for all nationalities. Some Masters programmes charge, and Baden-Württemberg charges €1,500 per semester for non-EU students. Semester contributions of €150–€350 still apply everywhere.",
+        a: "German public-university funding models are often favourable, but exceptions and compulsory student charges exist. Check the live university page and relevant regional rules for the exact programme.",
       },
       {
         q: "Do I need to speak German to study in Europe?",
-        a: "Not for the hundreds of English-taught Bachelors and Masters programmes in Germany, Netherlands, Poland, Czech Republic, and the Nordics. A2-level German unlocks part-time work and cheaper daily life.",
+        a: "Some programmes are taught in English, but language expectations differ by country, course, placement, profession, and daily-life context. Verify both teaching and assessment language on the exact programme page.",
       },
       {
         q: "What is the German blocked account (Sperrkonto) and how much do I need?",
-        a: "€11,904 per year (2024 rate) held in a Sperrkonto through Fintiba, Expatrio, or Deutsche Bank. The account releases €992 per month once you arrive.",
+        a: "A blocked account can be one way to evidence living funds. The required amount and acceptable alternatives can change, so use the live German authority guidance before opening or funding an account.",
       },
       {
         q: "Which European country is cheapest for international students?",
-        a: "Poland, Lithuania, Czech Republic, and Portugal offer public tuition under €4,000/year with living costs of €500–€800/month. Germany and Norway offer tuition-free public options with higher living costs.",
+        a: "There is no single cheapest answer. Compare the live programme charges, compulsory fees, housing market, transport, insurance, and visa evidence for your shortlist.",
       },
       {
-        q: "What is the 18-month Job Seeker Visa in Germany?",
-        a: "After graduating from a recognised German university you get an 18-month residence permit to look for a job matching your qualifications. Any employment (including non-degree-related) is allowed during this period.",
+        q: "Can I stay after graduation in Europe?",
+        a: "Post-study routes are country-specific and eligibility can depend on the qualification, institution, timing, employment, and application status. Check the destination hub and live authority source.",
       },
       {
         q: "Can I transfer between EU universities under Erasmus?",
-        a: "Yes — Erasmus+ mobility lets enrolled students spend 3–12 months at a partner university and transfer credits automatically. Erasmus Mundus Joint Masters cover 2 years across multiple countries.",
+        a: "Mobility depends on the universities' agreements, the programme, funding, and academic approval. Ask the home and host institutions how credits and enrolment will be handled before relying on a transfer.",
       },
       {
         q: "Do European degrees lead to Blue Card and EU permanent residency?",
-        a: "Yes — an EU degree plus a qualifying job (salary threshold varies by country) qualifies you for the EU Blue Card, with permanent residency after 21–33 months depending on language level.",
+        a: "A degree does not automatically create a work or permanent-residence right. National and EU routes have separate qualification, employment, salary, residence, and timing rules that must be checked when you apply.",
+      },
+    ],
+  },
+  {
+    slug: "germany",
+    name: "Germany",
+    short:
+      "Verify the programme, application route, tuition model, and current study-residence evidence before applying to Germany.",
+    eyebrow: "Study in",
+    headline: "Germany",
+    intro:
+      "Germany offers public and private universities, research-led courses, universities of applied sciences, and English-taught options. Earthlink helps applicants match the programme, institution type, application route, and current residence requirements.",
+    heroImage: heroFor("1467269204594-9661b134dd2b"),
+    landmark: "cliffs",
+    whyStudy: [
+      {
+        title: "Different institution types",
+        body: "Research universities and universities of applied sciences serve different academic and career goals. Choose on curriculum and delivery, not label alone.",
+      },
+      {
+        title: "Strong technical ecosystem",
+        body: "Engineering, computing, science, business, and research programmes connect to a large European academic and industrial network.",
+      },
+      {
+        title: "English-taught options",
+        body: "Many programmes are available in English, especially at postgraduate level. Daily life, placements, and some admissions steps may still require German.",
+      },
+      {
+        title: "Document-led process",
+        body: "Recognition, application portals, language evidence, and residence documents require early checking and consistent records.",
+      },
+    ],
+    education:
+      "Compare research universities, universities of applied sciences, public and private providers. Check recognition, the exact degree, admission status, teaching language, accreditation where relevant, and the programme's application route.",
+    documents: [
+      "Passport and identity documents",
+      "Academic records in the required format",
+      "Language evidence required by the programme",
+      "Motivation, references, CV, or portfolio where requested",
+      "Recognition or verification documents required for the applicant's education system",
+      "Admission evidence, insurance, and current financial evidence for the residence process",
+    ],
+    intakes: ["Winter semester", "Summer semester where offered"],
+    courses: [
+      "Engineering",
+      "Computer science",
+      "Natural sciences",
+      "Business",
+      "Renewable energy",
+    ],
+    budget: [
+      {
+        title: "Tuition model and student charges",
+        guidance:
+          "Public and private models differ, with regional and programme exceptions. Check tuition, semester contributions, and compulsory charges on the exact university page.",
+      },
+      {
+        title: "Living, insurance, and travel",
+        guidance:
+          "Plan by city for housing, health insurance, food, transport, study materials, and arrival costs.",
+      },
+      {
+        title: "Residence and financial evidence",
+        guidance:
+          "Use the live Make it in Germany guidance for the current requirement and accepted evidence, including any blocked-account option.",
+      },
+    ],
+    directAnswer:
+      "Germany can suit applicants seeking technical, research, or applied study in a large European economy. Start by verifying the institution, exact programme, teaching language, application route, and current residence evidence. Do not treat 'public university' as a guarantee that every programme has the same charges or process.",
+    applicantFit: [
+      "Applicants who can match their prior studies to the programme prerequisites",
+      "Students willing to compare research and applied-science institutions",
+      "Applicants prepared to organise recognition, language, insurance, and residence evidence early",
+    ],
+    programmeChecks: [
+      "Confirm the institution and programme through the university and recognised German study sources",
+      "Check teaching language, prerequisites, restricted-admission status, and application portal",
+      "Read tuition, semester-contribution, refund, enrolment, and insurance terms on the live university pages",
+    ],
+    applicationRoute: [
+      "Research the exact programme and institution type",
+      "Confirm whether the application goes to the university, uni-assist, or another stated route",
+      "Prepare recognition, academic, language, and programme-specific documents",
+      "After admission, follow the live residence guidance and local enrolment steps",
+    ],
+    nationalityNotes: [
+      {
+        title: "Education-system checks",
+        body: "Recognition, verification, and document-format steps can differ by the country where a qualification was earned. Follow the university and official German guidance for your education system.",
+      },
+    ],
+    sources: [COUNTRY_SOURCES.germanyProgrammes, COUNTRY_SOURCES.germanyStudy],
+    relatedDestinations: ["france", "spain", "portugal", "europe"],
+    relatedGuides: ["study-in-germany-free-tuition", "germany-student-visa-blocked-account"],
+    reviewedAt: "2026-08-25",
+    reviewNotice: CONTENT_REVIEW_NOTICE,
+    workRights:
+      "Study-related work and post-study residence depend on current law, residence conditions, study status, and the route used. Check the live authority guidance before working or planning a graduate transition.",
+    scholarships: [
+      "DAAD funding database",
+      "University and foundation awards",
+      "Programme-specific research funding",
+    ],
+    faqs: [
+      {
+        q: "Is university tuition free in Germany?",
+        a: "Germany has a favourable public-university model, but regional, institutional, programme, continuing-education, and private-provider exceptions exist. All students should check live tuition and compulsory charges for the exact course.",
+      },
+      {
+        q: "What is a German blocked account?",
+        a: "A blocked account can be used to evidence living funds for a study-residence application. The required amount, provider terms, and acceptable alternatives can change, so begin with the live official guidance.",
+      },
+      {
+        q: "Do I apply through uni-assist?",
+        a: "Some institutions use uni-assist, some accept direct applications, and some specify another route. The exact programme page is the controlling application instruction.",
+      },
+      {
+        q: "Can I study in English?",
+        a: "Yes, English-taught programmes exist. Verify the teaching and assessment language, entry evidence, and whether German is needed for placements, regulated careers, or daily life.",
+      },
+      {
+        q: "Can students work in Germany?",
+        a: "Work conditions depend on the residence permission, study status, activity, and current rules. Check the official source and your own document before accepting work.",
+      },
+    ],
+  },
+  {
+    slug: "france",
+    name: "France",
+    short:
+      "Choose the correct Campus France, platform, or direct application route for the exact French programme and applicant profile.",
+    eyebrow: "Study in",
+    headline: "France",
+    intro:
+      "France combines public universities, grandes ecoles, specialist schools, and English- or French-taught programmes. Earthlink helps applicants verify the institution, qualification, language, and correct application route before the visa stage.",
+    heroImage: heroFor("1502602898657-3e91760cbb34"),
+    landmark: "eiffel",
+    whyStudy: [
+      {
+        title: "Multiple institution types",
+        body: "Universities, grandes ecoles, and specialist schools have different admissions models, selectivity, recognition, and career links.",
+      },
+      {
+        title: "International programmes",
+        body: "English-taught options exist, while French ability can expand daily-life, placement, and employment choices.",
+      },
+      {
+        title: "Central and direct routes",
+        body: "The application route can depend on nationality, residence, study level, and programme. Confirm it before submitting.",
+      },
+      {
+        title: "Broad academic range",
+        body: "Applicants can compare programmes in business, engineering, arts, sciences, hospitality, and social sciences.",
+      },
+    ],
+    education:
+      "Check the institution's legal status, awarding authority, qualification level, recognition, teaching language, and professional accreditation where relevant. Do not assume every private-school award has the same recognition as a national degree.",
+    documents: [
+      "Passport and identity documents",
+      "Academic records and required translations",
+      "Language evidence for the programme",
+      "Motivation, CV, references, portfolio, or tests where requested",
+      "Admission and financial evidence required for the visa route",
+      "Accommodation, insurance, and residence documents requested by the live checklist",
+    ],
+    intakes: ["Autumn", "Other starts where the programme offers them"],
+    courses: [
+      "Business and management",
+      "Engineering",
+      "Fashion and design",
+      "Hospitality",
+      "Data and computer science",
+    ],
+    budget: [
+      {
+        title: "Tuition and compulsory charges",
+        guidance:
+          "Compare public and private models on the exact programme page and check enrolment, student-service, materials, and deposit terms.",
+      },
+      {
+        title: "Living and travel",
+        guidance:
+          "Plan by city for housing, food, transport, insurance, study materials, and arrival costs.",
+      },
+      {
+        title: "Visa and financial evidence",
+        guidance:
+          "Use France-Visas and the applicable Campus France route for current charges and evidence requirements.",
+      },
+    ],
+    directAnswer:
+      "France can suit applicants who want a broad choice of public, elite, and specialist institutions. The key is choosing a recognised qualification and the correct application route for your nationality, residence, study level, and programme.",
+    applicantFit: [
+      "Applicants willing to distinguish universities, grandes ecoles, and specialist schools",
+      "Students who will verify qualification recognition and teaching language",
+      "Applicants prepared to follow the Campus France, national platform, or direct route specified for them",
+    ],
+    programmeChecks: [
+      "Confirm institution status, awarding authority, qualification level, and professional recognition",
+      "Check teaching and assessment language, internship terms, and campus location",
+      "Read the current admissions, deposit, refund, and enrolment terms before paying",
+    ],
+    applicationRoute: [
+      "Identify the exact programme and qualification",
+      "Use Campus France to determine the route for your profile",
+      "Submit through the stated platform or directly to the institution",
+      "After admission, follow the live France-Visas and residence steps",
+    ],
+    nationalityNotes: [
+      {
+        title: "Etudes en France countries",
+        body: "Applicants resident in countries covered by the Etudes en France process may have different platform and interview steps. Confirm the current route through Campus France.",
+      },
+    ],
+    sources: [COUNTRY_SOURCES.franceApplications, COUNTRY_SOURCES.franceVisa],
+    relatedDestinations: ["germany", "spain", "portugal", "europe"],
+    relatedGuides: [
+      "france-university-application-routes",
+      "germany-vs-france-vs-spain-vs-portugal",
+    ],
+    reviewedAt: "2026-08-25",
+    reviewNotice: CONTENT_REVIEW_NOTICE,
+    workRights:
+      "Student work and post-study residence depend on current law, the residence document, study status, qualification, and any required authorisation. Verify the live French rules before relying on employment.",
+    scholarships: [
+      "Campus France funding catalogue",
+      "Eiffel Excellence programme",
+      "Institution and regional awards",
+    ],
+    faqs: [
+      {
+        q: "Do I apply through Campus France?",
+        a: "Campus France helps applicants identify the correct route. The answer depends on nationality or residence, study level, and programme, so check the current process for your profile.",
+      },
+      {
+        q: "How do I verify a French qualification?",
+        a: "Check the institution, awarding authority, qualification level, and any professional recognition. Ask for the exact award title and verify it through official French sources.",
+      },
+      {
+        q: "Can I study in France in English?",
+        a: "English-taught programmes exist. Confirm the teaching and assessment language, entry evidence, and whether French is expected for placements or regulated careers.",
+      },
+      {
+        q: "What financial evidence is required?",
+        a: "Use France-Visas and the applicable Campus France process for the current requirement and accepted documents. Contact Earthlink for a profile-specific document check.",
+      },
+      {
+        q: "Can students work in France?",
+        a: "Conditions depend on current law and the student's residence status. Check the live authority guidance and the conditions attached to your permission.",
+      },
+    ],
+  },
+  {
+    slug: "spain",
+    name: "Spain",
+    short:
+      "Match the Spanish university application route, qualification recognition, programme language, and current study-stay rules.",
+    eyebrow: "Study in",
+    headline: "Spain",
+    intro:
+      "Spain offers public and private universities, programmes in Spanish and regional languages, and a growing English-taught portfolio. Earthlink helps applicants verify the degree and use the correct admission and study-stay route.",
+    heroImage: heroFor("1539037116277-4db20889f2d4"),
+    landmark: "cliffs",
+    whyStudy: [
+      {
+        title: "Varied programme languages",
+        body: "Applicants should verify the teaching and assessment language, not infer it from an English marketing page.",
+      },
+      {
+        title: "Public and private routes",
+        body: "Admissions, entrance credentials, timelines, and fees differ by university type, region, level, and programme.",
+      },
+      {
+        title: "Accredited degrees",
+        body: "Official and institution-specific awards can serve different goals. Recognition matters for further study and regulated careers.",
+      },
+      {
+        title: "Regional choices",
+        body: "Madrid, Barcelona, Valencia, Andalusia, and other regions offer different housing, language, industry, and campus contexts.",
+      },
+    ],
+    education:
+      "Confirm whether the programme leads to an official recognised degree, the awarding university, teaching language, campus, credit structure, and professional recognition. International undergraduate applicants may need a credential or admissions route such as UNEDasiss where applicable.",
+    documents: [
+      "Passport and identity documents",
+      "Academic records and required recognition or accreditation documents",
+      "Language evidence",
+      "Programme-specific motivation, CV, references, or portfolio",
+      "Admission evidence",
+      "Current study-stay financial, insurance, accommodation, and other supporting documents",
+    ],
+    intakes: ["Autumn", "Other starts where offered"],
+    courses: [
+      "Business",
+      "Tourism and hospitality",
+      "Architecture",
+      "Engineering",
+      "Arts and design",
+    ],
+    budget: [
+      {
+        title: "Tuition and university charges",
+        guidance:
+          "Use the exact university programme page and confirm public or private status, deposits, enrolment charges, materials, and refund terms.",
+      },
+      {
+        title: "Living and travel",
+        guidance:
+          "Plan by city for housing, transport, food, insurance, study materials, and arrival costs.",
+      },
+      {
+        title: "Study-stay evidence",
+        guidance:
+          "Use Spain's live migration guidance for current visa or stay requirements, charges, and financial evidence.",
+      },
+    ],
+    directAnswer:
+      "Spain can suit applicants who match the programme language, recognised qualification, application route, and city context to their goals. Start with the exact university and degree, then use the live migration guidance for the study-stay stage.",
+    applicantFit: [
+      "Applicants ready to verify teaching and assessment language",
+      "Students who understand the distinction between official and institution-specific awards",
+      "Applicants prepared for recognition, translation, or admissions-credential steps where required",
+    ],
+    programmeChecks: [
+      "Verify the awarding university and whether the qualification is official",
+      "Confirm language, campus, curriculum, assessment, and internship terms",
+      "For regulated careers, check professional recognition before applying",
+    ],
+    applicationRoute: [
+      "Choose the exact degree and university",
+      "Confirm whether direct application, UNEDasiss, or another stated route applies",
+      "Complete recognition, language, and university documents",
+      "After admission, follow the live study-stay guidance for your application location",
+    ],
+    nationalityNotes: [
+      {
+        title: "Undergraduate credentials",
+        body: "The admissions credential, recognition, and subject-scoring route can differ by prior education system. Check the university and UNEDasiss guidance for your qualification.",
+      },
+    ],
+    sources: [COUNTRY_SOURCES.spainAdmission, COUNTRY_SOURCES.spainStudy],
+    relatedDestinations: ["france", "portugal", "germany", "europe"],
+    relatedGuides: [
+      "spain-university-application-student-visa",
+      "germany-vs-france-vs-spain-vs-portugal",
+    ],
+    reviewedAt: "2026-08-25",
+    reviewNotice: CONTENT_REVIEW_NOTICE,
+    workRights:
+      "Work and post-study options depend on the current study-stay or residence rules, the activity, and any authorisation. Check Spain's live migration guidance before accepting work.",
+    scholarships: [
+      "University awards",
+      "Regional and national programmes",
+      "Erasmus-related opportunities where eligible",
+    ],
+    faqs: [
+      {
+        q: "Do I need UNEDasiss?",
+        a: "It depends on the university, degree level, and prior education system. Use the university's current admissions page and UNEDasiss guidance before starting the credential process.",
+      },
+      {
+        q: "Can I study in Spain in English?",
+        a: "Yes, some programmes are taught in English. Verify the teaching and assessment language for every year and module, plus language expectations for placements.",
+      },
+      {
+        q: "How do I check whether the degree is recognised?",
+        a: "Confirm the awarding university and whether the programme is an official qualification. For regulated careers, check the professional recognition route as well.",
+      },
+      {
+        q: "What financial evidence is required?",
+        a: "Use the live Spanish migration and consular guidance for the current calculation and accepted evidence, then contact Earthlink for a document review.",
+      },
+      {
+        q: "Can students work in Spain?",
+        a: "Conditions depend on current law, study status, the activity, and the student's permission. Check the live official rules before working.",
+      },
+    ],
+  },
+  {
+    slug: "portugal",
+    name: "Portugal",
+    short:
+      "Compare Portuguese university entry, qualification recognition, programme language, and the current higher-education residence route.",
+    eyebrow: "Study in",
+    headline: "Portugal",
+    intro:
+      "Portugal offers public and private higher education, programmes in Portuguese and English, and distinct admissions routes for international applicants. Earthlink helps verify the programme, institution, application, and residence process.",
+    heroImage: heroFor("1555881400-74d7acaacd8b"),
+    landmark: "cliffs",
+    whyStudy: [
+      {
+        title: "International applicant route",
+        body: "DGES explains the national framework, while institutions publish their own programme entry and selection rules.",
+      },
+      {
+        title: "Public and private choices",
+        body: "Universities and polytechnics have different course profiles. Compare curriculum, recognition, teaching, and outcomes.",
+      },
+      {
+        title: "Language choice",
+        body: "English-taught programmes exist, but applicants should check module language, assessment, placements, and daily-life needs.",
+      },
+      {
+        title: "Distinct residence process",
+        body: "Admission and residence are separate stages. AIMA publishes the live higher-education residence guidance.",
+      },
+    ],
+    education:
+      "Compare universities and polytechnics, public and private institutions, and the exact qualification. Verify recognition, credits, teaching language, campus, application rules, and professional status where relevant.",
+    documents: [
+      "Passport and identity documents",
+      "Academic records and any recognition or equivalence documents",
+      "Language evidence required by the programme",
+      "Programme-specific motivation, CV, references, or portfolio",
+      "Admission evidence",
+      "Current residence financial, insurance, accommodation, and other supporting documents",
+    ],
+    intakes: ["Autumn", "Other starts where offered"],
+    courses: [
+      "Business",
+      "Engineering",
+      "Tourism and hospitality",
+      "Computer science",
+      "Arts and design",
+    ],
+    budget: [
+      {
+        title: "Tuition and institutional charges",
+        guidance:
+          "Use the exact institution's live programme and international-student pages for tuition, application, enrolment, materials, and refund terms.",
+      },
+      {
+        title: "Living and travel",
+        guidance:
+          "Plan by city for housing, transport, food, insurance, study materials, and arrival costs.",
+      },
+      {
+        title: "Residence and financial evidence",
+        guidance:
+          "Use AIMA's live higher-education guidance for current requirements and accepted evidence.",
+      },
+    ],
+    directAnswer:
+      "Portugal can suit applicants who find the right university or polytechnic programme and verify its language, recognition, application rules, and city context. Use DGES for the higher-education framework and AIMA for the current residence stage.",
+    applicantFit: [
+      "Applicants ready to compare university and polytechnic programmes",
+      "Students who will verify teaching language and qualification recognition",
+      "Applicants prepared to follow institution-specific admissions and a separate residence process",
+    ],
+    programmeChecks: [
+      "Confirm the provider, exact qualification, credits, and awarding authority",
+      "Check language, campus, curriculum, assessment, and placement terms",
+      "For regulated careers, verify professional recognition before applying",
+    ],
+    applicationRoute: [
+      "Research the programme through DGES and the institution",
+      "Follow the institution's stated international application route",
+      "Complete academic, recognition, language, and programme documents",
+      "After admission, follow AIMA's live higher-education residence guidance",
+    ],
+    nationalityNotes: [
+      {
+        title: "International-student status",
+        body: "Admission categories and document recognition can differ by citizenship, residence, prior education, and any applicable bilateral or EU status. Confirm the institution's category before applying.",
+      },
+    ],
+    sources: [COUNTRY_SOURCES.portugalAdmission, COUNTRY_SOURCES.portugalResidence],
+    relatedDestinations: ["spain", "france", "germany", "europe"],
+    relatedGuides: [
+      "portugal-university-application-residence",
+      "germany-vs-france-vs-spain-vs-portugal",
+    ],
+    reviewedAt: "2026-08-25",
+    reviewNotice: CONTENT_REVIEW_NOTICE,
+    workRights:
+      "Student work and post-study residence depend on current Portuguese law, residence status, study conditions, and any required authorisation. Check AIMA and other official sources before relying on employment.",
+    scholarships: [
+      "Institutional awards",
+      "Portuguese and international funding programmes",
+      "Erasmus-related opportunities where eligible",
+    ],
+    faqs: [
+      {
+        q: "Do I apply through DGES?",
+        a: "DGES explains the national international-student framework, while institutions publish the exact application route and selection rules. Follow the programme's current instructions.",
+      },
+      {
+        q: "Should I choose a university or polytechnic?",
+        a: "Choose by curriculum, teaching approach, facilities, recognition, placements, and career fit. The institution label alone does not decide quality for a specific applicant.",
+      },
+      {
+        q: "Can I study in Portugal in English?",
+        a: "English-taught programmes exist. Verify the language for every module, assessment, placement, and later year of the course.",
+      },
+      {
+        q: "What financial evidence is required?",
+        a: "Use AIMA and the relevant consular guidance for the current calculation and accepted documents. Contact Earthlink for a profile-specific review.",
+      },
+      {
+        q: "Can students work in Portugal?",
+        a: "Conditions depend on the current residence rules and the student's circumstances. Check the live official guidance before accepting work.",
       },
     ],
   },
@@ -787,11 +1512,23 @@ export const DESTINATIONS: Destination[] = [
       "Engineering",
       "Computer Science",
     ],
-    costs: {
-      tuition: "AED 35,000 – AED 95,000 per year",
-      living: "AED 4,000 – AED 7,000 per month",
-      visa: "AED 3,000 – AED 5,000 (student route)",
-    },
+    budget: [
+      {
+        title: "Tuition and campus charges",
+        guidance:
+          "Use the institution's live course page and confirm whether the award, campus, deposit, and compulsory charges match the offer.",
+      },
+      {
+        title: "Living and travel",
+        guidance:
+          "Compare housing, transport, food, insurance, and travel across Dubai, Sharjah, and Abu Dhabi.",
+      },
+      {
+        title: "Visa and sponsorship",
+        guidance:
+          "Confirm current charges and sponsorship arrangements with the institution and relevant UAE authority.",
+      },
+    ],
     workRights:
       "Part-time work permitted with employer sponsorship. Post-graduation Green or Golden Visa unlocks open work rights.",
     scholarships: ["University merit awards", "Sheikh Mohammed bin Rashid scholarships"],
@@ -806,7 +1543,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "What is the Green Visa and how do I qualify after graduation?",
-        a: "The Green Visa gives 5 years of self-sponsored residency to graduates of accredited UAE universities with a Bachelors or higher and a minimum monthly income of AED 15,000, or a valid job offer.",
+        a: "Eligibility depends on the current UAE route, qualification, employment, and other criteria. Check the live authority guidance before treating it as a post-study plan.",
       },
       {
         q: "Can I get a Golden Visa as a student?",
@@ -814,7 +1551,7 @@ export const DESTINATIONS: Destination[] = [
       },
       {
         q: "How much does it cost to study in Dubai?",
-        a: "Tuition ranges from AED 35,000 to AED 95,000 per year, with living costs of AED 4,000–7,000 per month in shared accommodation. Sharjah and Ajman are 30–40% cheaper than Dubai.",
+        a: "Compare the current course fee and compulsory charges with a location-specific housing, transport, food, insurance, and travel plan. Ask Earthlink for a current comparison based on your shortlist.",
       },
       {
         q: "Do UAE universities accept Indian and Pakistani boards directly?",

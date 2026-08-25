@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { absUrl } from "@/lib/site-config";
-import { COMPANY, SERVICES, JOURNEY, VALUES, TESTIMONIALS } from "@/content/company";
+import { COMPANY, GOOGLE_REVIEW_CONTEXT, SERVICES, JOURNEY, VALUES } from "@/content/company";
+import { FEATURED_GOOGLE_REVIEWS } from "@/content/featured-google-reviews";
 import { DESTINATIONS } from "@/content/destinations";
 import { UNIVERSITY_DIRECTORY_TOTAL } from "@/content/universities";
 import { whatsappLink, mailtoLink, callLink } from "@/lib/lead";
@@ -9,7 +10,7 @@ import {
   Star,
   ShieldCheck,
   Sparkles,
-  MapPin,
+  CalendarDays,
   Activity,
   Globe2,
   Plane,
@@ -43,7 +44,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Continuously trading since 2014. 398+ reviews. Worldwide education support with clearly scoped visa services.",
+          "Continuously trading since 2014. 412 Google reviews. Worldwide education support with clearly scoped visa services.",
       },
       { property: "og:url", content: absUrl("/") },
       { property: "og:type", content: "website" },
@@ -55,7 +56,7 @@ export const Route = createFileRoute("/")({
       {
         name: "twitter:description",
         content:
-          "Continuously trading since 2014. 398+ reviews. Worldwide education support with clearly scoped visa services.",
+          "Continuously trading since 2014. 412 Google reviews. Worldwide education support with clearly scoped visa services.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/") }],
@@ -187,7 +188,7 @@ function Home() {
             </p>
             <div className="mt-3 flex items-baseline gap-2">
               <span className="font-serif text-5xl text-foreground">
-                <CountUp to={COMPANY.rating.score} decimals={1} />
+                <CountUp to={COMPANY.rating.score} decimals={2} />
               </span>
               <span className="text-sm text-muted-foreground">/ 5</span>
             </div>
@@ -685,26 +686,34 @@ function Home() {
           <Carousel
             perView={3}
             interval={6000}
-            items={TESTIMONIALS.map((t) => (
-              <figure className="bento-tile-light flex h-full flex-col p-6">
+            items={FEATURED_GOOGLE_REVIEWS.map((review) => (
+              <figure key={review.id} className="bento-tile-light flex h-full flex-col p-6">
                 <div className="flex items-center gap-2 text-amber">
                   {[0, 1, 2, 3, 4].map((s) => (
                     <Star key={s} className="h-4 w-4 fill-amber" />
                   ))}
                 </div>
                 <blockquote className="mt-4 flex-1 font-serif text-lg leading-snug text-navy">
-                  "{t.quote}"
+                  "{review.text}"
                 </blockquote>
                 <figcaption className="mt-6 border-t hairline pt-4 text-xs text-muted-foreground">
-                  <span className="font-medium text-navy">{t.name}</span> · {t.course}
+                  <span className="font-medium text-navy">{review.reviewerName}</span> · Google
+                  review
                   <span className="mt-1 flex items-center gap-1 text-brand">
-                    <MapPin className="h-3 w-3" />
-                    {t.country}
+                    <CalendarDays className="h-3 w-3" />
+                    {new Date(`${review.publishedAt}T00:00:00Z`).toLocaleDateString("en-GB", {
+                      month: "long",
+                      year: "numeric",
+                      timeZone: "UTC",
+                    })}
                   </span>
                 </figcaption>
               </figure>
             ))}
           />
+          <p className="mt-6 max-w-4xl text-xs leading-relaxed text-muted-foreground">
+            {GOOGLE_REVIEW_CONTEXT}
+          </p>
         </div>
       </section>
 

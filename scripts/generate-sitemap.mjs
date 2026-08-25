@@ -123,7 +123,7 @@ async function main() {
     })),
     ...BLOGS.map((b) => ({
       path: `/blog/${b.slug}`,
-      lastmod: b.date,
+      lastmod: b.updatedAt || b.date,
       changefreq: "monthly",
       priority: "0.6",
       images: b.cover ? [{ loc: b.cover, title: b.title, caption: b.excerpt }] : undefined,

@@ -17,7 +17,7 @@ export function AuroraClient(props: {
     if (reduced) return;
 
     let idleId: number | undefined;
-    let timerId: number | undefined;
+    let timerId: ReturnType<typeof globalThis.setTimeout> | undefined;
     let cancelled = false;
 
     const activate = () => {
@@ -27,7 +27,7 @@ export function AuroraClient(props: {
       if ("requestIdleCallback" in window) {
         idleId = window.requestIdleCallback(activate, { timeout: 2500 });
       } else {
-        timerId = window.setTimeout(activate, 800);
+        timerId = globalThis.setTimeout(activate, 800);
       }
     };
 
@@ -38,7 +38,7 @@ export function AuroraClient(props: {
       cancelled = true;
       window.removeEventListener("load", schedule);
       if (idleId !== undefined) window.cancelIdleCallback(idleId);
-      if (timerId !== undefined) window.clearTimeout(timerId);
+      if (timerId !== undefined) globalThis.clearTimeout(timerId);
     };
   }, [reduced]);
 

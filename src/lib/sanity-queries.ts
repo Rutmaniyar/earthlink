@@ -37,10 +37,15 @@ const BLOG_LIST_QUERY = /* groq */ `
     category,
     "author": coalesce(author->name, "Earthlink Editorial"),
     "date": publishedAt,
+    "updatedAt": coalesce(updatedAt, _updatedAt),
     "bodyText": pt::text(body),
     coverImage,
     coverCaption,
-    tags
+    tags,
+    questionSections[]{question, answer, points},
+    sources[]{title, authority, href, description},
+    updateNotice,
+    relatedDestinations
   }
 `;
 
@@ -52,10 +57,15 @@ const BLOG_DETAIL_QUERY = /* groq */ `
     category,
     "author": coalesce(author->name, "Earthlink Editorial"),
     "date": publishedAt,
+    "updatedAt": coalesce(updatedAt, _updatedAt),
     "bodyText": pt::text(body),
     coverImage,
     coverCaption,
     tags,
+    questionSections[]{question, answer, points},
+    sources[]{title, authority, href, description},
+    updateNotice,
+    relatedDestinations,
     body
   }
 `;
@@ -67,29 +77,65 @@ type SanityBlogListItem = {
   category: Blog["category"];
   author: string;
   date: string;
+  updatedAt?: string;
   bodyText?: string;
   coverImage: unknown;
   coverCaption?: string;
   tags: string[];
+  questionSections?: Blog["questionSections"];
+  sources?: Blog["sources"];
+  updateNotice?: string;
+  relatedDestinations?: string[];
 };
 
 type SanityBlogDetail = SanityBlogListItem & { body: unknown };
 
+export function hasAuthoritativeLocalBlogContent(blog: Blog | undefined): boolean {
+  return Boolean(
+    blog &&
+    (blog.questionSections?.length ||
+      blog.sources?.length ||
+      blog.updateNotice ||
+      blog.relatedDestinations?.length),
+  );
+}
+
 function mapBlogList(item: SanityBlogListItem): Blog {
   const fallback = getBlog(item.slug);
-  const bodyText = item.bodyText?.trim() || fallback?.body.join(" ").trim() || "";
+  const localIsAuthoritative = hasAuthoritativeLocalBlogContent(fallback);
+  const bodyText =
+    (localIsAuthoritative ? fallback!.body.join(" ").trim() : item.bodyText?.trim()) ||
+    fallback?.body.join(" ").trim() ||
+    "";
   return {
     slug: item.slug,
-    title: item.title ?? fallback?.title ?? item.slug,
-    excerpt: item.excerpt ?? fallback?.excerpt ?? "",
-    category: item.category ?? fallback?.category ?? "Guides",
-    author: item.author ?? fallback?.author ?? "Earthlink Editorial",
-    date: item.date ?? fallback?.date ?? "",
-    readMinutes: Math.max(1, Math.ceil(bodyText.split(/\s+/).filter(Boolean).length / 200)),
+    title: (localIsAuthoritative ? fallback!.title : item.title) ?? fallback?.title ?? item.slug,
+    excerpt: (localIsAuthoritative ? fallback!.excerpt : item.excerpt) ?? fallback?.excerpt ?? "",
+    category:
+      (localIsAuthoritative ? fallback!.category : item.category) ?? fallback?.category ?? "Guides",
+    author:
+      (localIsAuthoritative ? fallback!.author : item.author) ??
+      fallback?.author ??
+      "Earthlink Editorial",
+    date: (localIsAuthoritative ? fallback!.date : item.date) ?? fallback?.date ?? "",
+    updatedAt: localIsAuthoritative ? fallback!.updatedAt : (item.updatedAt ?? fallback?.updatedAt),
+    readMinutes: localIsAuthoritative
+      ? fallback!.readMinutes
+      : Math.max(1, Math.ceil(bodyText.split(/\s+/).filter(Boolean).length / 200)),
     cover: imgUrl(item.coverImage as never, 1200) ?? fallback?.cover ?? "",
     coverCaption: item.coverCaption ?? fallback?.coverCaption,
-    tags: item.tags ?? fallback?.tags ?? [],
+    tags: (localIsAuthoritative ? fallback!.tags : item.tags) ?? fallback?.tags ?? [],
     body: fallback?.body ?? [],
+    questionSections: localIsAuthoritative
+      ? fallback!.questionSections
+      : (item.questionSections ?? fallback?.questionSections),
+    sources: localIsAuthoritative ? fallback!.sources : (item.sources ?? fallback?.sources),
+    updateNotice: localIsAuthoritative
+      ? fallback!.updateNotice
+      : (item.updateNotice ?? fallback?.updateNotice),
+    relatedDestinations: localIsAuthoritative
+      ? fallback!.relatedDestinations
+      : (item.relatedDestinations ?? fallback?.relatedDestinations),
     // Non-typed passthrough: raw Sanity image ref for responsive rendering.
     ...(item.coverImage ? { coverRef: item.coverImage } : {}),
   } as Blog;
@@ -129,7 +175,9 @@ export async function fetchBlogBySlug(slug: string): Promise<BlogWithPortableTex
     const row = await sanityClient.fetch<SanityBlogDetail | null>(BLOG_DETAIL_QUERY, { slug });
     if (!row) return null;
     const base = mapBlogList(row);
-    return { ...base, portableBody: row.body };
+    return hasAuthoritativeLocalBlogContent(getBlog(slug))
+      ? base
+      : { ...base, portableBody: row.body };
   } catch (err) {
     console.error("[sanity] fetchBlogBySlug failed", err);
     return null;

@@ -52,7 +52,7 @@ export const SCHOLARSHIPS = [
     country: "United Kingdom",
     name: "University-specific merit awards",
     level: "UG & PG",
-    value: "£2,000 – £10,000",
+    value: "Amount varies by institution",
     deadline: "Varies",
   },
   {
@@ -73,14 +73,14 @@ export const SCHOLARSHIPS = [
     country: "Canada",
     name: "Vanier Canada Graduate Scholarships",
     level: "Doctoral",
-    value: "CAD 50,000/year",
+    value: "Check the live award page",
     deadline: "November",
   },
   {
     country: "Canada",
     name: "Ontario Graduate Scholarship",
     level: "Postgraduate",
-    value: "CAD 15,000",
+    value: "Check the live award page",
     deadline: "Varies",
   },
   {
@@ -94,14 +94,14 @@ export const SCHOLARSHIPS = [
     country: "Australia",
     name: "Destination Australia",
     level: "UG & PG",
-    value: "AUD 15,000/year",
+    value: "Check the live award page",
     deadline: "Varies",
   },
   {
     country: "Ireland",
     name: "Government of Ireland International Scholarship",
     level: "UG & PG",
-    value: "€10,000 + fee waiver",
+    value: "Funding and fee support",
     deadline: "March",
   },
   {
@@ -115,14 +115,14 @@ export const SCHOLARSHIPS = [
     country: "Europe",
     name: "Erasmus Mundus Joint Masters",
     level: "Postgraduate",
-    value: "Full tuition + €1,400/month",
+    value: "Full funding where awarded",
     deadline: "January",
   },
   {
     country: "Europe",
     name: "DAAD Germany Scholarships",
     level: "Postgraduate",
-    value: "€850–€1,200/month",
+    value: "Programme-specific support",
     deadline: "Varies",
   },
 ] as const;
@@ -151,7 +151,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
       },
       {
         title: "Save application fees",
-        body: "Skip £100–£200 application fees on universities you wouldn't get into — or wouldn't attend.",
+        body: "Avoid paying application charges for universities that do not fit your profile or goals.",
       },
       {
         title: "An honest verdict",
@@ -781,7 +781,7 @@ export const SERVICE_DETAILS: Record<string, ServiceDetail> = {
     faqs: [
       {
         q: "Is airport pickup included or extra?",
-        a: "Coordination is included; the driver cost (usually £40–£70 in the UK) is paid directly to the vendor.",
+        a: "Coordination is included. The driver quotes the current transport charge, which is paid directly to the vendor.",
       },
       {
         q: "Will you help with my bank account after I land?",

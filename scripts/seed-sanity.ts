@@ -128,10 +128,28 @@ async function seedBlogs() {
       category: b.category,
       author: { _type: "reference", _ref: "author-earthlink-editorial" },
       publishedAt: b.date,
+      updatedAt: b.updatedAt,
       readMinutes: b.readMinutes,
       coverCaption: b.coverCaption,
       tags: b.tags,
       body: paragraphsToPortableText(b.body),
+      questionSections: b.questionSections?.map((section, index) => ({
+        _type: "questionSection",
+        _key: `question-${index}`,
+        question: section.question,
+        answer: section.answer,
+        points: section.points,
+      })),
+      sources: b.sources?.map((source, index) => ({
+        _type: "sourceRef",
+        _key: `source-${index}`,
+        title: source.title,
+        authority: source.authority,
+        href: source.href,
+        description: source.description,
+      })),
+      updateNotice: b.updateNotice,
+      relatedDestinations: b.relatedDestinations,
     };
     if (assetId) {
       doc.coverImage = {

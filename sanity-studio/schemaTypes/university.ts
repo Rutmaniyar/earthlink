@@ -39,7 +39,11 @@ export const university = defineType({
       validation: (r) => r.max(4),
     }),
     defineField({ name: "ranking", type: "string", description: "e.g. Top 50 (QS 2026)" }),
-    defineField({ name: "tuitionRange", type: "string", description: "e.g. £22k–£38k /yr" }),
+    defineField({
+      name: "tuitionRange",
+      type: "string",
+      description: "Internal note only. The public site directs readers to the live course page.",
+    }),
     defineField({
       name: "programs",
       type: "array",
@@ -76,7 +80,12 @@ export const university = defineType({
         { name: "gre", type: "string", description: "e.g. 310 (grad only)" },
         { name: "gmat", type: "string", description: "e.g. 650 (MBA)" },
         { name: "sat", type: "string", description: "e.g. 1300 (undergrad only)" },
-        { name: "applicationFee", type: "string", description: "e.g. £22 or USD 90" },
+        {
+          name: "applicationFee",
+          type: "string",
+          description:
+            "Internal note only. The public site directs readers to the live application page.",
+        },
         {
           name: "deadlineFall",
           type: "string",

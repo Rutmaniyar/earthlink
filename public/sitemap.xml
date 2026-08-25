@@ -156,19 +156,39 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.earthlink.org.uk/destination/germany</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/france</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/spain</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/destination/portugal</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.earthlink.org.uk/destination/uae</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.earthlink.org.uk/blog/uk-graduate-route-2026</loc>
-    <lastmod>2026-06-18</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
       <image:title>UK Graduate Route in 2026: What international students need to know</image:title>
-      <image:caption>Eligible non-doctoral applicants receive 2 years if they apply by 31 December 2026 and 18 months from 1 January 2027; doctoral graduates receive 3 years.</image:caption>
+      <image:caption>A practical guide to Graduate Route eligibility, timing, work planning, and the checks to make before applying.</image:caption>
     </image:image>
   </url>
   <url>
@@ -234,7 +254,7 @@
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
       <image:title>Career after an MSc in the UK: routes that beat the salary threshold</image:title>
-      <image:caption>Skilled Worker visa requires £38,700 (2024 threshold). Here are the sectors that pay it.</image:caption>
+      <image:caption>How to research graduate roles while checking the live Skilled Worker requirements that apply to your occupation.</image:caption>
     </image:image>
   </url>
   <url>
@@ -261,13 +281,13 @@
   </url>
   <url>
     <loc>https://www.earthlink.org.uk/blog/study-in-usa-complete-guide</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
-      <image:title>Study in USA: Universities, Costs, and F-1 Visa Roadmap</image:title>
-      <image:caption>From Ivy League to state schools — how to choose, apply, fund, and land your F-1 visa.</image:caption>
+      <image:title>Study in USA: university choice, applications, and the F-1 roadmap</image:title>
+      <image:caption>How to compare accredited institutions, build an application plan, prepare funding evidence, and follow the official student-visa process.</image:caption>
     </image:image>
   </url>
   <url>
@@ -316,13 +336,13 @@
   </url>
   <url>
     <loc>https://www.earthlink.org.uk/blog/study-in-germany-free-tuition</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
-      <image:title>Study in Germany: free tuition and Blocked Account explained</image:title>
-      <image:caption>Public universities charge no tuition. Here&apos;s what you actually pay and how to prove funds.</image:caption>
+      <image:title>Study in Germany: the public tuition model and study costs explained</image:title>
+      <image:caption>Why &apos;free tuition&apos; is an incomplete description, which exceptions to check, and how to plan the full cost of study.</image:caption>
     </image:image>
   </url>
   <url>
@@ -415,24 +435,24 @@
   </url>
   <url>
     <loc>https://www.earthlink.org.uk/blog/top-mba-programs-europe</loc>
-    <lastmod>2026-04-02</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
-      <image:title>Top MBA programs in Europe 2026: LBS, INSEAD, IESE, HEC</image:title>
-      <image:caption>One-year MBAs, tuition, average salaries, and admission rates for European giants.</image:caption>
+      <image:title>How to compare leading MBA programmes in Europe</image:title>
+      <image:caption>A fit-first framework for comparing format, curriculum, career access, location, and verified outcomes.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://www.earthlink.org.uk/blog/cost-of-living-uk-cities</loc>
-    <lastmod>2026-03-26</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
-      <image:title>Cost of living: London vs Manchester vs Birmingham vs Edinburgh</image:title>
-      <image:caption>Rent, transport, and grocery costs across the UK&apos;s top student cities.</image:caption>
+      <image:title>UK student living costs: how to compare cities without stale figures</image:title>
+      <image:caption>A practical method for comparing housing, transport, food, utilities, study, and contingency costs across UK cities.</image:caption>
     </image:image>
   </url>
   <url>
@@ -459,13 +479,13 @@
   </url>
   <url>
     <loc>https://www.earthlink.org.uk/blog/part-time-work-uk-students</loc>
-    <lastmod>2026-03-08</lastmod>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
       <image:title>Part-time work rules for UK international students</image:title>
-      <image:caption>20 hours during term, 40 in vacation — how to stay compliant and earn £8,000+ per year.</image:caption>
+      <image:caption>How to check your own work conditions, understand term time, and avoid common compliance mistakes.</image:caption>
     </image:image>
   </url>
   <url>
@@ -587,6 +607,72 @@
       <image:loc>https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
       <image:title>How to secure fully-funded international scholarships: a step-by-step guide</image:title>
       <image:caption>A practical playbook for winning Chevening, Commonwealth, Fulbright, DAAD and university-funded awards — plus how Earthlink screens eligibility and shapes essays.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/germany-student-visa-blocked-account</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Germany student visa blocked account: what to check before funding it</image:title>
+      <image:caption>How blocked accounts fit into Germany&apos;s study-residence evidence and which live checks to make before choosing a provider.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/france-university-application-routes</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>France university application routes: Campus France, platforms, and direct applications</image:title>
+      <image:caption>How nationality, residence, study level, and programme determine the route for applying to higher education in France.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/spain-university-application-student-visa</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Spain university application and student visa: a route-by-route guide</image:title>
+      <image:caption>How to verify a Spanish degree, choose the admissions route, and prepare for the current study-stay process.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/portugal-university-application-residence</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Portugal university application and higher-education residence guide</image:title>
+      <image:caption>How to compare Portuguese institutions, follow the international application route, and use current AIMA residence guidance.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/verify-malta-university-course</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1514222134-b57cbb8ce073?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>How to verify a Malta university, college, and course</image:title>
+      <image:caption>A practical MFHEA verification method for checking the provider, programme, qualification, campus, and offer before paying.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.earthlink.org.uk/blog/germany-vs-france-vs-spain-vs-portugal</loc>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&amp;q=70&amp;auto=format&amp;fit=crop</image:loc>
+      <image:title>Germany vs France vs Spain vs Portugal for international students</image:title>
+      <image:caption>Compare programme fit, institution types, application routes, language, recognition, and residence planning without using stale cost figures.</image:caption>
     </image:image>
   </url>
   <url>

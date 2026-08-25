@@ -63,13 +63,18 @@ export function SiteFooter() {
         <div>
           <h2 className="font-serif text-base text-gold">Featured destinations</h2>
           <ul className="mt-4 space-y-2 text-sm">
-            {DESTINATIONS.map((d) => (
+            {DESTINATIONS.slice(0, 6).map((d) => (
               <li key={d.slug}>
                 <Link to="/destination/$slug" params={{ slug: d.slug }} className="link-lime">
                   {d.name}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link to="/destinations" className="link-lime font-medium">
+                All destinations →
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -106,7 +111,7 @@ export function SiteFooter() {
             </li>
             <li>
               <Link to="/testimonials" className="link-lime">
-                Student stories
+                Google reviews
               </Link>
             </li>
             <li>

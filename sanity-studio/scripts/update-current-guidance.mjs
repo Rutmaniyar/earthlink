@@ -26,7 +26,7 @@ const updates = [
     title: "Study in UK 2026: Costs, Applications and Visa Overview",
     coverCaption: "Study in UK 2026: Costs, Applications and Visa Overview",
     body: [
-      "The UK hosts over 680,000 international students across 140+ universities. Tuition ranges from £11,000 to £38,000 per year, with living costs of £12,000–£15,000 outside London and £15,000–£20,000 in London.",
+      "Tuition, living costs, immigration charges and financial-evidence requirements vary by course, location and applicant circumstances. Check the university's live course page and GOV.UK, then contact Earthlink for a current profile-specific review.",
       "Application windows: UCAS opens in September for the following autumn intake. Oxbridge and medicine close in mid-October; most other courses accept until late January, with clearing running through summer.",
       "The Student route requires a CAS, the required financial evidence and English-language evidence where applicable. For the Graduate Route, eligible non-doctoral applications made by 31 December 2026 receive 2 years; applications from 1 January 2027 receive 18 months. Doctoral graduates receive 3 years.",
       "Earthlink may help with the university application. Stonebridge Legal Solutions alone provides UK immigration advice and handles every UK visa form and application.",
@@ -48,7 +48,7 @@ const updates = [
   {
     slug: "study-in-australia-complete-guide",
     body: [
-      "The Group of Eight (Melbourne, ANU, Sydney, UNSW, Queensland, Monash, UWA, Adelaide) dominate global rankings. Tuition ranges from AUD 30,000 to AUD 55,000 per year.",
+      "The Group of Eight includes Melbourne, ANU, Sydney, UNSW, Queensland, Monash, UWA and Adelaide. Course charges and living costs vary, so use each institution's live course page and the relevant Australian authority before making a budget.",
       "The Genuine Student (GS) test replaced GTE in 2024. Answer clearly why this course, why Australia, and what you plan next — vague answers get refused.",
       "Subclass 485 duration depends on stream and qualification. Post-Vocational Education Work is up to 18 months; Post-Higher Education Work is generally 2 years for bachelor’s and coursework master’s qualifications and 3 years for research master’s and doctoral qualifications. Eligible regional graduates may separately qualify for a 1- or 2-year second visa.",
     ],
@@ -56,9 +56,10 @@ const updates = [
   {
     slug: "canada-vs-uk-vs-usa",
     body: [
-      "UK: 1-year master's, £25,000–£35,000 total, Graduate Route of 2 years for applications by 31 December 2026 or 18 months from 1 January 2027; doctoral graduates receive 3 years.",
-      "USA: 2-year master's, $60,000–$120,000 total, 12–36 months OPT, PR via H-1B/EB lottery.",
-      "Canada: 1–2 year master's, CAD 40,000–70,000 total, up to 3-year PGWP, direct PR via Express Entry.",
+      "UK: compare course length, programme fit, current Student route requirements and the Graduate Route position shown on GOV.UK.",
+      "USA: compare programme structure, institution accreditation, the current student-visa process and any employment authorization that applies to your status.",
+      "Canada: compare programme eligibility, the current study-permit process and post-graduation work rules using official Canadian sources.",
+      "Charges, living costs, financial evidence and immigration rules change. Check live institution and authority sources, then contact Earthlink for a current profile-specific review.",
     ],
   },
 ];
@@ -99,7 +100,7 @@ const verified = await client.fetch(
   { slugs },
 );
 const stale = verified.filter((record) =>
-  /Student Direct Stream|\bSDS\b|2–4 years|2-year post-study work/i.test(
+  /Student Direct Stream|\bSDS\b|2–4 years|2-year post-study work|[£€$]\s*\d|\b(?:AUD|CAD|EUR|GBP|USD)\s*\d/i.test(
     [record.title, record.excerpt, record.bodyText].filter(Boolean).join(" "),
   ),
 );

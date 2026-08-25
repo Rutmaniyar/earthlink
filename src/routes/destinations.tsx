@@ -10,7 +10,7 @@ export const Route = createFileRoute("/destinations")({
       {
         name: "description",
         content:
-          "Earthlink serves applicants in 120+ countries worldwide. Compare our featured study destinations, tuition, intakes, visa routes and post-study options.",
+          "Compare Earthlink's featured study destinations, application routes, programme choices and post-study considerations.",
       },
       { property: "og:title", content: "Destinations · Earthlink Consultants" },
       {
@@ -68,8 +68,8 @@ function Destinations() {
           </h1>
           <p className="mt-6 max-w-2xl text-muted-foreground">
             We serve applicants in 120+ countries. The guides below are our featured study
-            destinations, with practical intakes, tuition ranges, visa information, and post-study
-            considerations to help you decide.
+            destinations, with practical application routes, programme checks, official sources, and
+            post-study considerations to help you decide.
           </p>
         </div>
       </section>

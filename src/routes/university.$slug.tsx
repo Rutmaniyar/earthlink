@@ -450,7 +450,7 @@ function UniversityDetailPage() {
             )}
             {uni.tuitionRange && (
               <span className="inline-flex items-center gap-1">
-                <Wallet className="h-3.5 w-3.5" /> {uni.tuitionRange}
+                <Wallet className="h-3.5 w-3.5" /> Check current fees on the course page
               </span>
             )}
             {uni.scholarshipsAvailable && (
@@ -594,7 +594,11 @@ function UniversityDetailPage() {
                   <Field label="GRE" value={a.gre} />
                   <Field label="GMAT" value={a.gmat} />
                   <Field label="SAT" value={a.sat} />
-                  <Field label="Application fee" value={a.applicationFee} icon={Wallet} />
+                  <Field
+                    label="Application fee"
+                    value={a.applicationFee ? "Check the live application page" : undefined}
+                    icon={Wallet}
+                  />
                   <Field
                     label="Fall / Autumn deadline"
                     value={a.deadlineFall}

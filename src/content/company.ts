@@ -38,9 +38,12 @@ export const COMPANY = {
     city: "London",
     postcode: "E15 1NT",
   },
-  rating: { score: 4.9, reviews: 398 },
+  rating: { score: 4.97, reviews: 412 },
   founded: 2014,
 };
+
+export const GOOGLE_REVIEW_CONTEXT =
+  "Reviews reproduce public Google Business Profile feedback and describe individual experiences at the time. All current UK immigration advice and applications are handled solely by Stonebridge Legal Solutions.";
 
 export const NAV = [
   { to: "/", label: "Home" },
@@ -193,47 +196,10 @@ export const VALUES = [
 
 export const WHY = [
   { stat: "Since 2014", label: "Continuously trading since incorporation on 9 October 2014." },
-  { stat: "4.9 ★", label: "398+ published reviews across destinations." },
+  { stat: "4.97 ★", label: "412 published Google reviews." },
   {
     stat: "120+",
     label: "Countries served worldwide, with detailed guides for featured study destinations.",
   },
   { stat: "UK office", label: "Real people, real consultations — phone, video, or in person." },
-];
-
-export const TESTIMONIALS = [
-  {
-    name: "Anjali R.",
-    country: "United Kingdom",
-    course: "MSc Data Science, University of Leeds",
-    quote:
-      "Earthlink picked the three universities I should actually apply to instead of the twelve I'd shortlisted. Saved me thousands in application fees and a lot of stress.",
-  },
-  {
-    name: "Tomasz K.",
-    country: "Canada",
-    course: "PG Diploma, Seneca College",
-    quote:
-      "They flagged a gap in my financials before submission and rebuilt my proof-of-funds — visa approved in 18 days.",
-  },
-  {
-    name: "Faiza M.",
-    country: "Ireland",
-    course: "MSc International Business, DCU",
-    quote:
-      "Felt like having an older sibling who'd done this before. Honest about the cost of Dublin, honest about job prospects.",
-  },
-  {
-    name: "Daniel O.",
-    country: "Australia",
-    course: "Bachelor of Nursing, UTS",
-    quote:
-      "I was set on Melbourne; they showed me UTS Sydney made more sense for my budget and graduate route. They were right.",
-  },
-  {
-    name: "Sneha P.",
-    country: "USA",
-    course: "MS Computer Science, NEU Boston",
-    quote: "Interview prep was brutal in the best way. F1 approved first attempt.",
-  },
 ];
