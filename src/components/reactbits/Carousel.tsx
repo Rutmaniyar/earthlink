@@ -1,5 +1,6 @@
 import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { usePrefersReducedMotion } from "@/hooks/use-reduced-motion";
 
 interface CarouselProps {
   items: ReactNode[];
@@ -23,8 +24,11 @@ export default function Carousel({
 }: CarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [autoPlayEnabled, setAutoPlayEnabled] = useState(true);
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [focusPaused, setFocusPaused] = useState(false);
   const [visible, setVisible] = useState(true);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const scrollTo = useCallback((i: number) => {
     const track = trackRef.current;
@@ -45,10 +49,29 @@ export default function Carousel({
   );
 
   useEffect(() => {
-    if (!autoPlay || paused || !visible) return;
+    if (
+      !autoPlay ||
+      !autoPlayEnabled ||
+      hoverPaused ||
+      focusPaused ||
+      prefersReducedMotion ||
+      !visible ||
+      items.length <= 1
+    )
+      return;
     const id = setInterval(next, interval);
     return () => clearInterval(id);
-  }, [autoPlay, paused, visible, interval, next]);
+  }, [
+    autoPlay,
+    autoPlayEnabled,
+    hoverPaused,
+    focusPaused,
+    prefersReducedMotion,
+    visible,
+    items.length,
+    interval,
+    next,
+  ]);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -106,8 +129,14 @@ export default function Carousel({
   return (
     <div
       className={`relative ${className}`}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      onMouseEnter={() => setHoverPaused(true)}
+      onMouseLeave={() => setHoverPaused(false)}
+      onFocusCapture={() => setFocusPaused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setFocusPaused(false);
+        }
+      }}
     >
       <div
         ref={trackRef}
@@ -137,7 +166,35 @@ export default function Carousel({
         <ChevronRight className="h-5 w-5" />
       </button>
 
-      <div className="mt-4 flex justify-center gap-2">
+      <div className="mt-4 flex items-center justify-center gap-2">
+        {autoPlay && items.length > 1 ? (
+          <button
+            type="button"
+            disabled={prefersReducedMotion}
+            aria-label={
+              prefersReducedMotion
+                ? "Automatic scrolling disabled by reduced motion preference"
+                : autoPlayEnabled
+                  ? "Pause automatic scrolling"
+                  : "Resume automatic scrolling"
+            }
+            title={
+              prefersReducedMotion
+                ? "Automatic scrolling disabled by reduced motion preference"
+                : autoPlayEnabled
+                  ? "Pause automatic scrolling"
+                  : "Resume automatic scrolling"
+            }
+            onClick={() => setAutoPlayEnabled((enabled) => !enabled)}
+            className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-navy transition hover:bg-navy/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {autoPlayEnabled && !prefersReducedMotion ? (
+              <Pause className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <Play className="h-4 w-4" aria-hidden="true" />
+            )}
+          </button>
+        ) : null}
         {items.map((_, i) => (
           <button
             key={i}

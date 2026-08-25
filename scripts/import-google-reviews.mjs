@@ -17,6 +17,10 @@ const ratingValues = {
   FIVE: 5,
 };
 
+const excludedReviewIds = new Set([
+  "Ci9DQUlRQUNvZENodHljRjlvT2tSNmRFUlpkeTFtZEdKb1RIWTNaRWhMWW5kRFNGRRAB",
+]);
+
 const sourceFiles = readdirSync(sourceDirectory)
   .filter((file) => /^reviews.*\.json$/i.test(file))
   .sort();
@@ -34,14 +38,15 @@ const reviews = sourceReviews
     ...(review.comment ? { text: review.comment.replace(/\s+/gu, " ").trim() } : {}),
     publishedAt: review.createTime.slice(0, 10),
   }))
+  .filter((review) => !excludedReviewIds.has(review.id))
   .sort(
     (left, right) =>
       right.publishedAt.localeCompare(left.publishedAt) || left.id.localeCompare(right.id),
   );
 
-if (sourceFiles.length !== 21 || reviews.length !== 412) {
+if (sourceFiles.length !== 21 || sourceReviews.length !== 412 || reviews.length !== 411) {
   throw new Error(
-    `Expected 21 files and 412 reviews, found ${sourceFiles.length} and ${reviews.length}`,
+    `Expected 21 files, 412 source reviews, and 411 published reviews; found ${sourceFiles.length}, ${sourceReviews.length}, and ${reviews.length}`,
   );
 }
 

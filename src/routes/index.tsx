@@ -44,7 +44,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Continuously trading since 2014. 412 Google reviews. Worldwide education support with clearly scoped visa services.",
+          "Continuously trading since 2014. 411 Google reviews. Worldwide education support with clearly scoped visa services.",
       },
       { property: "og:url", content: absUrl("/") },
       { property: "og:type", content: "website" },
@@ -56,7 +56,7 @@ export const Route = createFileRoute("/")({
       {
         name: "twitter:description",
         content:
-          "Continuously trading since 2014. 412 Google reviews. Worldwide education support with clearly scoped visa services.",
+          "Continuously trading since 2014. 411 Google reviews. Worldwide education support with clearly scoped visa services.",
       },
     ],
     links: [{ rel: "canonical", href: absUrl("/") }],
@@ -684,6 +684,7 @@ function Home() {
         </div>
         <div className="mt-12">
           <Carousel
+            autoPlay
             perView={3}
             interval={6000}
             items={FEATURED_GOOGLE_REVIEWS.map((review) => (

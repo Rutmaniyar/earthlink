@@ -38,7 +38,7 @@ export const COMPANY = {
     city: "London",
     postcode: "E15 1NT",
   },
-  rating: { score: 4.97, reviews: 412 },
+  rating: { score: 4.98, reviews: 411 },
   founded: 2014,
 };
 
@@ -196,7 +196,7 @@ export const VALUES = [
 
 export const WHY = [
   { stat: "Since 2014", label: "Continuously trading since incorporation on 9 October 2014." },
-  { stat: "4.97 ★", label: "412 published Google reviews." },
+  { stat: "4.98 ★", label: "411 published Google reviews." },
   {
     stat: "120+",
     label: "Countries served worldwide, with detailed guides for featured study destinations.",

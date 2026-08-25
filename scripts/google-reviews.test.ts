@@ -30,13 +30,13 @@ describe("Google review snapshot", () => {
     const average =
       GOOGLE_REVIEWS.reduce((total, review) => total + review.rating, 0) / GOOGLE_REVIEWS.length;
 
-    expect(GOOGLE_REVIEWS).toHaveLength(412);
-    expect(new Set(GOOGLE_REVIEWS.map((review) => review.id)).size).toBe(412);
-    expect(WRITTEN_GOOGLE_REVIEWS).toHaveLength(370);
+    expect(GOOGLE_REVIEWS).toHaveLength(411);
+    expect(new Set(GOOGLE_REVIEWS.map((review) => review.id)).size).toBe(411);
+    expect(WRITTEN_GOOGLE_REVIEWS).toHaveLength(369);
     expect(GOOGLE_REVIEWS.length - WRITTEN_GOOGLE_REVIEWS.length).toBe(42);
-    expect(ratingCounts).toEqual({ 1: 1, 4: 7, 5: 404 });
-    expect(Number(average.toFixed(2))).toBe(4.97);
-    expect(COMPANY.rating).toEqual({ score: 4.97, reviews: 412 });
+    expect(ratingCounts).toEqual({ 4: 7, 5: 404 });
+    expect(Number(average.toFixed(2))).toBe(4.98);
+    expect(COMPANY.rating).toEqual({ score: 4.98, reviews: 411 });
   });
 
   test("contains only sanitized public review fields", () => {
