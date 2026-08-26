@@ -19,13 +19,13 @@ import stonebridgeLogoUrl from "@/assets/stonebridge-logo.png";
 export const Route = createFileRoute("/partners/stonebridge")({
   head: () => ({
     meta: [
-      { title: "UK Visa Services for Harrow Clients | Stonebridge" },
+      { title: "UK Visa Services for Clients | Stonebridge" },
       {
         name: "description",
         content:
-          "UK visa advice and applications for Harrow clients are delivered only by Stonebridge under a separate contract; Earthlink provides no UK immigration advice.",
+          "UK visa advice and applications for clients are delivered only by Stonebridge under a separate contract; Earthlink provides no UK immigration advice.",
       },
-      { property: "og:title", content: "UK Visa Services for Harrow Clients — Stonebridge" },
+      { property: "og:title", content: "UK Visa Services for Clients — Stonebridge" },
       {
         property: "og:description",
         content:
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/partners/stonebridge")({
       { property: "og:url", content: absUrl("/partners/stonebridge") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "UK Visa Services for Harrow Clients — Stonebridge" },
+      { name: "twitter:title", content: "UK Visa Services for Clients — Stonebridge" },
       {
         name: "twitter:description",
         content:
@@ -49,7 +49,7 @@ export const Route = createFileRoute("/partners/stonebridge")({
           "@context": "https://schema.org",
           "@type": "Service",
           "@id": absUrl("/partners/stonebridge#uk-visa-service"),
-          name: "UK visa advice and application processing for Harrow clients",
+          name: "UK visa advice and application processing for clients",
           serviceType: "UK visa advice and application processing",
           url: absUrl("/partners/stonebridge"),
           areaServed: { "@type": "Country", name: "United Kingdom" },
@@ -204,7 +204,7 @@ function StonebridgePartnerPage() {
             loading="eager"
           />
           <h1 className="mt-6 max-w-3xl font-serif text-4xl text-balance leading-tight md:text-6xl">
-            UK visa services for Harrow clients — delivered by{" "}
+            UK visa services for clients — delivered by{" "}
             <span className="text-brand">Stonebridge</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-foreground/85">
