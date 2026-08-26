@@ -25,7 +25,7 @@ export const Route = createFileRoute("/partners/stonebridge")({
         content:
           "UK visa advice and applications for clients are delivered only by Stonebridge under a separate contract; Earthlink provides no UK immigration advice.",
       },
-      { property: "og:title", content: "UK Visa Services for Clients — Stonebridge" },
+      { property: "og:title", content: "UK Visa Services for Clients - Stonebridge" },
       {
         property: "og:description",
         content:
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/partners/stonebridge")({
       { property: "og:url", content: absUrl("/partners/stonebridge") },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "UK Visa Services for Clients — Stonebridge" },
+      { name: "twitter:title", content: "UK Visa Services for Clients - Stonebridge" },
       {
         name: "twitter:description",
         content:
