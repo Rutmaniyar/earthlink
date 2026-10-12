@@ -16,8 +16,8 @@ export type CookieConsentRecord = {
 };
 
 export const DEFAULT_COOKIE_PREFERENCES: CookiePreferences = {
-  externalMedia: true,
-  analytics: true,
+  externalMedia: false,
+  analytics: false,
 };
 
 function isBrowser() {
