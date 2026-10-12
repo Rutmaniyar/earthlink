@@ -34,8 +34,12 @@ export function CookieConsent() {
   }, []);
 
   function commit(next: CookiePreferences) {
-    
+    const previouslyAllowed =  readCookieConsent()?.preferences.analytics === true;
     saveCookieConsent(next);
+    if (previouslyAllowed && !next.analytics) {
+      window.location.reload();
+      return;
+    }
     setPreferences(next);
     setHasDecision(true);
     setCustomising(false);
