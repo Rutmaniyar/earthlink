@@ -34,6 +34,7 @@ export function CookieConsent() {
   }, []);
 
   function commit(next: CookiePreferences) {
+    
     saveCookieConsent(next);
     setPreferences(next);
     setHasDecision(true);
@@ -93,6 +94,17 @@ export function CookieConsent() {
                 setPreferences((current) => ({ ...current, externalMedia }))
               }
             />
+            <ConsentChoice
+              label="Analytics"
+              description="Allow Google Analytics to measure website visits and usage."
+              checked={preferences.analytics}
+              onChange={(analytics) =>
+                setPreferences((current) => ({
+                  ...current,
+                  analytics,
+                }))
+              }
+            />
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
                 type="button"
@@ -116,7 +128,7 @@ export function CookieConsent() {
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
             <button
               type="button"
-              onClick={() => commit({ externalMedia: true })}
+              onClick={() => commit({ externalMedia: true, analytics: true })}
               className={choiceButton}
             >
               Accept
